@@ -1,10 +1,10 @@
-import { animeData } from "@/types/AnimeTypes"
-import Image from "next/image"
-import Link from "next/link"
+import { AnimeData } from "@/types/AnimeTypes";
+import Image from "next/image";
+import Link from "next/link";
 
 
 type Props = {
-	anime:animeData
+	anime:AnimeData
 }
 
 export default function BasicAnimeDisplayer({anime}: Props) {
@@ -13,5 +13,5 @@ export default function BasicAnimeDisplayer({anime}: Props) {
 		<Image src={anime.image} alt="anime-poster" width={300} height={400}/>
 		<h2>{anime.title}</h2>
 	</Link>
-  )
+  );
 }

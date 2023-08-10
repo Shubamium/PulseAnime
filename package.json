@@ -12,12 +12,17 @@
     "@types/node": "20.4.6",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
+    "artplayer": "^5.0.9",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "hls.js": "^1.4.10",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.65.1",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.33.1"
   }
 }

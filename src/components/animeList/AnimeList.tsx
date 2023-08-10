@@ -1,9 +1,9 @@
-import { animeData } from "@/types/AnimeTypes"
-import BasicAnimeDisplayer from "../basicAnimeDisplayer/BasicAnimeDisplayer"
-import './animeList.scss'
+import { AnimeData } from "@/types/AnimeTypes";
+import BasicAnimeDisplayer from "../basicAnimeDisplayer/BasicAnimeDisplayer";
+import './animeList.scss';
 
 type Props = {
-	animes:animeData[]
+	animes:AnimeData[]
 }
 
 export default function AnimeList({animes}:Props){
@@ -12,8 +12,8 @@ export default function AnimeList({animes}:Props){
 				{animes && animes.map((anime)=>{
 					return(
 						<BasicAnimeDisplayer key={anime.id} anime={anime}/>
-					)
+					);
 				})}
 		</div>
-	)
+	);
 }

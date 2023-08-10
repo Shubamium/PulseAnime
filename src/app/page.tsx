@@ -1,17 +1,17 @@
 import AnimeList from "@/components/animeList/AnimeList";
 import BasicAnimeDisplayer from "@/components/basicAnimeDisplayer/BasicAnimeDisplayer";
-import { backendUrl } from "@/db/util"
-import { animeData } from "@/types/AnimeTypes";
+import { backendUrl } from "@/db/util";
+import { AnimeData } from "@/types/AnimeTypes";
 
 async function getTopAiringAnime(){
-	const result = await fetch(backendUrl + '/anime/gogoanime/top-airing')
-	const anime = await result.json()
+	const result = await fetch(backendUrl + '/anime/gogoanime/top-airing');
+	const anime = await result.json();
 	return anime;
 }
 
 export default async function Home() {
 	const serverData = await getTopAiringAnime();
-	const topAiring = serverData.results as animeData[] 
+	const topAiring = serverData.results as AnimeData[]; 
 	return (
 		<main>
 			<h2>Welcome to Pulse Anime</h2>
@@ -24,7 +24,7 @@ export default async function Home() {
 			<AnimeList animes={topAiring}/>
 			
 		</main>
-	)
+	);
 }
 
 

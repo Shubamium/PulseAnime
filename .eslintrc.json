@@ -1,3 +1,9 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals","plugin:react/recommended"],
+  "plugins": ["react"],
+  "rules": {
+	"semi":"error",
+	"react-hooks/exhaustive-deps":"off",
+	"react/react-in-jsx-scope":"off"
+  }
 }
