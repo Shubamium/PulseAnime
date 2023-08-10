@@ -12,7 +12,7 @@ const options:PlayerOption = {
 	container:''
 };
 
-function playM3u8(video:HTMLVideoElement, url:string, art:any) {
+function playM3u8(video:any, url:any, art:any) {
     if (Hls.isSupported()) {
         if (art.Hls) art.hls.destroy();
         const hls = new Hls();
