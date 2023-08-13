@@ -25,7 +25,7 @@ export default async function AnimeDetail({params}: Props) {
 				<p><b>Status:</b>{animeDetail.status}</p>
 			</div>
 			<div>
-				{animeDetail.episodes.map((episode)=>{
+				{animeDetail.episodes && animeDetail.episodes.map((episode)=>{
 					return (
 						<div className="episode" key={'episode-list-'+ episode.id}>
 							<h2>Episode: {episode.number}</h2>

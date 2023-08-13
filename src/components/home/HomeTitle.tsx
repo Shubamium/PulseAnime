@@ -1,0 +1,20 @@
+import Image from "next/image";
+import styling from './homeTitle.module.scss';
+
+type Props = {}
+
+export default function HomeTitle({}: Props) {
+	return (
+		<section className={styling["container_home-title"]}>
+			<div className={styling['title-section']}>
+				<Image src={'/images/logo/logo.png'} alt="pulseanime-logo" width={600} height={240}/>
+				<p className={styling['tagline']}>Watch Anime & Read Manga & Novel for Free</p>
+				<p className="description">Welcome to PulseAnime - Your Ultimate Destination for Anime, Manga, and Light Novels! Immerse yourself in a world of captivating stories, vibrant characters, and thrilling adventures. Discover a vast collection of the latest anime episodes, manga chapters, and light novels, all at your fingertips, and all for free! Whether you&apos;re a seasoned otaku or new to the world of Japanese entertainment, PulseAnime brings you the best content in high-quality streaming. PulseAnime is committed to keeping you updated with the latest releases and providing excellent streaming capabilities for the best experience possible.</p>
+			</div>
+			<form className="search-bar" action={'/anime/search'} method="GET">
+				<input type="search" name="query" placeholder="Search for the title here!"  required/>
+				<button type="submit">Search</button>
+			</form>
+		</section>
+	);
+}
