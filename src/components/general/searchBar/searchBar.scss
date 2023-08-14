@@ -1,0 +1,28 @@
+.search-bar{
+	display: flex;
+	gap: 1em;
+	margin: 1.5em .2em;
+
+	.input-search{
+		padding: 0em 1em;
+		border-radius: .25em;
+		border: none;
+		font-family: var(--fontPoppins);
+		min-width: 400px;
+	}
+	.btn-search{
+		font-family: var(--fontPoppins);
+		background-color: #F1215F;
+		color: white;
+		padding: 0.4em;
+		display: flex;
+		align-items: center;
+		border: none;
+		border-radius: .25em;	
+		font-size: 1.4rem;		
+
+		&.alt-color{
+			background-color: #7E0D58;
+		}
+	}
+}

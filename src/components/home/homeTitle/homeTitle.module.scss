@@ -30,33 +30,10 @@
 			font-weight: 300;
 		}
 	}
-
-	.search-bar{
-		display: flex;
-		gap: 1em;
-		margin: 1.5em .2em;
+	.container_action{
 		position: relative;
 		z-index: 100;
-		.input-search{
-			padding: 0em 1em;
-			border-radius: .25em;
-			border: none;
-			font-family: var(--fontPoppins);
-			min-width: 400px;
-		}
-		.btn-search{
-			font-family: var(--fontPoppins);
-			background-color: #F1215F;
-			color: white;
-			padding: 0.4em;
-			display: flex;
-			align-items: center;
-			border: none;
-			border-radius: .25em;	
-			font-size: 1.4rem;		
-		}
 	}
-
 	.decor_art-r{
 		position: absolute;
 		height: 100%;
