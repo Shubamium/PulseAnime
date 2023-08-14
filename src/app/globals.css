@@ -3,3 +3,11 @@
 	border-radius: 0;
 	margin: 0;
 }
+main{
+	min-height: 250vh;
+	overflow-x: hidden;
+}
+
+body{
+	overflow-x: hidden;
+}

@@ -60,13 +60,15 @@
 		position: absolute;
 		height: 100%;
 		width: auto;
-		left: -5%;
+		left: -2%;
+		top: 0;
 	}
 	.decor_art-l{
 		position: absolute;
 		height: 100%;
 		width: auto;
 		right: -5%;
+		top:0
 	}
 	
 	.background{
@@ -74,5 +76,6 @@
 		position: absolute;
 		height: 100%;
 		width: 100%;
+		top: 0;
 	}
 }
