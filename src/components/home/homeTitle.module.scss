@@ -1,25 +1,78 @@
 .container_home-title{
-	background:linear-gradient(to bottom,#C92253, #3936460a 40%);
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	justify-content: center;
 	color: white;
 	.title-section{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		height: 100%;
 		text-align: center;
-		max-width: min(80%,800px);
+		position: relative;
+		z-index: 100;
+		max-width: min(80%,900px);
 		img{
 			display: block;
-			max-width: 400px;
+			max-height: 150px;
 			object-fit: contain;
 		}
 
 		.tagline{
 			color: #FF688F;
 		}
+		.description{
+			font-size: .8rem;
+			max-width: 110ch;
+		}
+	}
+
+	.search-bar{
+		display: flex;
+		gap: 1em;
+		margin: 1.5em .2em;
+		position: relative;
+		z-index: 100;
+		.input-search{
+			padding: 0em 1em;
+			border-radius: .25em;
+			border: none;
+			font-family: var(--fontPoppins);
+			min-width: 400px;
+		}
+		.btn-search{
+			font-family: var(--fontPoppins);
+			background-color: #F1215F;
+			color: white;
+			padding: 0.4em;
+			display: flex;
+			align-items: center;
+			border: none;
+			border-radius: .25em;	
+			font-size: 1.4rem;		
+		}
+	}
+
+	.decor_art-r{
+		position: absolute;
+		height: 100%;
+		width: auto;
+		left: -5%;
+	}
+	.decor_art-l{
+		position: absolute;
+		height: 100%;
+		width: auto;
+		right: -5%;
+	}
+	
+	.background{
+		background:linear-gradient(to bottom,#c92254da,#9320427c, #393646 90%);
+		position: absolute;
+		height: 100%;
+		width: 100%;
 	}
 }
