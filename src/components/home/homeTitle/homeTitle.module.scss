@@ -33,6 +33,12 @@
 	.container_action{
 		position: relative;
 		z-index: 100;
+		display: flex;
+		align-items: center;
+		// justify-content: center;
+		flex-direction: column;
+		gap: 1em;
+		margin: 2em 0;
 	}
 	.decor_art-r{
 		position: absolute;

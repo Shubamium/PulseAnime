@@ -3,6 +3,7 @@ import styling from './homeTitle.module.scss';
 
 import {FaSearch} from 'react-icons/fa';
 import SearchBar from "@/components/general/searchBar/SearchBar";
+import ContentSwitch from "@/components/general/contentSwitch/ContentSwitch";
 
 type Props = {}
 
@@ -19,6 +20,7 @@ export default function HomeTitle({}: Props) {
 			</div>
 			<div className={styling["container_action"]}>
 				<SearchBar/>	
+				<ContentSwitch/>
 			</div>
 		</section>
 	);
