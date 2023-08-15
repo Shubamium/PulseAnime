@@ -24,8 +24,14 @@ export default async function AnimeSearch({searchParams}: AnimeSearchProps) {
 							);
 						})}
 					</div>
-					<div className="sidebar">
-						<h2>Category</h2>
+					<div className="container_sidebar">
+						<div className="sticky-container">
+							<aside className="sidebar">
+								<div className="sidebar-header">
+									<h2 className="header-title">Category</h2>
+								</div>
+							</aside>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -6,14 +6,36 @@
 			margin: 0 auto;
 			max-width: 1100px;
 			display: grid;
-			grid-template-columns: 4fr 1fr;
-			gap: 3em;
+			grid-template-columns: 3fr 1fr;
+			gap: 2em;
 			padding-top: 2em;
+			align-items: stretch;
+			justify-items: stretch;
 			.container_list{
 				display: grid;
 				grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
 				gap: 2.5em 1em;
 			}
+			.container_sidebar{
+				padding: .25em;
+				height: 100%;
+				.sticky-container{
+					position: sticky;
+					.sidebar{
+						background-color: #542845;
+						min-height: 400px;
+						border-radius: 1em;
+						.sidebar-header{
+							background-color: #7E0D58;
+							border-radius: 1em 1em 0 0;
+							text-align: center;
+							padding: .25em;
+							color: white;
+						}
+					}
+				}
+			}
+
 		}
 	}
 }
