@@ -1,0 +1,17 @@
+.btn{
+	transition: all 250ms ease;
+	scale: 1;
+	font-family: var(--fontPoppins);
+	display: flex;
+	align-items: center;
+	gap: .2em;
+	border-radius: .5em;
+	&:hover{
+		scale: 1.11;
+	}
+
+	&:active{
+		scale: .95;
+	}
+	cursor: pointer;
+}

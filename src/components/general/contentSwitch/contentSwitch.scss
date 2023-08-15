@@ -1,0 +1,23 @@
+.container_content-switch{
+	background-color: #383645;
+	display: flex;
+	border-radius: .25em;
+	height: min-content;
+	gap: .5em;
+	.btn_content-type{
+		color: white;
+		border: none;
+		font-size: 1rem;
+		background:none;
+		transition: all 250ms ease;
+		padding:.2em 1.2em;
+
+		&.active, &:hover{
+			background:#7E0D58;
+			font-weight: bold;
+			padding:.2em 1.6em;
+			border: 2px solid white;
+			border-radius: .25em;
+		}
+	}
+}

@@ -1,7 +1,12 @@
 import Image from "next/image";
 import SearchBar from "../searchBar/SearchBar";
 import './navbar.scss';
-import { FaDiscord, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaDice, FaDiceFour, FaDiceTwo, FaDiscord, FaInstagram, FaTwitter } from "react-icons/fa";
+import Button from "../button/Button";
+import Link from "next/link";
+import ContentSwitch from "../contentSwitch/ContentSwitch";
+
+import {BsDice3} from 'react-icons/bs';
 type Props = {}
 
 export default function Navbar({ }: Props) {
@@ -9,31 +14,33 @@ export default function Navbar({ }: Props) {
 		<header className="container_header">
 			<div className="confine">
 				<div className="left">
-					<div className="logo">
+					<Link href={'/'} className="logo">
 						<div className="container_logo bleed">
 							<Image src={"/images/logo/logo.png"} alt="" width={320} height={120}/>
 						</div>
 						<div className="container_logo">
 							<Image src={"/images/logo/logo.png"} alt="" width={320} height={120}/>
 						</div>
-					</div>
+					</Link>
 					<div className="socials">
-						<div className="btn-socials">
+						<Button className="btn-socials">
 							<FaDiscord/>
-						</div>
-						<div className="btn-socials">
+						</Button>
+						<Button className="btn-socials">
 							<FaTwitter/>
-						</div>
-						<div className="btn-socials">
+						</Button>
+						<Button className="btn-socials">
 							<FaInstagram/>
-						</div>
+						</Button>
 					</div>
 				</div>
-				<div className="right">
-					<nav>
-						<SearchBar altSearchColor={true}/>
-					</nav>
-				</div>
+				<nav className="right">
+					<ContentSwitch/>
+					<SearchBar altSearchColor={true}/>
+					<Button className="btn-random">
+						<BsDice3/> Random
+					</Button>
+				</nav>
 			</div>
 		</header>
 	  );
