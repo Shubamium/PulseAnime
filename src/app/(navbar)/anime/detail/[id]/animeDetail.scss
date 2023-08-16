@@ -3,7 +3,7 @@
 	.banner{
 		height: 300px;
 		position: relative;
-		border-bottom: .25em solid #F1215F;
+		border-bottom: .5em solid #F1215F;
 		img{
 			width: 100%;
 			height: 100%;
@@ -11,7 +11,6 @@
 			filter: blur(4px);
 			position: relative;
 			z-index: -10;
-			// opacity: 0;
 		}
 		
 		.overlay{
@@ -36,7 +35,7 @@
 			background-color: #F4F7FF;
 			padding: .25em;
 			border-radius: .25em;
-			filter: drop-shadow(-1px 2px 4px rgba(55, 93, 163, 0.338));
+			filter: drop-shadow(-1px .1em .2em rgba(55, 93, 163, 0.338));
 		}
 
 		.detail-part{
@@ -59,6 +58,8 @@
 					font-weight: 400;
 					font-size: .9rem;
 				}
+
+				margin-bottom: 2em;
 			}       
 			.details-list{
 				display: grid;
@@ -73,7 +74,8 @@
 						text-align: center;
 						border-radius: 1em;
 						margin-bottom: .5em;
-						font-size: .9rem;
+						font-size: .8rem;	
+						font-weight: bold;
 						padding: .2em;
 					}
 					.detail-text{
@@ -83,7 +85,76 @@
 						text-transform: capitalize;
 					}
 				}
-			}       
+			}   
+			
+			
+			.episodes{
+				.header{
+					filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.153));
+					background-color: #F3215C;
+					border: 2px solid white;
+					color: white;
+					padding: .3em 1em;
+					display: flex;
+					border-radius: 2em;
+					justify-content: space-between;
+					align-items: center;
+					.left{
+						display: flex;
+						align-items: center;
+						gap: .4em;
+						.icon{
+							font-size: 1.2rem;
+						}
+					}
+				}
+				.list{
+					display: grid;
+					grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+					gap: 2em .5em;
+					margin: 1em;
+					.episode{
+						padding: 0;
+						border-radius: 1em 1em 0.2em 0.2em;
+						.episode-header{
+							background-color: #FF4372;
+							color: white;
+							font-size: .7rem;
+							border-radius: 1em 1em 0 0;
+							text-align: center;
+							padding: .25em;
+						}
+						.episode-body{
+							display: flex;
+							padding: .35em;
+							justify-content: center;
+							align-items: center;
+							gap: .4em;
+							.btn{
+								color: white;
+								background:none;
+								border: none;
+								border-radius: .25em;
+								padding: .25em .5em;
+							}
+
+							.btn-watch{
+								border: 2px solid #62A1FF;
+								background-color: #62A1FF;
+								a{
+									color: white;
+									text-decoration: none;
+								}
+
+							}
+							.btn-download{
+								color: #62A1FF;
+								border: 2px solid #62A1FF;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		.detail-sidebar{
@@ -95,6 +166,12 @@
 				border-radius: .5em;
 				scale: 0.8;
 				box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+			}  
+
+			.sidebar-part{
+				min-height: 400px;
+				background-color: #E5E5E5;
+				border-radius: .5em;
 			}
 		}
 	}
