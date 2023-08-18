@@ -22,7 +22,7 @@ export default async function AnimeDetail({params}: Props) {
 				<Image src={'/images/placeholder/banner.png'}  alt='banner' width={1200} height={400} ></Image>
 				<div className="overlay"></div>
 			</div>
-			<div className="confine">
+			<div className="confine watch-section">
 				<section className="detail-part">
 					<div className='info-part'>
 						<div className="title-container">
@@ -111,10 +111,11 @@ export default async function AnimeDetail({params}: Props) {
 				<aside className="detail-sidebar">
 					<Image className='poster' src={animeDetail.image} alt='anime-poster' width={300} height={400}/>
 					<div className="sidebar-part">
-						{/* <h2>Detail Part here</h2> */}
+						<h2>Detail Part here</h2>
 					</div>
 				</aside>		
 			</div>
+	
 		</div>
 	);
 }

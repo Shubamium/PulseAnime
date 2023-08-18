@@ -2,6 +2,9 @@ import VideoPlayer from "@/components/videoPlayer/VideoPlayer";
 import { getAnimeDetail, getAnimeEpisode } from "@/db/AnimeData";
 import Link from "next/link";
 import './watchAnime.scss';
+import Button from "@/components/general/button/Button";
+import { FaDownload, FaExpand, FaStar } from "react-icons/fa";
+import {MdSkipPrevious, MdSkipNext} from 'react-icons/md';
 type Props = {
 	searchParams:{
 		episode:number;
@@ -24,8 +27,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 	console.log(episodeData);
 	return (
 		<div className="container_watch-anime">
-			{/* <h2>{animeDetail.title}</h2>
-			<p>{searchParams.episode}</p> */}
+		
 			<div className="confine">
 				<section className="media-player layout">
 					<div className="left">
@@ -50,6 +52,35 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 								<h2>Episode 1</h2>
 								<h2>Episode 1</h2>
 							</div>
+						</div>
+					</div>
+				</section>
+				<section className="media-detail layout">
+					<div className="container_media-detail">
+						<div className="media-header">
+							<h2 className="title">{animeDetail.title}</h2>
+							<p className="episode-number">Episode {episodeNumber}</p>
+						</div>
+						<div className="media-action">
+							<select className="dropdown">
+								<option value="gogoanime">Gogoanime</option>
+								<option value="gogoanime">Zoro</option>
+								<option value="gogoanime">Enime</option>
+								<option value="gogoanime">9Anime</option>
+								<option value="gogoanime">AnimeFox</option>
+							</select>
+							<div className="episode-control">
+								<Button><MdSkipPrevious/>Prev</Button>
+								<Button>Next<MdSkipNext/></Button>
+							</div>
+							<Button className="btn-download"><FaDownload/>Download</Button>
+							<Button className="btn-star"><FaStar/></Button>
+							<Button className="btn-fullscreen"><FaExpand/></Button>
+						</div>
+					</div>
+					<div className="container_media-recommmendation">
+						<div className="ads-section">
+							<h2>Ads here</h2>
 						</div>
 					</div>
 				</section>
