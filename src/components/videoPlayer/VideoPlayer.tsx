@@ -51,7 +51,7 @@ export default function VideoPlayer({url}: Props) {
 				}
 			};
 		}
-	},[]);
+	},[url]);
 	
 	return (
 		<div>

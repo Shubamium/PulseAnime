@@ -66,25 +66,7 @@
 				grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
 				gap: .5em;
 				margin: 1em 0;
-				.detail{
-					width: 100%;
-					.detail-name{
-						background:#A52F7D;
-						color: white;
-						text-align: center;
-						border-radius: 1em;
-						margin-bottom: .5em;
-						font-size: .8rem;	
-						font-weight: bold;
-						padding: .2em;
-					}
-					.detail-text{
-						border-radius: 1em;
-						font-size: .8rem;
-						text-align: center;
-						text-transform: capitalize;
-					}
-				}
+			
 			}   
 			
 			

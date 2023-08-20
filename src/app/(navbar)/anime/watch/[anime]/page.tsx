@@ -5,6 +5,8 @@ import './watchAnime.scss';
 import Button from "@/components/general/button/Button";
 import { FaDownload, FaExpand, FaStar } from "react-icons/fa";
 import {MdSkipPrevious, MdSkipNext} from 'react-icons/md';
+import Image from "next/image";
+import MediaDetail from "@/components/mediaDetail/MediaDetail";
 type Props = {
 	searchParams:{
 		episode:number;
@@ -24,10 +26,9 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 	// const episode = animeDetail.episodes.find((episode) => episode.number === episodeNumber);
 
 	const episodeData =  animeDetail.episodes[episodeNumber] ? await getAnimeEpisode(animeDetail.episodes[episodeNumber-1].id) : null;
-	console.log(episodeData);
+	console.log(episodeData,episodeNumber);
 	return (
 		<div className="container_watch-anime">
-		
 			<div className="confine">
 				<section className="media-player layout">
 					<div className="left">
@@ -45,12 +46,15 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 								Episodes
 							</div>
 							<div className="episode-list">
-								<div className="episode">
-									<h2>Episode 1</h2>
-								</div>
-								<h2>Episode 1</h2>
-								<h2>Episode 1</h2>
-								<h2>Episode 1</h2>
+								{animeDetail.episodes.map((episode:any,index:number)=>{
+									const isPlayed = episodeNumber == index + 1;
+									return (
+										<Link href={`/anime/watch/${animeDetail.id}?episode=${index+1}`} className={"episode" + ` ${isPlayed ? 'played' : 'not-played' }`} key={'episode-list-'+index}>
+											<h2>Episode {index+1}</h2>
+											{isPlayed && <p className="play-status">(Now Playing)</p>}
+										</Link>
+									);
+								})}
 							</div>
 						</div>
 					</div>
@@ -82,6 +86,38 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 						<div className="ads-section">
 							<h2>Ads here</h2>
 						</div>
+					</div>
+				</section>
+				<section className="media-info layout">
+					<div className="container_media-info">
+						<div className="media-info-detailed">
+							<div className="info-section">
+								<div className="title">
+									<h2>{animeDetail.title}</h2>
+								</div>
+								<div className="genre-list">
+									<div className="genre">Comedy</div>
+									<div className="genre">Slice Of Life</div>
+									<div className="genre">Iyashikei</div>
+								</div>
+								<div className="info-section-media-detail">
+									<MediaDetail title='Status' text={animeDetail.status} />
+									<MediaDetail title='Type' text={animeDetail.type} />
+								</div>
+								<div className="media-detailed-section">
+									<p className="description">
+										{animeDetail.description}
+									</p>
+								</div>	
+							</div>
+							<div className="img-section">
+								<Image src={animeDetail.image} alt="media-cover" width={300} height={400}/>
+							</div>
+						</div>
+						<div className="comment-section"></div>
+					</div>
+					<div className="container_media-recommendation">
+
 					</div>
 				</section>
 			</div>

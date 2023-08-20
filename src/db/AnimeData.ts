@@ -11,7 +11,7 @@ export async function getAnimeSearch(query:string) {
 
 export async function getAnimeDetail(id:string) {
 
-	const response = await fetch(backendUrl +'/anime/gogoanime/info/'+encodeURIComponent(id));
+	const response = await fetch(backendUrl +'/anime/gogoanime/info/'+id);
 	const result = await response.json();
 
 	return result as AnimeDetail;

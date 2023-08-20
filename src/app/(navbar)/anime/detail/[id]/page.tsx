@@ -6,6 +6,7 @@ import './animeDetail.scss';
 import Button from '@/components/general/button/Button';
 import { FaArrowLeft, FaArrowRight, FaDownload, FaList } from 'react-icons/fa';
 import { splitIntoParagraphs } from '@/db/util';
+import MediaDetail from '@/components/mediaDetail/MediaDetail';
 
 type Props = {
 	params:{
@@ -29,38 +30,10 @@ export default async function AnimeDetail({params}: Props) {
 							<h2>{animeDetail.title}</h2>
 						</div>
 						<div className="details-list">
-							<div className="detail">
-								<div className="detail-name">
-									<p>Type</p>
-								</div>
-								<div className="detail-text panel">
-									<p>{animeDetail.subOrDub}</p>
-								</div>
-							</div>
-							<div className="detail">
-								<div className="detail-name">
-									<p>Episodes</p>
-								</div>
-								<div className="detail-text panel">
-									<p>{animeDetail.episodes.length}</p>
-								</div>
-							</div>
-							<div className="detail">
-								<div className="detail-name">
-									<p>Release Date</p>
-								</div>
-								<div className="detail-text panel">
-									<p>{animeDetail.releaseDate}</p>
-								</div>
-							</div>
-							<div className="detail">
-								<div className="detail-name">
-									<p>Status</p>
-								</div>
-								<div className="detail-text panel">
-									<p>{animeDetail.status}</p>
-								</div>
-							</div>
+							<MediaDetail title='Type' text={animeDetail.subOrDub} />
+							<MediaDetail title='Episodes' text={animeDetail.episodes.length.toString()} />
+							<MediaDetail title='Release Date' text={animeDetail.releaseDate} />
+							<MediaDetail title='Status Date' text={animeDetail.status} />
 						</div>
 						<div className="description panel">
 							{splitIntoParagraphs(animeDetail.description).map((sentence,index)=>{
@@ -92,7 +65,7 @@ export default async function AnimeDetail({params}: Props) {
 							</div>
 						</div>
 						<div className="list">
-							{animeDetail.episodes && animeDetail.episodes.map((episode)=>{
+							{animeDetail && animeDetail.episodes && animeDetail.episodes.map((episode)=>{
 								return (
 									<div className="episode panel" key={'episode-list-'+ episode.id}>
 										<div className="episode-header">
@@ -115,7 +88,7 @@ export default async function AnimeDetail({params}: Props) {
 					</div>
 				</aside>		
 			</div>
-	
+			
 		</div>
 	);
 }
