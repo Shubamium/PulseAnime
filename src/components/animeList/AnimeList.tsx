@@ -9,11 +9,11 @@ type Props = {
 export default function AnimeList({animes}:Props){
 	return (
 		<div className="anime-list" >
-				{animes && animes.map((anime)=>{
-					return(
-						<BasicAnimeDisplayer key={anime.id} anime={anime}/>
-					);
-				})}
+			{animes && animes.map((anime)=>{
+				return(
+					<BasicAnimeDisplayer key={anime.id} anime={anime}/>
+				);
+			})}
 		</div>
 	);
 }
