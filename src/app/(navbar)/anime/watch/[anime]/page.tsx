@@ -1,5 +1,5 @@
 import VideoPlayer from "@/components/videoPlayer/VideoPlayer";
-import { getAnimeDetail, getAnimeEpisode } from "@/db/AnimeData";
+import { getAnimeEpisode, getAnimeMeta } from "@/db/AnimeData";
 import Link from "next/link";
 import './watchAnime.scss';
 import Button from "@/components/general/button/Button";
@@ -22,7 +22,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 	const animeId = params.anime;
 	const episodeNumber = searchParams.episode;
 	
-	const animeDetail = await getAnimeDetail(animeId);
+	const animeDetail = await getAnimeMeta(animeId);
 
 	const episodeData =  animeDetail.episodes[episodeNumber] ? await getAnimeEpisode(animeDetail.episodes[episodeNumber-1].id) : null;
 
@@ -40,7 +40,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 						</div>
 						<div className="container_media-detail">
 							<div className="media-header">
-								<h2 className="title">{animeDetail.title}</h2>
+								<h2 className="title">{animeDetail.title.english}</h2>
 								<p className="episode-number">Episode {episodeNumber}</p>
 							</div>
 							<div className="media-action">
@@ -86,16 +86,21 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 						<div className="media-info-detailed">
 							<div className="info-section">
 								<div className="title">
-									<h2>{animeDetail.title}</h2>
+									<h2>{animeDetail.title.english}</h2>
 								</div>
 								<div className="genre-list">
 									<div className="genre">Comedy</div>
 									<div className="genre">Slice Of Life</div>
-									<div className="genre">Iyashikei</div>
+									{animeDetail.genres && animeDetail.genres.map((genre:string,index:number)=>{
+										return (
+											<div className="genre" key={'genre-list'+index}>{genre}</div>
+										);
+									})}
 								</div>
 								<div className="info-section-media-detail">
 									<MediaDetail title='Status' text={animeDetail.status} />
 									<MediaDetail title='Type' text={animeDetail.type} />
+									<MediaDetail title='Release Date' text={animeDetail.season + ' ' + animeDetail.releaseDate} />
 								</div>
 								<div className="media-detailed-section">
 									<p className="description">

@@ -20,9 +20,11 @@ export async function getAnimeSearch(query:string) {
 export async function getAnimeMeta(id:string) {
 
 	const response = await fetch(backendUrl +'/meta/anilist/info/'+id);
-	const result = await response.json();
+	const result = await response.json() as AnimeMeta;
 
-	return result as AnimeMeta;
+	result.episodes.sort((a,b) => a.number - b.number);
+	
+	return result;
 
 }
 export async function getAnimeEpisode(episodeId:string) {

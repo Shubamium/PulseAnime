@@ -183,6 +183,7 @@
 
 					.genre-list{
 						display: flex;
+						flex-wrap: wrap;
 						gap: .5em;
 						margin: .5em 0;
 						.genre{
