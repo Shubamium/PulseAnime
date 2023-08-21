@@ -20,19 +20,21 @@ export default async function AnimeDetail({params}: Props) {
 	return (
 		<div className='container_anime-detail'>
 			<div className="banner">
-				<Image src={'/images/placeholder/banner.png'}  alt='banner' width={1200} height={400} ></Image>
+				<Image src={ animeDetail.cover || '/images/placeholder/banner.png'}  alt='banner' width={1200} height={400} ></Image>
 				<div className="overlay"></div>
 			</div>
 			<div className="confine watch-section">
-				<section className="detail-part">
+				<section className={"detail-part"+ ` ${ animeDetail.title.english.length >= 35 ? 'longer-header':''}`}>
 					<div className='info-part'>
 						<div className="title-container">
-							<h2>{animeDetail.title.english}</h2>
+							<h2>{animeDetail.title.english} </h2>
+							<span className='jp'>{animeDetail.title.native}</span>
 						</div>
+					
 						<div className="details-list">
 							<MediaDetail title='Type' text={animeDetail.subOrDub} />
-							<MediaDetail title='Episodes' text={animeDetail.totalEpisodes.toString()} />
-							<MediaDetail title='Release Date' text={animeDetail.releaseDate} />
+							<MediaDetail title='Episodes' text={animeDetail.totalEpisodes?.toString() || 'TBA'} />
+							<MediaDetail title='Release Date' text={animeDetail.releaseDate || 'TBA'} />
 							<MediaDetail title='Status' text={animeDetail.status} />
 						</div>
 						<div className="description panel">
@@ -50,6 +52,12 @@ export default async function AnimeDetail({params}: Props) {
 								);
 							})}
 						</div>
+						{animeDetail.trailer && animeDetail.trailer.site === 'youtube' && (
+							<div className="trailer">
+								<iframe width="650" height="350" src={`https://www.youtube.com/embed/${animeDetail.trailer.id}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+							</div>
+						)}
+					
 					</div>
 					<div className="episodes">
 						<div className="header">
