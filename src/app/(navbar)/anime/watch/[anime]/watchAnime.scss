@@ -149,9 +149,15 @@
 						color: white;
 						// font-size: 1.3rem;
 						scale: 1.4;
-						top: 4px;
+						top: 6px;
 						right: 4px;
 						position: relative;
+						// transition: all 250ms ;
+						svg{
+							overflow: visible;
+							border-bottom: 2px solid #F1215F;
+							border-radius: 1em;
+						}
 					}
 				}
 			}

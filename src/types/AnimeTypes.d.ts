@@ -1,9 +1,7 @@
+import { type } from "os";
+
 export type AnimeSearchResult = {
-	title:{
-		romaji:string;
-		english:string;
-		native:string;
-	};
+	title:AnimeTitle
 	id:string;
 	image:string;
 	type:string;
@@ -44,11 +42,7 @@ export type AnimeEpisodeData = {
 
 export type AnimeMeta = {
 	id:string;
-	title:{
-		romaji:string;
-		english:string;
-		native:string;
-	};
+	title:AnimeTitle
 	image:string;
 	cover:string;
 	trailer:{
@@ -69,3 +63,9 @@ export type AnimeMeta = {
 		number:number
 	}[]
 }
+// animeDetail.title.english || animeDetail.title.native || animeDetail.title.romaji
+export type AnimeTitle = {
+	romaji:string;
+	english:string;
+	native:string;
+};

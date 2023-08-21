@@ -5,7 +5,7 @@ import React from 'react';
 import './animeDetail.scss';
 import Button from '@/components/general/button/Button';
 import { FaArrowLeft, FaArrowRight, FaDownload, FaList } from 'react-icons/fa';
-import { splitIntoParagraphs } from '@/db/util';
+import { getTitle, splitIntoParagraphs } from '@/db/util';
 import MediaDetail from '@/components/mediaDetail/MediaDetail';
 
 type Props = {
@@ -17,6 +17,9 @@ type Props = {
 
 export default async function AnimeDetail({params}: Props) {
 	const animeDetail = await getAnimeMeta(params.id);
+
+	const title = getTitle(animeDetail.title);
+
 	return (
 		<div className='container_anime-detail'>
 			<div className="banner">
@@ -24,11 +27,11 @@ export default async function AnimeDetail({params}: Props) {
 				<div className="overlay"></div>
 			</div>
 			<div className="confine watch-section">
-				<section className={"detail-part"+ ` ${ animeDetail.title.english.length >= 35 ? 'longer-header':''}`}>
+				<section className={"detail-part"+ ` ${ title.length >= 35 ? 'longer-header':''}`}>
 					<div className='info-part'>
 						<div className="title-container">
-							<h2>{animeDetail.title.english} </h2>
-							<span className='jp'>{animeDetail.title.native}</span>
+							<h2>{title} </h2>
+							<span className='jp'>{animeDetail.title.native || ''}</span>
 						</div>
 					
 						<div className="details-list">

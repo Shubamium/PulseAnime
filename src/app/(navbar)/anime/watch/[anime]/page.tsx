@@ -55,7 +55,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 									<Button><MdSkipPrevious/>Prev</Button>
 									<Button>Next<MdSkipNext/></Button>
 								</div>
-								<Button className="btn-download"><FaDownload/>Download</Button>
+								<Button className="btn-download">Download<FaDownload/></Button>
 								<Button className="btn-star"><FaStar/></Button>
 								<Button className="btn-fullscreen"><FaExpand/></Button>
 							</div>
@@ -103,9 +103,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 									<MediaDetail title='Release Date' text={animeDetail.season + ' ' + animeDetail.releaseDate} />
 								</div>
 								<div className="media-detailed-section">
-									<p className="description">
-										{animeDetail.description}
-									</p>
+									<div className="description" dangerouslySetInnerHTML={{__html:animeDetail.description}}></div>
 								</div>	
 							</div>
 							<div className="img-section">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import './animeSearch.scss';
 import ResultDisplayer from "./resultDisplayer/ResultDisplayer";
 import { AnimeSearchResult } from "@/types/AnimeTypes";
+import { getTitle } from "@/db/util";
 type AnimeSearchProps = {
   searchParams: {
 	query:string
@@ -13,14 +14,16 @@ type AnimeSearchProps = {
 export default async function AnimeSearch({searchParams}: AnimeSearchProps) {
 	const query = searchParams.query;
 	const {results} = await getAnimeSearch(query);
+
 	return (
 		<div className="container_search-page">
 			<div className="search-results">
 				<div className="confine">
 					<div className="container_list">
 						{results && results.map((result:AnimeSearchResult)=>{
+							const title = getTitle(result.title);
 							return (
-								<ResultDisplayer cover={result.image} to={`/anime/detail/${result.id}`} title={result.title.english} key={result.id}/>
+								<ResultDisplayer cover={result.image} to={`/anime/detail/${result.id}`} title={title} key={result.id}/>
 							);
 						})}
 					</div>

@@ -1,3 +1,5 @@
+import { AnimeTitle } from "@/types/AnimeTypes";
+
 export const backendUrl = process.env.DB_HOST ?? 'http:127.0.0.1:3173';
 
 
@@ -22,4 +24,9 @@ export function splitIntoParagraphs(sentence:string) {
   
 	return paragraphs;
   }
+  
+export function getTitle(title:AnimeTitle){
+	return title.english || title.native || title.romaji || 'No Title';
+	
+}
   
