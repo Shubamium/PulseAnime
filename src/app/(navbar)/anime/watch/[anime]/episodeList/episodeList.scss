@@ -1,0 +1,103 @@
+
+.container_episodes-list{
+	.episode-header{
+		background-color: #383645;
+		color: white;
+		font-size: 1.2rem;
+		padding: .5em;
+		border-radius: .25em 0.25em 0 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.title{
+			font-size: .95rem;
+		}
+
+		.action{
+			display: flex;
+			gap: .25em;
+			.btn{
+				font-size: 1.5rem;
+				border-radius: 0.1em;
+				padding: .15em;
+				border: none;
+				color: white;
+			}
+
+			.btn-toggle-detail{
+				background-color: #F1215F;
+			}
+			.btn-scroll{
+				background-color: #2474EB;
+			}
+		}
+	}
+	.episode-list{
+		background-color: #38364511;
+		border-radius: 0 0 .25em .25em;
+		height: 600px;
+		margin-bottom: 1em;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+		overflow-x: hidden;
+		gap: .5em;
+		padding-block: .5em;
+		padding-inline: .45em;
+		.episode{
+			text-decoration: none;
+			background-color: #D9D9D9;
+			padding: .5em;
+			border-radius: .25em;
+			color: #383645;
+			transition: all 250ms ease;
+			display: grid;
+			.info{
+				display: flex;
+				justify-content: space-between;
+				gap: .2em;
+				align-items: center;
+				h2{
+					font-size: .9rem;
+					font-weight: 300;
+				}
+			}
+			&:hover{
+				padding: 0.7em;
+				transform-origin: left;
+			}
+	
+			&.played{
+				border-bottom:3px solid #F1215F;
+				background-color: #7E0D58;
+				color: white;
+				.episode-detail{
+					.title{
+						font-weight: bold;
+					}
+				}
+			}
+			.episode-detail{
+				img{
+					width: 100%;
+					object-fit: cover;
+					border-radius: .25em;
+				}
+			}
+			.play-status{
+				color: white;
+				// font-size: 1.3rem;
+				scale: 1.4;
+				top: 6px;
+				right: 4px;
+				position: relative;
+				// transition: all 250ms ;
+				svg{
+					overflow: visible;
+					border-bottom: 2px solid #F1215F;
+					border-radius: 1em;
+				}
+			}
+		}
+	}
+}

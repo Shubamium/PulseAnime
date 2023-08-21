@@ -39,7 +39,6 @@ export type AnimeEpisodeData = {
 	}[]
 }
 
-
 export type AnimeMeta = {
 	id:string;
 	title:AnimeTitle
@@ -58,12 +57,17 @@ export type AnimeMeta = {
 	season:string;
 	subOrDub:string;
 	type:string;
-	episodes:{
-		id:string,
-		number:number
-	}[]
-}
-// animeDetail.title.english || animeDetail.title.native || animeDetail.title.romaji
+	episodes:AnimeEpisode[]
+};
+
+export type AnimeEpisode ={
+	id:string,
+	number:number,
+	title?:string,
+	image?:string,
+	description?:string
+};
+
 export type AnimeTitle = {
 	romaji:string;
 	english:string;

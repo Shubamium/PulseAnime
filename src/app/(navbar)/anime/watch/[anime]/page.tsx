@@ -1,12 +1,13 @@
 import VideoPlayer from "@/components/videoPlayer/VideoPlayer";
 import { getAnimeEpisode, getAnimeMeta } from "@/db/AnimeData";
-import Link from "next/link";
 import './watchAnime.scss';
 import Button from "@/components/general/button/Button";
-import { FaDownload, FaExpand, FaPlayCircle, FaStar } from "react-icons/fa";
+import { FaDownload, FaExpand , FaStar } from "react-icons/fa";
 import {MdSkipPrevious, MdSkipNext} from 'react-icons/md';
 import Image from "next/image";
 import MediaDetail from "@/components/mediaDetail/MediaDetail";
+import EpisodeList from "./episodeList/EpisodeList";
+
 type Props = {
 	searchParams:{
 		episode:number;
@@ -62,25 +63,9 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 						</div>
 					</div>
 					<div className="right">
-						<div className="episodes">
-							<div className="episode-header">
-								Episodes
-							</div>
-							<div className="episode-list">
-								{animeDetail.episodes.map((episode:any,index:number)=>{
-									const isPlayed = episodeNumber == index + 1;
-									return (
-										<Link href={`/anime/watch/${animeDetail.id}?episode=${index+1}`} className={"episode" + ` ${isPlayed ? 'played' : 'not-played' }`} key={'episode-list-'+index}>
-											<h2>Episode {index+1}</h2>
-											{isPlayed && <p className="play-status"><FaPlayCircle/></p>}
-										</Link>
-									);
-								})}
-							</div>
-						</div>
+						<EpisodeList episodes={animeDetail.episodes} currentEpisode={episodeNumber} animeId={animeDetail.id}/>
 					</div>
 				</section>
-			
 				<section className="media-info layout">
 					<div className="container_media-info">
 						<div className="media-info-detailed">
