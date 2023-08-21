@@ -1,7 +1,7 @@
 import AnimeList from "@/components/animeList/AnimeList";
 import HomeTitle from "@/components/home/homeTitle/HomeTitle";
 import { backendUrl } from "@/db/util";
-import { AnimeData } from "@/types/AnimeTypes";
+import { AnimeSearchResult } from "@/types/AnimeTypes";
 import styling from './home.module.scss';
 
 
@@ -13,11 +13,11 @@ async function getTopAiringAnime(){
 
 export default async function Home() {
 	const serverData = await getTopAiringAnime();
-	const topAiring = serverData.results as AnimeData[]; 
+	const topAiring = serverData.results as AnimeSearchResult[]; 
 	return (
 		<main className={styling['container_home-page']}>
 			<HomeTitle/>
-			<AnimeList animes={topAiring}/>
+			{/* <AnimeList animes={topAiring}/> */}
 		</main>
 	);
 }

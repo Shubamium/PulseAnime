@@ -1,4 +1,4 @@
-import { getAnimeDetail } from '@/db/AnimeData';
+import { getAnimeMeta } from '@/db/AnimeData';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -16,7 +16,7 @@ type Props = {
 
 
 export default async function AnimeDetail({params}: Props) {
-	const animeDetail = await getAnimeDetail(params.id);
+	const animeDetail = await getAnimeMeta(params.id);
 	return (
 		<div className='container_anime-detail'>
 			<div className="banner">
@@ -27,21 +27,22 @@ export default async function AnimeDetail({params}: Props) {
 				<section className="detail-part">
 					<div className='info-part'>
 						<div className="title-container">
-							<h2>{animeDetail.title}</h2>
+							<h2>{animeDetail.title.english}</h2>
 						</div>
 						<div className="details-list">
 							<MediaDetail title='Type' text={animeDetail.subOrDub} />
-							<MediaDetail title='Episodes' text={animeDetail.episodes.length.toString()} />
+							<MediaDetail title='Episodes' text={animeDetail.totalEpisodes.toString()} />
 							<MediaDetail title='Release Date' text={animeDetail.releaseDate} />
-							<MediaDetail title='Status Date' text={animeDetail.status} />
+							<MediaDetail title='Status' text={animeDetail.status} />
 						</div>
 						<div className="description panel">
-							{splitIntoParagraphs(animeDetail.description).map((sentence,index)=>{
+							<div dangerouslySetInnerHTML={{__html:animeDetail.description} }></div>
+							{false && splitIntoParagraphs(animeDetail.description).map((sentence,index)=>{
 								return index % 4 === 0 ? 
 								(
 									<React.Fragment key={'paragraph-sentences' + index}>
 										<p>{sentence}</p>
-										<br/>
+										{/* <br/> */}
 									</React.Fragment>
 								)
 								: (

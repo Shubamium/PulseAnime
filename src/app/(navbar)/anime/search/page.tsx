@@ -3,7 +3,7 @@ import { getAnimeSearch } from "@/db/AnimeData";
 import Link from "next/link";
 import './animeSearch.scss';
 import ResultDisplayer from "./resultDisplayer/ResultDisplayer";
-import { AnimeData } from "@/types/AnimeTypes";
+import { AnimeSearchResult } from "@/types/AnimeTypes";
 type AnimeSearchProps = {
   searchParams: {
 	query:string
@@ -18,9 +18,9 @@ export default async function AnimeSearch({searchParams}: AnimeSearchProps) {
 			<div className="search-results">
 				<div className="confine">
 					<div className="container_list">
-						{results && results.map((result:any)=>{
+						{results && results.map((result:AnimeSearchResult)=>{
 							return (
-								<ResultDisplayer cover={result.image} to={`/anime/detail/${result.id}`} title={result.title} key={result.id}/>
+								<ResultDisplayer cover={result.image} to={`/anime/detail/${result.id}`} title={result.title.english} key={result.id}/>
 							);
 						})}
 					</div>

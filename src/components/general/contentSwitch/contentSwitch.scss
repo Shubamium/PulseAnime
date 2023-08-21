@@ -12,15 +12,20 @@
 		border: none;
 		font-size: 1rem;
 		background:none;
-		transition: all 250ms ease;
+		transition: all 250ms ease, border 0ms;
 		padding:.2em 1.2em;
-
+		
 		&.active, &:hover{
 			background:#7E0D58;
 			font-weight: bold;
 			padding:.2em 1.6em;
 			border: 2px solid white;
 			border-radius: .25em;
+		}
+
+		&:hover.active{
+			// background:none;
+			scale:1
 		}
 	}
 }

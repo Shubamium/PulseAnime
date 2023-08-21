@@ -1,9 +1,9 @@
-import { AnimeData } from "@/types/AnimeTypes";
+import { AnimeSearchResult } from "@/types/AnimeTypes";
 import BasicAnimeDisplayer from "../basicAnimeDisplayer/BasicAnimeDisplayer";
 import './animeList.scss';
 
 type Props = {
-	animes:AnimeData[]
+	animes:AnimeSearchResult[]
 }
 
 export default function AnimeList({animes}:Props){

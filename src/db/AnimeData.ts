@@ -1,23 +1,30 @@
-import { AnimeData, AnimeDetail, AnimeEpisodeData, AnimeSearchResults } from "@/types/AnimeTypes";
+import {  AnimeEpisodeData, AnimeMeta, AnimeSearchResults } from "@/types/AnimeTypes";
 import { backendUrl } from "./util";
 
 export async function getAnimeSearch(query:string) {
 
-	const result = await fetch(backendUrl + '/anime/gogoanime/' + encodeURIComponent(query));
+	const result = await fetch(backendUrl + '/meta/anilist/' + encodeURIComponent(query));
 	const res = await result.json();
 
 	return res as AnimeSearchResults;
 }
 
-export async function getAnimeDetail(id:string) {
+// export async function getAnimeDetail(id:string) {
 
-	const response = await fetch(backendUrl +'/anime/gogoanime/info/'+id);
+// 	const response = await fetch(backendUrl +'/anime/gogoanime/info/'+id);
+// 	const result = await response.json();
+
+// 	return result as AnimeDetail;
+
+// }
+export async function getAnimeMeta(id:string) {
+
+	const response = await fetch(backendUrl +'/meta/anilist/info/'+id);
 	const result = await response.json();
 
-	return result as AnimeDetail;
+	return result as AnimeMeta;
 
 }
-
 export async function getAnimeEpisode(episodeId:string) {
 	console.log('getting anime episode');
 	const response = await fetch(backendUrl +'/anime/gogoanime/watch/'+encodeURIComponent(episodeId));
