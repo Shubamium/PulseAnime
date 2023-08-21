@@ -7,6 +7,7 @@ import {MdSkipPrevious, MdSkipNext} from 'react-icons/md';
 import Image from "next/image";
 import MediaDetail from "@/components/mediaDetail/MediaDetail";
 import EpisodeList from "./episodeList/EpisodeList";
+import { getTitle } from "@/db/util";
 
 type Props = {
 	searchParams:{
@@ -25,23 +26,25 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 	
 	const animeDetail = await getAnimeMeta(animeId);
 
-	const episodeData =  animeDetail.episodes[episodeNumber] ? await getAnimeEpisode(animeDetail.episodes[episodeNumber-1].id) : null;
-
+	// const episodeData =  animeDetail.episodes[episodeNumber] ? await getAnimeEpisode(animeDetail.episodes[episodeNumber-1].id) : null;
+	const episodeData = animeDetail.episodes.find((episode)=>episode.number == episodeNumber) ?? animeDetail.episodes[0];
+	const episodeVideo = await getAnimeEpisode(episodeData.id);
+	const mediaTitle = getTitle(animeDetail.title);
 	return (
 		<div className="container_watch-anime">
 			<div className="confine">
 				<section className="media-player layout">
 					<div className="left">
 						<div className="video">
-							{episodeData && episodeData.sources[1] && episodeData.sources[3].isM3U8 &&
+							{episodeData && episodeVideo.sources[1] && episodeVideo.sources[3].isM3U8 &&
 								(
-										<VideoPlayer url={episodeData.sources[3].url}/>
+										<VideoPlayer url={episodeVideo.sources[3].url}/>
 								)
 							}
 						</div>
 						<div className="container_media-detail">
 							<div className="media-header">
-								<h2 className="title">{animeDetail.title.english}</h2>
+								<h2 className="title">{mediaTitle}</h2>
 								<p className="episode-number">Episode {episodeNumber}</p>
 							</div>
 							<div className="media-action">

@@ -24,7 +24,7 @@ export default function EpisodeList({episodes,currentEpisode,animeId}: Props) {
 			return !prev;
 		});
 	};
-
+	console.log(episodes);
 	return (
 		<div className="container_episodes-list">
 			<div className="episode-header">
@@ -39,9 +39,9 @@ export default function EpisodeList({episodes,currentEpisode,animeId}: Props) {
 			</div>
 			<div className="episode-list">
 				{episodes.map((episode,index:number)=>{
-					const isPlayed = currentEpisode == index + 1;
+					const isPlayed = currentEpisode ==  (episode.number ?? index + 1);
 					return (
-						<Link href={`/anime/watch/${animeId}?episode=${index+1}`} className={"episode" + ` ${isPlayed ? 'played' : 'not-played' }`} key={'episode-list-'+index}>
+						<Link href={`/anime/watch/${animeId}?episode=${episode.number}`} className={"episode" + ` ${isPlayed ? 'played' : 'not-played' }`} key={'episode-list-'+index}>
 							{episode.image && detailedEpisode && (
 								<div className="episode-detail">
 										{episode.image && <Image src={episode.image} className="episode-image" alt="episode-thumbnail" width={190} height={100}></Image>}
@@ -49,7 +49,7 @@ export default function EpisodeList({episodes,currentEpisode,animeId}: Props) {
 								</div>
 							)}
 							<div className="info">
-								<h2>Episode {index+1}</h2>
+								<h2>Episode {episode.number ?? index+1}</h2>
 								{isPlayed && <p className="play-status"><FaPlayCircle/></p>}
 							</div>
 						</Link>
