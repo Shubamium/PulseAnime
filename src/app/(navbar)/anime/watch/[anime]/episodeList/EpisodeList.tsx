@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FaEye, FaEyeSlash, FaPlayCircle } from "react-icons/fa";
 import './episodeList.scss';
 import Button from "@/components/general/button/Button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 type Props = {
@@ -17,14 +17,23 @@ type Props = {
 const EPISODE_DETAIL_VIEW = 'episode_toggle';
 
 export default function EpisodeList({episodes,currentEpisode,animeId}: Props) {
-	const [detailedEpisode,setDetailedEpisode] = useState(JSON.parse(localStorage.getItem(EPISODE_DETAIL_VIEW)|| 'false') ?? true);
+	const [detailedEpisode,setDetailedEpisode] = useState(JSON.parse(localStorage.getItem(EPISODE_DETAIL_VIEW)|| 'true') ?? true);
+	const episodeContainerRef = useRef<HTMLDivElement>(null);
 	const changeDetailedView = ()=>{
 		setDetailedEpisode((prev:boolean) => {
 			localStorage.setItem(EPISODE_DETAIL_VIEW,JSON.stringify(!prev));
 			return !prev;
 		});
 	};
-	console.log(episodes);
+
+	const scrollView = (amount:number)=>{
+		
+		if(episodeContainerRef.current){
+			const currentScrollTop = episodeContainerRef.current.scrollTop;
+			episodeContainerRef.current.scrollBy({behavior:'smooth',top:amount});
+			console.log(currentScrollTop);
+		}
+	};
 	return (
 		<div className="container_episodes-list">
 			<div className="episode-header">
@@ -33,11 +42,11 @@ export default function EpisodeList({episodes,currentEpisode,animeId}: Props) {
 				</div>
 				<div className="action">
 					<Button className="btn-toggle-detail" onClick={changeDetailedView}>{detailedEpisode ? (<FaEye/>):(<FaEyeSlash/>)}</Button>
-					<Button className="btn-scroll" onClick={()=>{setDetailedEpisode(prev => !prev);}}><BsChevronUp/></Button>
-					<Button className="btn-scroll" onClick={()=>{setDetailedEpisode(prev => !prev);}}><BsChevronDown/></Button>
+					<Button className="btn-scroll" onClick={()=>{scrollView(-4300);}}><BsChevronUp/></Button>
+					<Button className="btn-scroll" onClick={()=>{scrollView(4300);}}><BsChevronDown/></Button>
 				</div>
 			</div>
-			<div className="episode-list">
+			<div className="episode-list" ref={episodeContainerRef}>
 				{episodes.map((episode,index:number)=>{
 					const isPlayed = currentEpisode ==  (episode.number ?? index + 1);
 					return (
