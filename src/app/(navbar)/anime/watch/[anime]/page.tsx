@@ -12,6 +12,7 @@ import EpisodeControls from "./episodeControls/EpisodeControls";
 import { redirect } from "next/navigation";
 import { MdStarOutline } from "react-icons/md";
 import RecommendationDisplayer from "./recommendationDisplayer/RecommendationDisplayer";
+import Dropdown from "@/components/general/dropdown/Dropdown";
 type Props = {
 	searchParams:{
 		episode:number;
@@ -53,13 +54,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 								<p className="episode-number">Episode {episodeNumber}</p>
 							</div>
 							<div className="media-action">
-								<select className="dropdown">
-									<option value="gogoanime">Gogoanime</option>
-									<option value="gogoanime">Zoro</option>
-									<option value="gogoanime">Enime</option>
-									<option value="gogoanime">9Anime</option>
-									<option value="gogoanime">AnimeFox</option>
-								</select>
+								<Dropdown options={[{label:'Gogoanime',value:'gogoanime'}]}/>
 								<EpisodeControls
 									route={"/anime/watch/"+animeDetail.id} 
 									currentEpisode={episodeNumber} 

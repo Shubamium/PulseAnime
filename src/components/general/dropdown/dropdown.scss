@@ -1,0 +1,14 @@
+.dropdown{
+	font-family: var(--fontPoppins);
+	padding: .5em 1em;
+	border-radius: .25em;
+	border: none;
+	background-color: #383645;
+	border-right: 2em solid #F1215F;
+	padding-right: 1em;
+	color: white;	
+	&::-ms-expand{
+		left: 15px;
+	}
+	outline: none;
+}

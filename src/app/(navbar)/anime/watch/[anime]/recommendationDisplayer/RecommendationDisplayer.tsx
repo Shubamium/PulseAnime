@@ -17,7 +17,7 @@ export default function RecommendationDisplayer({recommendations}: Props) {
 			<div className="recommendation-list" >
 				{recommendations.slice(0,8).map((recommendation,index:number)=>{
 					return(
-						<Link href={'/anime/info/'+recommendation.id} className="recommendation" key={index}>
+						<Link href={'/anime/detail/'+recommendation.id} className="recommendation" key={index}>
 							<div className="banner">
 								<Image src={recommendation.cover} alt="" width={300} height={100}></Image>
 							</div>
