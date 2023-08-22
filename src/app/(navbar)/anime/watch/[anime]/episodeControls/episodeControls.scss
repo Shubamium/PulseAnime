@@ -1,0 +1,18 @@
+.episode-control{
+	display: flex;
+	background-color: #7E0D58;
+	border-radius: 1em;
+	a{
+		display: block;
+		text-decoration: none;
+		background-color: none;
+		.btn-prev{
+			background-color: #383645 !important;
+			border-radius: 1em 0 0 1em;
+		}
+		.btn-next{
+			border-radius: 0 1em 1em 0;
+	
+		}
+	}
+}

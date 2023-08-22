@@ -33,11 +33,21 @@
 					display: flex;
 					flex-direction: column;
 					justify-items: center;
+					text-decoration: none;
 					.title{
-						font-size: 1.1rem;
-						line-height: 80%;
-						color: #7E0D58;
-						font-weight: 300;
+						h2{
+							font-size: 1.1rem;
+
+							color: #7E0D58;
+							font-weight: 300;
+							line-height: 80%;
+						}
+						&:hover{
+							h2{
+								color: #2474EB;
+							}
+						}
+						text-decoration: none;
 					}
 					.episode-number{
 						color: #383645c3;	
@@ -82,20 +92,7 @@
 					.btn-star{
 						background-color: #2474EB ;
 					}
-					.episode-control{
-						display: flex;
-						background-color: #7E0D58;
-						border-radius: 1em;
-						.btn:nth-child(1){
-							background-color: #383645;
-							border-radius: 1em 0 0 1em;
-						}
-						.btn:nth-child(2){
-							border-radius: 0 1em 1em 0;
-	
-						}
-					}
-	
+					
 				}
 			}
 		}
@@ -114,7 +111,17 @@
 					.title{
 						background-color: #F62159;
 						color: white;
+						display: block;
 						font-size: 1rem;
+						text-decoration: none;
+						transition: all 250ms ease;
+						position: relative;
+						left: 0%;
+						&:hover{
+							background-color: #7E0D58;
+							left: 1%;
+
+						}
 						padding: .4em 1em;
 						border-radius: .25em;
 					}

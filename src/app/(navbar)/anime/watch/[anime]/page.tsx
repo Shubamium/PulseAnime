@@ -8,6 +8,8 @@ import Image from "next/image";
 import MediaDetail from "@/components/mediaDetail/MediaDetail";
 import EpisodeList from "./episodeList/EpisodeList";
 import { getTitle } from "@/db/util";
+import Link from "next/link";
+import EpisodeControls from "./episodeControls/EpisodeControls";
 
 type Props = {
 	searchParams:{
@@ -38,13 +40,13 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 						<div className="video">
 							{episodeData && episodeVideo.sources[1] && episodeVideo.sources[3].isM3U8 &&
 								(
-										<VideoPlayer url={episodeVideo.sources[3].url}/>
+									<VideoPlayer url={episodeVideo.sources[3].url}/>
 								)
 							}
 						</div>
 						<div className="container_media-detail">
 							<div className="media-header">
-								<h2 className="title">{mediaTitle}</h2>
+								<Link href={'/anime/info/'+animeDetail.id} className="title"><h2>{mediaTitle}</h2></Link>
 								<p className="episode-number">Episode {episodeNumber}</p>
 							</div>
 							<div className="media-action">
@@ -55,10 +57,11 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 									<option value="gogoanime">9Anime</option>
 									<option value="gogoanime">AnimeFox</option>
 								</select>
-								<div className="episode-control">
-									<Button><MdSkipPrevious/>Prev</Button>
-									<Button>Next<MdSkipNext/></Button>
-								</div>
+								<EpisodeControls
+									route={"/anime/watch/"+animeDetail.id} 
+									currentEpisode={episodeNumber} 
+									episodesData={animeDetail.episodes}
+									/>
 								<Button className="btn-download">Download<FaDownload/></Button>
 								<Button className="btn-star"><FaStar/></Button>
 								<Button className="btn-fullscreen"><FaExpand/></Button>
@@ -73,9 +76,9 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 					<div className="container_media-info">
 						<div className="media-info-detailed">
 							<div className="info-section">
-								<div className="title">
-									<h2>{animeDetail.title.english}</h2>
-								</div>
+								<Link href={'/anime/info/'+animeDetail.id} className="title">
+									<h2>{mediaTitle}</h2>
+								</Link>
 								<div className="genre-list">
 									<div className="genre">Comedy</div>
 									<div className="genre">Slice Of Life</div>
