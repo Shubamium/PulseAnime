@@ -57,9 +57,20 @@ export type AnimeMeta = {
 	season:string;
 	subOrDub:string;
 	type:string;
-	episodes:AnimeEpisode[]
+	episodes:AnimeEpisode[];
+	recommendations:AnimeRecommendation[]
 };
 
+export type AnimeRecommendation = {
+	id:number;
+	title:AnimeTitle;
+	status:string;
+	image:string;
+	cover:string;
+	rating:number;
+	type:string;
+	episodes:number;
+}
 export type AnimeEpisode ={
 	id:string,
 	number:number,

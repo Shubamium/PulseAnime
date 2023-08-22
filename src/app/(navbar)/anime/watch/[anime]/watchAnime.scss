@@ -181,7 +181,20 @@
 		.container_media-recommendation{
 			min-height: 500px;
 			width: 100%;
-			background-color: grey;
+			// background-color: rgba(128, 128, 128, 0.183);
+
+			.ads-section{
+				min-height: 250px;
+				background-color: #383645;
+				font-size: 1.2rem;
+				color: white;
+				display: flex;
+				align-items: center;
+				text-align: center;
+				justify-content: center;
+				margin: .5em .5em;
+				border-radius: .2em;
+			}
 		}
 	}
 	

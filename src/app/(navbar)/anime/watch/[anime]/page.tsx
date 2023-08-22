@@ -3,14 +3,15 @@ import { getAnimeEpisode, getAnimeMeta } from "@/db/AnimeData";
 import './watchAnime.scss';
 import Button from "@/components/general/button/Button";
 import { FaDownload, FaExpand , FaStar } from "react-icons/fa";
-import {MdSkipPrevious, MdSkipNext} from 'react-icons/md';
 import Image from "next/image";
 import MediaDetail from "@/components/mediaDetail/MediaDetail";
 import EpisodeList from "./episodeList/EpisodeList";
 import { getTitle } from "@/db/util";
 import Link from "next/link";
 import EpisodeControls from "./episodeControls/EpisodeControls";
-
+import { redirect } from "next/navigation";
+import { MdStarOutline } from "react-icons/md";
+import RecommendationDisplayer from "./recommendationDisplayer/RecommendationDisplayer";
 type Props = {
 	searchParams:{
 		episode:number;
@@ -27,7 +28,9 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 	const episodeNumber = searchParams.episode;
 	
 	const animeDetail = await getAnimeMeta(animeId);
-
+	if(!animeDetail.episodes){
+		redirect('/anime/detail/'+animeDetail.id);
+	};
 	// const episodeData =  animeDetail.episodes[episodeNumber] ? await getAnimeEpisode(animeDetail.episodes[episodeNumber-1].id) : null;
 	const episodeData = animeDetail.episodes.find((episode)=>episode.number == episodeNumber) ?? animeDetail.episodes[0];
 	const episodeVideo = await getAnimeEpisode(episodeData.id);
@@ -104,7 +107,10 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 						<div className="comment-section"></div>
 					</div>
 					<div className="container_media-recommendation">
-
+						<div className="ads-section">
+							<h2>Ads Spaces</h2>
+						</div>
+						<RecommendationDisplayer recommendations={animeDetail.recommendations}/>
 					</div>
 				</section>
 			</div>
