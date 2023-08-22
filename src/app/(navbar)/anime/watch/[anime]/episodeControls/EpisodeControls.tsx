@@ -16,8 +16,8 @@ export default function EpisodeControls({route,currentEpisode,episodesData}: Pro
 	if(currentEpisodeId === -1) return null;
 	return (
 		<div className="episode-control">
-			<Link href={route+`?episode=${episodesData[Math.max(currentEpisodeId-1,0)].number}`}><Button className="btn-prev"><MdSkipPrevious/>Prev</Button></Link>
-			<Link href={route+`?episode=${episodesData[Math.min(currentEpisodeId+1,episodesData.length)].number}`}><Button className="btn-next">Next<MdSkipNext/></Button></Link>
+			<Link href={route+`?episode=${episodesData[Math.max(currentEpisodeId - 1,0)].number}`}><Button className="btn-prev"><MdSkipPrevious/>Prev</Button></Link>
+			<Link href={route+`?episode=${episodesData[Math.min(currentEpisodeId + 1,episodesData.length-1)].number}`}><Button className="btn-next">Next<MdSkipNext/></Button></Link>
 		</div>
 	);
 }
