@@ -31,7 +31,7 @@ export type AnimeSearchResults = {
 };
 
 
-export type AnimeEpisodeData = {
+export type AnimeEpisodeSources = {
 	sources:{
 		url:string,
 		isM3U8:boolean,
@@ -84,3 +84,5 @@ export type AnimeTitle = {
 	english:string;
 	native:string;
 };
+
+

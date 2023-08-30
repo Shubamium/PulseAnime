@@ -1,5 +1,7 @@
-import {  AnimeEpisodeData, AnimeMeta, AnimeSearchResults } from "@/types/AnimeTypes";
+import {  AnimeEpisodeSources, AnimeMeta, AnimeSearchResults } from "@/types/AnimeTypes";
 import { backendUrl } from "./util";
+
+// export const getAnimeEpisodeUrl = 
 
 export async function getAnimeSearch(query:string) {
 
@@ -32,6 +34,6 @@ export async function getAnimeEpisode(episodeId:string) {
 	const response = await fetch(backendUrl +'/anime/gogoanime/watch/'+encodeURIComponent(episodeId));
 	const result = await response.json();
 
-	return result as AnimeEpisodeData;
+	return result as AnimeEpisodeSources;
 
 }

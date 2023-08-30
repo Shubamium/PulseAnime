@@ -13,6 +13,9 @@ import { redirect } from "next/navigation";
 import { MdStarOutline } from "react-icons/md";
 import RecommendationDisplayer from "./recommendationDisplayer/RecommendationDisplayer";
 import Dropdown from "@/components/general/dropdown/Dropdown";
+import AnimeWatchProvider from "./AnimeWatchProvider";
+import MediaAction from "./mediaAction/MediaAction";
+import AnimeVideo from "./animeVideo/AnimeVideo";
 type Props = {
 	searchParams:{
 		episode:number;
@@ -26,44 +29,33 @@ type Props = {
 
 export default async function AnimeWatch({searchParams,params}: Props) {
 	const animeId = params.anime;
-	const episodeNumber = searchParams.episode;
+	const episodeNumber = searchParams.episode ?? 1;
 	
 	const animeDetail = await getAnimeMeta(animeId);
+	// If the anime doesn't have any episodes go back
 	if(!animeDetail.episodes){
 		redirect('/anime/detail/'+animeDetail.id);
 	};
-	// const episodeData =  animeDetail.episodes[episodeNumber] ? await getAnimeEpisode(animeDetail.episodes[episodeNumber-1].id) : null;
-	const episodeData = animeDetail.episodes.find((episode)=>episode.number == episodeNumber) ?? animeDetail.episodes[0];
-	const episodeVideo = await getAnimeEpisode(episodeData.id);
+	
+	// const episodeData = animeDetail.episodes.find((episode)=>episode.number == episodeNumber) ?? animeDetail.episodes[0];
 	const mediaTitle = getTitle(animeDetail.title);
+	// console.log(episodeData);
+	// const episodeData =  animeDetail.episodes[episodeNumber] ? await getAnimeEpisode(animeDetail.episodes[episodeNumber-1].id) : null;
+	// const episodeVideo = await getAnimeEpisode(episodeData.id);
+	// console.log(episodeVideo);
 	return (
-		<div className="container_watch-anime">
+		<AnimeWatchProvider>
+			<div className="container_watch-anime">
 			<div className="confine">
 				<section className="media-player layout">
 					<div className="left">
-						<div className="video">
-							{episodeData && episodeVideo.sources[1] && episodeVideo.sources[3].isM3U8 &&
-								(
-									<VideoPlayer url={episodeVideo.sources[3].url}/>
-								)
-							}
-						</div>
+						<AnimeVideo episode={episodeNumber}/>
 						<div className="container_media-detail">
 							<div className="media-header">
 								<Link href={'/anime/info/'+animeDetail.id} className="title"><h2>{mediaTitle}</h2></Link>
 								<p className="episode-number">Episode {episodeNumber}</p>
 							</div>
-							<div className="media-action">
-								<Dropdown options={[{label:'Gogoanime',value:'gogoanime'}]}/>
-								<EpisodeControls
-									route={"/anime/watch/"+animeDetail.id} 
-									currentEpisode={episodeNumber} 
-									episodesData={animeDetail.episodes}
-									/>
-								<Button className="btn-download">Download<FaDownload/></Button>
-								<Button className="btn-star"><FaStar/></Button>
-								<Button className="btn-fullscreen"><FaExpand/></Button>
-							</div>
+							<MediaAction episodeList={animeDetail.episodes} animeId={animeDetail.id} currentEpisode={episodeNumber}></MediaAction>
 						</div>
 					</div>
 					<div className="right">
@@ -110,5 +102,6 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 				</section>
 			</div>
 		</div>
+		</AnimeWatchProvider>
 	);
 }
