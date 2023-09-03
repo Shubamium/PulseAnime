@@ -59,7 +59,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 						<AnimeVideo episode={episodeNumber} provider={provider} episodeList={animeDetail.episodes}/>
 						<div className="container_media-detail">
 							<div className="media-header">
-								<Link href={'/anime/info/'+animeDetail.id} className="title"><h2>{mediaTitle}</h2></Link>
+								<Link href={'/anime/detail/'+animeDetail.id} className="title"><h2>{mediaTitle}</h2></Link>
 								<p className="episode-number">Episode {episodeNumber}</p>
 							</div>
 							<MediaAction episodeList={animeDetail.episodes} provider={provider} animeId={animeDetail.id} currentEpisode={episodeNumber}></MediaAction>
@@ -73,7 +73,7 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 					<div className="container_media-info">
 						<div className="media-info-detailed">
 							<div className="info-section">
-								<Link href={'/anime/info/'+animeDetail.id} className="title">
+								<Link href={'/anime/detail/'+animeDetail.id} className="title">
 									<h2>{mediaTitle}</h2>
 								</Link>
 								<div className="genre-list">
