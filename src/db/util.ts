@@ -26,7 +26,7 @@ export function splitIntoParagraphs(sentence:string) {
   }
   
 export function getTitle(title:AnimeTitle){
-	return title.english || title.romaji || title.native || 'No Title';
+	return title?.english || title?.romaji || title?.native || 'No Title';
 	
 }
   

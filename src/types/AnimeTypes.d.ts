@@ -31,12 +31,10 @@ export type AnimeSearchResults = {
 };
 
 
-export type AnimeEpisodeSources = {
-	sources:{
-		url:string,
-		isM3U8:boolean,
-		quality:string
-	}[]
+export type AnimeEpisodeSource = {
+	url:string,
+	isM3U8:boolean,
+	quality:string
 }
 
 export type AnimeMeta = {

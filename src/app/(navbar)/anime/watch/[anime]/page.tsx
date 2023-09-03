@@ -16,10 +16,12 @@ import Dropdown from "@/components/general/dropdown/Dropdown";
 import AnimeWatchProvider from "./AnimeWatchProvider";
 import MediaAction from "./mediaAction/MediaAction";
 import AnimeVideo from "./animeVideo/AnimeVideo";
+import { AnimeProvider } from "@/types/AnimeEnums";
 type Props = {
 	searchParams:{
-		episode:number;
+		episode:string;
 		anime:string;
+		provider:string;
 	},
 	params:{
 		anime:string;
@@ -29,13 +31,18 @@ type Props = {
 
 export default async function AnimeWatch({searchParams,params}: Props) {
 	const animeId = params.anime;
-	const episodeNumber = searchParams.episode ?? 1;
-	
-	const animeDetail = await getAnimeMeta(animeId);
+	const episodeNumber = parseInt(searchParams.episode ?? 1);
+	const provider:AnimeProvider = AnimeProvider[searchParams.provider] ?? AnimeProvider.GOGOANIME;
+	const animeDetail = await getAnimeMeta(animeId,provider);
+
+	if(!animeDetail){
+		redirect('/');
+	}
+
 	// If the anime doesn't have any episodes go back
-	if(!animeDetail.episodes){
-		redirect('/anime/detail/'+animeDetail.id);
-	};
+	// if(!animeDetail.episodes){
+	// 	redirect('/anime/detail/'+animeDetail.id);
+	// };
 	
 	// const episodeData = animeDetail.episodes.find((episode)=>episode.number == episodeNumber) ?? animeDetail.episodes[0];
 	const mediaTitle = getTitle(animeDetail.title);
@@ -49,17 +56,17 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 			<div className="confine">
 				<section className="media-player layout">
 					<div className="left">
-						<AnimeVideo episode={episodeNumber}/>
+						<AnimeVideo episode={episodeNumber} provider={provider} episodeList={animeDetail.episodes}/>
 						<div className="container_media-detail">
 							<div className="media-header">
 								<Link href={'/anime/info/'+animeDetail.id} className="title"><h2>{mediaTitle}</h2></Link>
 								<p className="episode-number">Episode {episodeNumber}</p>
 							</div>
-							<MediaAction episodeList={animeDetail.episodes} animeId={animeDetail.id} currentEpisode={episodeNumber}></MediaAction>
+							<MediaAction episodeList={animeDetail.episodes} provider={provider} animeId={animeDetail.id} currentEpisode={episodeNumber}></MediaAction>
 						</div>
 					</div>
 					<div className="right">
-						<EpisodeList episodes={animeDetail.episodes} currentEpisode={episodeNumber} animeId={animeDetail.id}/>
+						<EpisodeList episodes={animeDetail.episodes} currentEpisode={episodeNumber} animeId={animeDetail.id} provider={provider}/>
 					</div>
 				</section>
 				<section className="media-info layout">

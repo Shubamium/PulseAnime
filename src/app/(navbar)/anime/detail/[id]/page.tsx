@@ -7,6 +7,7 @@ import Button from '@/components/general/button/Button';
 import { FaArrowLeft, FaArrowRight, FaDownload, FaList } from 'react-icons/fa';
 import { getTitle, splitIntoParagraphs } from '@/db/util';
 import MediaDetail from '@/components/mediaDetail/MediaDetail';
+import { redirect } from 'next/navigation';
 
 type Props = {
 	params:{
@@ -18,8 +19,11 @@ type Props = {
 export default async function AnimeDetail({params}: Props) {
 	const animeDetail = await getAnimeMeta(params.id);
 
-	const title = getTitle(animeDetail.title);
+	if(animeDetail === null){
+		redirect('/');
+	}
 
+	const title = getTitle(animeDetail.title);
 	return (
 		<div className='container_anime-detail'>
 			<div className="banner">
@@ -42,18 +46,17 @@ export default async function AnimeDetail({params}: Props) {
 						</div>
 						<div className="description panel">
 							<div dangerouslySetInnerHTML={{__html:animeDetail.description} }></div>
-							{false && splitIntoParagraphs(animeDetail.description).map((sentence,index)=>{
+							{/* { splitIntoParagraphs(animeDetail.description).map((sentence,index)=>{
 								return index % 4 === 0 ? 
 								(
 									<React.Fragment key={'paragraph-sentences' + index}>
 										<p>{sentence}</p>
-										{/* <br/> */}
 									</React.Fragment>
 								)
 								: (
 									<p key={'paragraph-sentences' + index}>{sentence}</p>
 								);
-							})}
+							})} */}
 						</div>
 						{animeDetail.trailer && animeDetail.trailer.site === 'youtube' && (
 							<div className="trailer">
