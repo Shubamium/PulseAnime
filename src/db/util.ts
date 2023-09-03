@@ -1,6 +1,6 @@
 import { AnimeTitle } from "@/types/AnimeTypes";
 
-export const backendUrl = () => process.env.DB_HOST ?? 'http:127.0.0.1:3173';
+export const backendUrl = process.env.NEXT_PUBLIC_DB_HOST ?? 'http:127.0.0.1:3173';
 
 
 
