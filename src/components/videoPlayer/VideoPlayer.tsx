@@ -55,7 +55,7 @@ export default function VideoPlayer({videoInfo}: videoPlayerProps) {
 						customType:{
 							m3u8: playM3u8 
 						},
-						quality:sourceList,
+						// quality:sourceList ?? '',
 						autoplay:true,
 						autoSize:true,
 						fullscreen:true,
