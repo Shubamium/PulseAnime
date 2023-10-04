@@ -5,6 +5,7 @@ import { AnimeEpisode, AnimeEpisodeSource } from '@/types/AnimeTypes';
 import { AnimeProvider } from '@/types/AnimeEnums';
 import { getAnimeEpisodeUrl } from '@/db/AnimeData';
 import VideoPlayer from '@/components/videoPlayer/VideoPlayer';
+import { corsUrl } from '@/db/util';
 
 type AnimeVideoProps = {
 	episode:number;
@@ -26,7 +27,7 @@ export default function AnimeVideo({episode,provider,episodeList}: AnimeVideoPro
 		const loadAnime = async() => {
 			const url = new URL(getAnimeEpisodeUrl(episodeList[episodeId].id,provider));
 			try{
-				const req = await fetch(url,{signal:abortController.signal});
+				const req = await fetch( url,{signal:abortController.signal});
 				const response = await req.json();
 				
 				if(req.ok){

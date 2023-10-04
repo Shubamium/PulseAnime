@@ -1,7 +1,8 @@
 import { AnimeTitle } from "@/types/AnimeTypes";
 
-export const backendUrl = process.env.NEXT_PUBLIC_DB_HOST ?? 'http:127.0.0.1:3173';
-
+export const backendUrl = process.env.NEXT_PUBLIC_DB_HOST ?? 'http://127.0.0.1:3173';
+// export const backendUrl = 'https://pulseanime-be.vercel.app';
+export const corsUrl = 'https://pulseanime-cors.vercel.app/api';
 
 
 export function splitIntoParagraphs(sentence:string) {
@@ -29,4 +30,14 @@ export function getTitle(title:AnimeTitle){
 	return title?.english || title?.romaji || title?.native || 'No Title';
 	
 }
+  
+
+export function getEnumKeyByValue(enumObj: any, value: string): string | undefined {
+	for (const key in enumObj) {
+	  if (enumObj.hasOwnProperty(key) && enumObj[key] === value) {
+		return key;
+	  }
+	}
+	return undefined;
+  }
   

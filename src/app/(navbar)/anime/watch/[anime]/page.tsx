@@ -17,6 +17,7 @@ import AnimeWatchProvider from "./AnimeWatchProvider";
 import MediaAction from "./mediaAction/MediaAction";
 import AnimeVideo from "./animeVideo/AnimeVideo";
 import { AnimeProvider } from "@/types/AnimeEnums";
+
 type Props = {
 	searchParams:{
 		episode:string;
@@ -33,12 +34,12 @@ export default async function AnimeWatch({searchParams,params}: Props) {
 	const animeId = params.anime;
 	const episodeNumber = parseInt(searchParams.episode ?? 1);
 	const provider:AnimeProvider = AnimeProvider[searchParams.provider] ?? AnimeProvider.GOGOANIME;
-	const animeDetail = await getAnimeMeta(animeId,provider);
 
+	const animeDetail = await getAnimeMeta(animeId,provider);
+	
 	if(!animeDetail){
 		redirect('/');
 	}
-
 	// If the anime doesn't have any episodes go back
 	// if(!animeDetail.episodes){
 	// 	redirect('/anime/detail/'+animeDetail.id);

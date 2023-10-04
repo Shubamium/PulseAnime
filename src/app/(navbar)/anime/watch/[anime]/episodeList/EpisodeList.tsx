@@ -20,7 +20,11 @@ type Props = {
 const EPISODE_DETAIL_VIEW = 'episode_toggle';
 
 export default function EpisodeList({episodes,currentEpisode,animeId,provider}: Props) {
-	const [detailedEpisode,setDetailedEpisode] = useState(JSON.parse(localStorage.getItem(EPISODE_DETAIL_VIEW)|| 'true') ?? true);
+	let savedDetailed = undefined;
+	if(typeof window === 'undefined'){
+		 savedDetailed = JSON.parse(localStorage.getItem(EPISODE_DETAIL_VIEW)|| 'true');
+	}
+	const [detailedEpisode,setDetailedEpisode] = useState(savedDetailed ?? true);
 	const episodeContainerRef = useRef<HTMLDivElement>(null);
 	const [isLongAnime,setIsLongAnime] = useState(false);
 	const [episodeSectionIndex,setEpisodeSectionIndex] = useState<number>(0);

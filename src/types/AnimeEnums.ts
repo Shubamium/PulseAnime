@@ -1,8 +1,7 @@
 export enum AnimeProvider {
+	NINEANIME = '9anime',
 	GOGOANIME = 'Gogoanime',
 	ZORO = 'Zoro',
-	ENIME = 'Enime',
 	ANIMEPAHE = 'Animepahe',
-	// ANIMEFOX = 'Animefox',
-	// NINEANIME = '9anime',
+	ANIMEFOX = 'Animefox',
 }
