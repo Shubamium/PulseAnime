@@ -20,21 +20,26 @@ type Props = {
 const EPISODE_DETAIL_VIEW = 'episode_toggle';
 
 export default function EpisodeList({episodes,currentEpisode,animeId,provider}: Props) {
+
+	// Get the user preferences for episode thumbnail iew
 	let savedDetailed = undefined;
 	if(typeof window === 'undefined'){
 		 savedDetailed = JSON.parse(localStorage.getItem(EPISODE_DETAIL_VIEW)|| 'true');
 	}
 	const [detailedEpisode,setDetailedEpisode] = useState(savedDetailed ?? true);
-	const episodeContainerRef = useRef<HTMLDivElement>(null);
 	const [isLongAnime,setIsLongAnime] = useState(false);
 	const [episodeSectionIndex,setEpisodeSectionIndex] = useState<number>(0);
 	const [episodeElement,setEpisodeElement] = useState<JSX.Element[][]>([]);
+
+	const episodeContainerRef = useRef<HTMLDivElement>(null);
+	
 	const changeDetailedView = ()=>{
 		setDetailedEpisode((prev:boolean) => {
 			localStorage.setItem(EPISODE_DETAIL_VIEW,JSON.stringify(!prev));
 			return !prev;
 		});
 	};
+
 	const scrollView = (amount:number)=>{
 		if(episodeContainerRef.current){
 			const currentScrollTop = episodeContainerRef.current.scrollTop;
@@ -55,37 +60,40 @@ export default function EpisodeList({episodes,currentEpisode,animeId,provider}: 
 		return options;
 	};
 
+	const updateEpisodeList = (episodes:AnimeEpisode[])=>{
+		const allEpisodes = episodes.map((episode,index:number)=>{
+			const isPlayed = currentEpisode == (episode.number ?? index + 1);
+			return (
+				<Link href={`/anime/watch/${animeId}?episode=${episode.number}&provider=${provider.toUpperCase()}`} id={episode.id} className={"episode" + ` ${isPlayed ? 'played' : 'not-played' }`} key={'episode-list-'+index}>
+					{episode.image && (
+						<div className={"episode-detail"+ ` ${detailedEpisode ?'visible':'hidden'}`}>
+								{episode.image && <Image loading="lazy" src={episode.image} className="episode-image" alt="episode-thumbnail" width={190} height={100}></Image>}
+								<p className="title">{episode.title}</p>
+						</div>
+					)}
+					<div className="info">
+						<h2>Episode {episode.number ?? index+1}</h2>
+						{isPlayed && <p className="play-status"><FaPlayCircle/></p>}
+					</div>
+				</Link>
+			);
+		});
+		let sectionedEpisode:JSX.Element[][] = [[...allEpisodes]];
+		if(allEpisodes.length > 100){
+			sectionedEpisode = [] as JSX.Element[][];
+			for(let i = 0; i < allEpisodes.length; i += 100){
+				sectionedEpisode.push(allEpisodes.slice(i,i+100));
+			}
+			setIsLongAnime(true);
+		}else{
+			setIsLongAnime(false);
+		}
+		setEpisodeElement(sectionedEpisode);
+	};
+	
 	useEffect(()=>{
 		if(episodes){
-			const allEpisodes = episodes.map((episode,index:number)=>{
-				const isPlayed = currentEpisode == (episode.number ?? index + 1);
-				const isDetailed = ()=>detailedEpisode;
-				return (
-					<Link href={`/anime/watch/${animeId}?episode=${episode.number}&provider=${provider.toUpperCase()}`} id={episode.id} className={"episode" + ` ${isPlayed ? 'played' : 'not-played' }`} key={'episode-list-'+index}>
-						{episode.image && (
-							<div className={"episode-detail"+ ` ${detailedEpisode ?'visible':'hidden'}`}>
-									{episode.image && <Image loading="lazy" src={episode.image} className="episode-image" alt="episode-thumbnail" width={190} height={100}></Image>}
-									<p className="title">{episode.title}</p>
-							</div>
-						)}
-						<div className="info">
-							<h2>Episode {episode.number ?? index+1}</h2>
-							{isPlayed && <p className="play-status"><FaPlayCircle/></p>}
-						</div>
-					</Link>
-				);
-			});
-			let sectionedEpisode:JSX.Element[][] = [[...allEpisodes]];
-			if(allEpisodes.length > 100){
-				sectionedEpisode = [] as JSX.Element[][];
-				for(let i = 0; i < allEpisodes.length; i += 100){
-					sectionedEpisode.push(allEpisodes.slice(i,i+100));
-				}
-				setIsLongAnime(true);
-			}else{
-				setIsLongAnime(false);
-			}
-			setEpisodeElement(sectionedEpisode);
+			updateEpisodeList(episodes);
 		}
 	},[episodes,detailedEpisode,provider]);
 	
@@ -104,7 +112,7 @@ export default function EpisodeList({episodes,currentEpisode,animeId,provider}: 
 
 			{isLongAnime && (
 				<div className="episode-section-control">
-					<Dropdown options={getDropdownOptions(episodeElement)} onChange={(res)=>{setEpisodeSectionIndex(prev=>parseInt(res)); console.log(parseInt(res));}}/>
+					<Dropdown options={getDropdownOptions(episodeElement)} onChange={(res) => setEpisodeSectionIndex(prev=>parseInt(res))}/> 
 				</div>
 			)}
 

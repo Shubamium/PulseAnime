@@ -17,16 +17,19 @@ type mediaActionProps = {
 }
 
 const MediaAction = ({episodeList,animeId,currentEpisode,provider}: mediaActionProps) => {
-	const serverOptions = Object.keys(AnimeProvider).map((keys)=>{
+	const allProvider = Object.keys(AnimeProvider);
+	let defaultValue = 0;
+	const serverOptions = allProvider.map((keys,index)=>{
+		if(AnimeProvider[keys] === provider) defaultValue = index;
 		return {
 			label:AnimeProvider[keys],
 			value:keys
 		};
 	});
-	const animeWatchContext = useContext(AnimeWatchContext);
+
+	
 	const navigate = useRouter();
 	const handleChangeProvider = (value:string)=>{
-		// animeWatchContext?.dispatch({type:AnimeWatchContextAction.SET_PROVIDER,payload:AnimeProvider[value]});
 		const currentUrl = new URL(window.location.href);
 		currentUrl.searchParams.set('provider',value);
 		console.log(currentUrl.toString());
@@ -40,7 +43,7 @@ const MediaAction = ({episodeList,animeId,currentEpisode,provider}: mediaActionP
 					episodesData={episodeList}
 					provider={provider}
 				/>
-				<Dropdown options={serverOptions} onChange={handleChangeProvider}/>
+				<Dropdown options={serverOptions} onChange={handleChangeProvider} defaultValue={serverOptions[defaultValue].value}/>
 				<Button className="btn-download">Download<FaDownload/></Button>
 				<Button className="btn-star"><FaStar/></Button>
 				<Button className="btn-fullscreen"><FaExpand/></Button>

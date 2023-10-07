@@ -8,13 +8,14 @@ type Props = {
 		value:string;
 	}[]
 	onChange?:(value:string)=>void;
+	defaultValue?:string
 }
-export default function Dropdown({options,onChange}: Props) {
+export default function Dropdown({options,onChange,defaultValue}: Props) {
 	return (
 		<select className="dropdown" onChange={(e) => onChange && onChange(e.target.value)}>
 			{options.map((option,index:number)=>{
 				return (
-					<option value={option.value} key={'select-options-'+options.values+'-'+index}>
+					<option value={option.value} key={'select-options-'+options.values+'-'+index} selected={option.value === defaultValue}>
 						{option.label}
 					</option>
 				);

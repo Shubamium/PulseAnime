@@ -17,6 +17,7 @@ export default function AnimeVideo({episode,provider,episodeList}: AnimeVideoPro
 
 
 	const [videoInfo,setVideoInfo] = useState<AnimeEpisodeSource[]>();
+	const [loadFail,setLoadFail] = useState(false);
 
 	useEffect(()=>{
 		const abortController = new AbortController();
@@ -34,16 +35,18 @@ export default function AnimeVideo({episode,provider,episodeList}: AnimeVideoPro
 					setVideoInfo(response.sources);
 				}else{
 					console.log('video is missing');
+					setLoadFail(true);
 				}
+
 			}catch (error: unknown) { // Specify the error type as "unknown"
 				if (error instanceof Error) { // Check if it's an instance of the Error class
 					if (error.name === 'AbortError') {
 					console.log('Fetch request was aborted');
 					} else {
-					console.error('An error occurred:', error);
+						console.error('An error occurred:', error);
 					}
 				}
-				}
+			}
 		}; 
 
 		loadAnime();
@@ -56,16 +59,19 @@ export default function AnimeVideo({episode,provider,episodeList}: AnimeVideoPro
 	},[episode,episodeList,provider]);
 
 	useEffect(()=>{
-	
-	},[videoInfo]);
+		if(loadFail){
+			setLoadFail(false);
+		}
+	},[episode]);
 	return (
 		
 		<div className="video">
 				{videoInfo ? (
 					<VideoPlayer videoInfo={videoInfo}/>
-				) : (
-					<p>Waiting for video sources to load / Invalid video sources</p>
-				)}
+				) : 		
+					loadFail ? <p>Waiting for video sources to load / Invalid video sources</p>
+					: <></>
+				}
 		</div>
 	);
 }

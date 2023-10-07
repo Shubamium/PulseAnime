@@ -37,19 +37,9 @@ export async function getAnimeSearch(query:string) {
 	return res as AnimeSearchResults;
 }
 
-// export async function getAnimeDetail(id:string) {
 
-// 	const response = await fetch(backendUrl +'/anime/gogoanime/info/'+id);
-// 	const result = await response.json();
-
-// 	return result as AnimeDetail;
-
-// }
 export async function getAnimeMeta(id:string,provider?:AnimeProvider) {
-	// let providerString = provider === AnimeProvider.NINEANIME ? '"9anime"' : provider;
-	// if(providerString !== '"9anime"'){
-	// 	providerString = provider === AnimeProvider.ANIMEFOX ? '"Animefox"' : provider;
-	// }
+
 	const endpoint = new URL(backendUrl +'/meta/anilist/info/'+ id + (provider ? `?provider=${getEnumKeyByValue(AnimeProvider,provider)}` :'' ));
 	console.log(endpoint.toString());
 	const response = await fetch(endpoint);

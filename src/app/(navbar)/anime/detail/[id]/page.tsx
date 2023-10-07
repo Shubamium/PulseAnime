@@ -1,13 +1,12 @@
 import { getAnimeMeta } from '@/db/AnimeData';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import './animeDetail.scss';
-import Button from '@/components/general/button/Button';
 import { FaArrowLeft, FaArrowRight, FaDownload, FaList } from 'react-icons/fa';
-import { getTitle, splitIntoParagraphs } from '@/db/util';
+import { getTitle } from '@/db/util';
 import MediaDetail from '@/components/mediaDetail/MediaDetail';
 import { redirect } from 'next/navigation';
+import EpisodeDisplayer from './episodeDisplayer/EpisodeDisplayer';
 
 type Props = {
 	params:{
@@ -46,17 +45,6 @@ export default async function AnimeDetail({params}: Props) {
 						</div>
 						<div className="description panel">
 							<div dangerouslySetInnerHTML={{__html:animeDetail.description} }></div>
-							{/* { splitIntoParagraphs(animeDetail.description).map((sentence,index)=>{
-								return index % 4 === 0 ? 
-								(
-									<React.Fragment key={'paragraph-sentences' + index}>
-										<p>{sentence}</p>
-									</React.Fragment>
-								)
-								: (
-									<p key={'paragraph-sentences' + index}>{sentence}</p>
-								);
-							})} */}
 						</div>
 						{animeDetail.trailer && animeDetail.trailer.site === 'youtube' && (
 							<div className="trailer">
@@ -65,36 +53,7 @@ export default async function AnimeDetail({params}: Props) {
 						)}
 					
 					</div>
-					<div className="episodes">
-						<div className="header">
-							<div className="left">
-								<FaList className="icon"/>
-								<h2>  Episodes</h2>
-							</div>
-							<div className="right">
-								<select>
-									<option>Server 1 </option>
-									<option>Server 2 </option>
-									<option>Server 3</option>
-								</select>
-							</div>
-						</div>
-						<div className="list">
-							{animeDetail && animeDetail.episodes && animeDetail.episodes.map((episode)=>{
-								return (
-									<div className="episode panel" key={'episode-list-'+ episode.id}>
-										<div className="episode-header">
-											<h2 className=''>Episode {episode.number}</h2>
-										</div>
-										<div className="episode-body">
-											<Button className='btn-download'>Download <FaDownload/></Button>
-											<Button className='btn-watch'><Link href={'/anime/watch/'+animeDetail.id+`?episode=${episode.number}`}>Watch <FaArrowRight/></Link></Button>
-										</div>
-									</div>
-								);
-							})}
-						</div>
-					</div>
+					<EpisodeDisplayer episodes={animeDetail.episodes} animeId={animeDetail.id}/>
 				</section>
 				<aside className="detail-sidebar">
 					<Image className='poster' src={animeDetail.image} alt='anime-poster' width={300} height={400}/>
