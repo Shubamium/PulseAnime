@@ -11,18 +11,17 @@ const nineanimeUrl = (episodeId:string) => backendUrl + `/anime/9anime/watch/${e
 
 
 export const getAnimeEpisodeUrl = (episodeId:string,provider:AnimeProvider)=>{
-	// episodeId = encodeURIComponent(episodeId);
 	switch(provider){
 		case AnimeProvider.GOGOANIME:
 			return gogoanimeUrl(episodeId);
-		case AnimeProvider.ZORO:
-			return zoroUrl(episodeId);
-		// case AnimeProvider.ENIME:
+		// case AnimeProvider.ZORO:
+		// 	return zoroUrl(episodeId);
+		// // case AnimeProvider.ENIME:
 		// 	return enimeUrl(episodeId);
-		case AnimeProvider.ANIMEPAHE:
-			return animepaheUrl(episodeId);
-		case AnimeProvider.ANIMEFOX:
-			return animefoxUrl(episodeId);
+		// case AnimeProvider.ANIMEPAHE:
+		// 	return animepaheUrl(episodeId);
+		// case AnimeProvider.ANIMEFOX:
+		// 	return animefoxUrl(episodeId);
 		case AnimeProvider.NINEANIME:
 			return nineanimeUrl(episodeId);
 		default:
