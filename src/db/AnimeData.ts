@@ -2,17 +2,21 @@ import {  AnimeEpisodeSource, AnimeMeta, AnimeSearchResults } from "@/types/Anim
 import { backendUrl, corsUrl, getEnumKeyByValue } from "./util";
 import { AnimeProvider } from "@/types/AnimeEnums";
 
-const gogoanimeUrl = (episodeId:string) => backendUrl + `/anime/gogoanime/watch/${episodeId}`;
 const zoroUrl = (episodeId:string) => backendUrl + `/anime/zoro/watch?episodeId=${episodeId}`;
 const enimeUrl = (episodeId:string) => backendUrl + `/anime/enime/watch?episodeId=${episodeId}`;
 const animepaheUrl = (episodeId:string) => backendUrl + `/anime/animepahe/watch/${episodeId}`;
 const animefoxUrl = (episodeId:string) => backendUrl + `/anime/animefox/watch?episodeId=${episodeId}`;
+const gogoanimeUrl = (episodeId:string) => backendUrl + `/anime/gogoanime/watch/${episodeId}`;
 const nineanimeUrl = (episodeId:string) => backendUrl + `/anime/9anime/watch/${episodeId}`;
 
 
 export const getAnimeEpisodeUrl = (episodeId:string,provider:AnimeProvider)=>{
 	switch(provider){
 		case AnimeProvider.GOGOANIME:
+			return gogoanimeUrl(episodeId);
+		case AnimeProvider.NINEANIME:
+			return nineanimeUrl(episodeId);
+		default:
 			return gogoanimeUrl(episodeId);
 		// case AnimeProvider.ZORO:
 		// 	return zoroUrl(episodeId);
@@ -22,10 +26,6 @@ export const getAnimeEpisodeUrl = (episodeId:string,provider:AnimeProvider)=>{
 		// 	return animepaheUrl(episodeId);
 		// case AnimeProvider.ANIMEFOX:
 		// 	return animefoxUrl(episodeId);
-		case AnimeProvider.NINEANIME:
-			return nineanimeUrl(episodeId);
-		default:
-			return gogoanimeUrl(episodeId);
 	}
 }; 
 
@@ -67,7 +67,7 @@ export async function getAnimeMeta(id:string,provider?:AnimeProvider) {
 }
 
 export async function getAnimeEpisode(episodeId:string) {
-	console.log('getting anime episode');
+	
 	const targetUrl = backendUrl +'/anime/gogoanime/watch/'+encodeURIComponent(episodeId);
 	const response = await fetch(corsUrl,{headers:{'my-url':targetUrl}});
 	const result = await response.json();
