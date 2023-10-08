@@ -1,8 +1,12 @@
 .container_search-list{
 	text-decoration: none;
-	transition: all 250ms ease;
+	transition: all 150ms ease;
 	&:hover{
-		scale: 1.02;
+		transform: translateY(1%);
+		.cover{
+			box-shadow: 0px 0px 2em .1em rgba(42, 97, 149, 0.23);
+
+		}
 	}
 	.cover{
 		background: #D9D9D9;
@@ -13,13 +17,13 @@
 		aspect-ratio: 3/4;
 		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.122));
 		border: 2px solid rgb(255, 98, 98);
-		border-radius: .25em;
+		border-radius: .05em;
 		object-fit: cover;
 	}
 
 	.title{
 		text-align: center;
-		font-size: .9rem;
+		font-size: .89rem;
 		font-weight: 300;
 		color:#000000;
 	}
