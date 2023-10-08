@@ -1,0 +1,112 @@
+.detail_episodes-displayer{
+	.header{
+		filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.153));
+		background-color: #F3215C;
+		border: 2px solid white;
+		color: white;
+		padding: .3em 1em;
+		display: flex;
+		border-radius: 2em;
+		justify-content: space-between;
+		align-items: center;
+		.left{
+			display: flex;
+			align-items: center;
+			gap: .4em;
+			.icon{
+				font-size: 1.2rem;
+			}
+		}
+	}
+	.list{
+		display: grid;
+		grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+		gap: 2em .5em;
+		margin: 1em;
+		.episode{
+			padding: 0;
+			border-radius: 1em 1em 0.2em 0.2em;
+			.episode-header{
+				background-color: #FF4372;
+				color: white;
+				font-size: .7rem;
+				border-radius: 1em 1em 0 0;
+				text-align: center;
+				padding: .25em;
+			}
+			.episode-body{
+				display: flex;
+				padding: .35em;
+				justify-content: center;
+				align-items: center;
+				gap: .4em;
+				.btn{
+					color: white;
+					background:none;
+					border: none;
+					border-radius: .25em;
+					padding: .25em .5em;
+				}
+
+				.btn-watch{
+					border: 2px solid #62A1FF;
+					background-color: #62A1FF;
+					a{
+						color: white;
+						text-decoration: none;
+					}
+
+				}
+				.btn-download{
+					color: #62A1FF;
+					border: 2px solid #62A1FF;
+				}
+			}
+		}
+	}
+	.pagination{
+		margin-top: 2em;
+		background-color: #62a1ff3b;
+		display: flex;
+		align-items: center;	
+		justify-content: center;
+		gap: .25em;
+		padding: .4em .5em;
+		border-radius: .25em;
+		.btn-page{
+			background-color: #62A1FF;
+			border: 3px solid white;
+			font-size: 1rem;
+			padding: .2em 1em;
+			height: 100%;
+			color: #383645;
+			&.active{
+				background-color: #F3215C;
+				&:hover{
+					scale: initial;
+					scale: 1.02;
+				}
+				scale: 1.02;
+				font-size: 1.1rem;
+				color: white;
+				border-color: #383645;
+				font-weight: bold;
+			}
+
+			&.edge{
+				background-color: #383645;
+				color: white;
+
+			}
+		}
+	}
+}
+.detail_episodes-not-found{
+	background-color: #383645;
+	color: white;
+	font-size: .8rem;
+	padding: 2em;
+	border-radius: .25em;
+	text-align: center;
+	font-weight: 400;
+}
