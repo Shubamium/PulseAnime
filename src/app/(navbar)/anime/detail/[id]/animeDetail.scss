@@ -178,6 +178,23 @@
 					padding: .5em;
 					margin: .25em 1em;
 				}
+
+				.show-link{
+					color: white;
+					font-size: .8rem;
+					background-color: #599bff;
+					text-decoration: none;
+					padding:.25em 1em;
+					text-align: center;
+					transition: all 100ms ease;
+					border-radius: .25em;
+					display: block;
+
+					&:hover{
+						scale: 1.01 !important;
+						background-color: rgba(36, 124, 255, 0.456)
+					}
+				}
 			}
 		}
 	}

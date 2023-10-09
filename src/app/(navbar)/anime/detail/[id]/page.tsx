@@ -2,12 +2,13 @@ import { getAnimeMeta } from '@/db/AnimeData';
 import Image from 'next/image';
 import React from 'react';
 import './animeDetail.scss';
-import { FaArrowLeft, FaArrowRight, FaDownload, FaInfoCircle, FaList, FaStar } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight, FaDownload, FaFastBackward, FaFastForward, FaInfoCircle, FaList, FaStar } from 'react-icons/fa';
 import { getTitle } from '@/db/util';
 import MediaDetail from '@/components/mediaDetail/MediaDetail';
 import { redirect } from 'next/navigation';
 import EpisodeDisplayer from './episodeDisplayer/EpisodeDisplayer';
 import MediaDetailRow from './mediaDetailRow/MediaDetailRow';
+import Link from 'next/link';
 
 type Props = {
 	params:{
@@ -24,6 +25,8 @@ export default async function AnimeDetail({params}: Props) {
 	}
 
 	const title = getTitle(animeDetail.title);
+	const sequel = animeDetail.relations.filter((relation)=> relation.relationType === 'SEQUEL');
+	const prequel = animeDetail.relations.filter((relation)=> relation.relationType === 'PREQUEL');
 	return (
 		<div className='container_anime-detail'>
 			<div className="banner">
@@ -100,22 +103,52 @@ export default async function AnimeDetail({params}: Props) {
 							</div>
 						</MediaDetailRow>
 					
-						<MediaDetailRow title={<>Popularity </>}>
+					    {/* Popularity */}
+						<MediaDetailRow title={<>Ratings & Popularity </>}>
 								<p>{animeDetail.rating / 100 * 5} <FaStar/> - {animeDetail.popularity} </p> 
 						</MediaDetailRow>
 
-						{/* <MediaDetailRow title={<>Sequel</>}>
-								{animeDetail.relation}
-						</MediaDetailRow> */}
-						<MediaDetailRow title='Other Names'>
-							<div className="genre-list">
-								{animeDetail.synonyms.map((genre)=>{
-									return (
-										<p className='genre' key={genre}>{genre}</p>
-									);
-								})}
-							</div>
-						</MediaDetailRow>
+					    {/* Sequel */}
+						{
+							sequel.length !== 0 && (
+								<MediaDetailRow title={<><FaFastBackward/> Sequel  </>}>
+									{sequel.map((anime)=>{
+										return (
+											<Link href={'/anime/detail/'+anime.id} key={anime.id} className='show-link'>
+												{getTitle(anime.title)}
+											</Link>
+										);
+									})}
+							</MediaDetailRow> 
+							)
+						}
+						{/* Prequel */}
+						{
+							prequel.length !== 0 && (
+								<MediaDetailRow title={<><FaFastForward/> Prequel</>}>
+									{prequel.map((anime)=>{
+										return (
+											<Link href={'/anime/detail/'+anime.id} key={anime.id} className='show-link'>
+												{getTitle(anime.title)}
+											</Link>
+										);
+									})}
+							</MediaDetailRow> 
+							)
+						}
+
+						{/* Other Names */}
+						{animeDetail.synonyms?.length !== 0 && (
+							<MediaDetailRow title='Other Names'>
+								<div className="genre-list">
+									{animeDetail.synonyms.map((genre)=>{
+										return (
+											<p className='genre' key={genre}>{genre}</p>
+										);
+									})}
+								</div>
+							</MediaDetailRow>
+						)}
 					</div>
 				</aside>		
 			</div>

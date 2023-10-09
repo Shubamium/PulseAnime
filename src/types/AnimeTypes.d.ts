@@ -42,6 +42,14 @@ type dateObj = {
 	month:number;
 	year:number;
 }
+
+type AnimeRelation = {
+	id:number;
+	relationType:string;
+	title:AnimeTitle;
+	images:string;
+	cover:string;
+}
 export type AnimeMeta = {
 	id:string;
 	title:AnimeTitle
@@ -70,7 +78,7 @@ export type AnimeMeta = {
 	popularity:number;
 	endDate:dateObj;
 	synonyms:string[];
-
+	relations:AnimeRelation[];
 };
 
 
