@@ -37,6 +37,11 @@ export type AnimeEpisodeSource = {
 	quality:string
 }
 
+type dateObj = {
+	day:number;
+	month:number;
+	year:number;
+}
 export type AnimeMeta = {
 	id:string;
 	title:AnimeTitle
@@ -51,13 +56,23 @@ export type AnimeMeta = {
 	genres:string[];
 	status:string;
 	totalEpisodes:number;
+	currentEpisodes:number;
 	releaseDate:string;
 	season:string;
 	subOrDub:string;
 	type:string;
 	episodes:AnimeEpisode[];
-	recommendations:AnimeRecommendation[]
+	recommendations:AnimeRecommendation[];
+	studios:string[];
+	startDate:dateObj;
+	duration:number;
+	rating:number;
+	popularity:number;
+	endDate:dateObj;
+	synonyms:string[];
+
 };
+
 
 export type AnimeRecommendation = {
 	id:number;

@@ -1,0 +1,22 @@
+.media-info-part{
+	// background-color: rebeccapurple;
+	padding: .5em;
+	.info-part-header{
+		text-align: center;
+		color: white;
+		font-size: .55rem;
+		background-color: #a82c51f8;
+		border-radius: 1em;
+	}
+	.media-info-content{
+		padding: .1em 0;
+		margin-top: .25em;
+		p{
+			text-align: center;
+			color: white;
+			font-size: .8rem;
+			background-color: #a82c5163;
+			border-radius: 1em;
+		}
+	}
+}

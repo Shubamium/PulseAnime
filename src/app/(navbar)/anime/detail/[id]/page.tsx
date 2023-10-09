@@ -2,11 +2,12 @@ import { getAnimeMeta } from '@/db/AnimeData';
 import Image from 'next/image';
 import React from 'react';
 import './animeDetail.scss';
-import { FaArrowLeft, FaArrowRight, FaDownload, FaList } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight, FaDownload, FaInfoCircle, FaList, FaStar } from 'react-icons/fa';
 import { getTitle } from '@/db/util';
 import MediaDetail from '@/components/mediaDetail/MediaDetail';
 import { redirect } from 'next/navigation';
 import EpisodeDisplayer from './episodeDisplayer/EpisodeDisplayer';
+import MediaDetailRow from './mediaDetailRow/MediaDetailRow';
 
 type Props = {
 	params:{
@@ -14,11 +15,11 @@ type Props = {
 	}
 }
 
-
+const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 export default async function AnimeDetail({params}: Props) {
 	const animeDetail = await getAnimeMeta(params.id);
 
-	if(animeDetail === null){
+	if(!animeDetail.id){
 		redirect('/');
 	}
 
@@ -38,7 +39,7 @@ export default async function AnimeDetail({params}: Props) {
 						</div>
 					
 						<div className="details-list">
-							<MediaDetail title='Type' text={animeDetail.subOrDub} />
+							<MediaDetail title='Studios' text={animeDetail.studios.join(', ')} />
 							<MediaDetail title='Episodes' text={animeDetail.totalEpisodes?.toString() || 'TBA'} />
 							<MediaDetail title='Release Date' text={animeDetail.releaseDate || 'TBA'} />
 							<MediaDetail title='Status' text={animeDetail.status} />
@@ -58,7 +59,63 @@ export default async function AnimeDetail({params}: Props) {
 				<aside className="detail-sidebar">
 					<Image className='poster' src={animeDetail.image} alt='anime-poster' width={300} height={400}/>
 					<div className="sidebar-part">
-						<h2>Detail Part here</h2>
+						
+						<div className="sidebar-header">
+							<h2><FaInfoCircle/> Info</h2>
+						</div>
+
+						<p className='media-title'>{title}</p>
+
+						<div className="detail-grid">
+							<MediaDetailRow title='Format'>
+								<p>{animeDetail.type}</p>
+							</MediaDetailRow>
+							<MediaDetailRow title='Season'>
+								<p>{animeDetail.season + ' ' +  animeDetail.startDate.year}</p>
+							</MediaDetailRow>
+						
+							<MediaDetailRow title='Start'>
+								<p>{month[animeDetail.startDate.month] + ' ' + (animeDetail.startDate.day ?  animeDetail.startDate.day +' ,' :'')  + ' ' + animeDetail.startDate.year}</p>
+							</MediaDetailRow>
+							<MediaDetailRow title='End'>
+								{animeDetail.endDate.day && month[animeDetail.endDate.month] ? <p>{month[animeDetail.endDate.month] + ' ' + animeDetail.endDate.day + ', ' + animeDetail.endDate.year}</p> : animeDetail.endDate.year ? <p>{animeDetail.endDate.year}</p> : <p>N/A</p>}
+							</MediaDetailRow>
+							<MediaDetailRow title='Episodes'>
+								<p>{animeDetail.currentEpisodes ? animeDetail.currentEpisodes + '/' : ''}{animeDetail.totalEpisodes}</p>
+							</MediaDetailRow>
+							{animeDetail.duration && (
+								<MediaDetailRow title='Duration'>
+									<p>{animeDetail.duration + ' mins'}</p>
+								</MediaDetailRow>
+							)}
+						</div>
+
+						<MediaDetailRow title='Genre'>
+							<div className="genre-list">
+								{animeDetail.genres.map((genre)=>{
+									return (
+										<p className='genre' key={genre}>{genre}</p>
+									);
+								})}
+							</div>
+						</MediaDetailRow>
+					
+						<MediaDetailRow title={<>Popularity </>}>
+								<p>{animeDetail.rating / 100 * 5} <FaStar/> - {animeDetail.popularity} </p> 
+						</MediaDetailRow>
+
+						{/* <MediaDetailRow title={<>Sequel</>}>
+								{animeDetail.relation}
+						</MediaDetailRow> */}
+						<MediaDetailRow title='Other Names'>
+							<div className="genre-list">
+								{animeDetail.synonyms.map((genre)=>{
+									return (
+										<p className='genre' key={genre}>{genre}</p>
+									);
+								})}
+							</div>
+						</MediaDetailRow>
 					</div>
 				</aside>		
 			</div>
