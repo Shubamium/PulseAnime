@@ -17,7 +17,7 @@ export default async function Home() {
 	return (
 		<main className={styling['container_home-page']}>
 			<HomeTitle/>
-			{/* <AnimeList animes={topAiring}/> */}
+			<AnimeList animes={topAiring}/>
 		</main>
 	);
 }

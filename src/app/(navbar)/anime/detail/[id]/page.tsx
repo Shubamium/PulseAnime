@@ -105,14 +105,14 @@ export default async function AnimeDetail({params}: Props) {
 					
 					    {/* Popularity */}
 						<MediaDetailRow title={<>Ratings & Popularity </>}>
-								<p>{animeDetail.rating / 100 * 5} <FaStar/> - {animeDetail.popularity} </p> 
+								<p>{(animeDetail.rating / 100 * 5).toFixed(2)} <FaStar/> - {animeDetail.popularity} </p> 
 						</MediaDetailRow>
 
 					    {/* Sequel */}
 						{
-							sequel.length !== 0 && (
-								<MediaDetailRow title={<><FaFastBackward/> Sequel  </>}>
-									{sequel.map((anime)=>{
+							prequel.length !== 0 && (
+								<MediaDetailRow title={<><FaFastBackward/> Prequel  </>}>
+									{prequel.map((anime)=>{
 										return (
 											<Link href={'/anime/detail/'+anime.id} key={anime.id} className='show-link'>
 												{getTitle(anime.title)}
@@ -124,9 +124,9 @@ export default async function AnimeDetail({params}: Props) {
 						}
 						{/* Prequel */}
 						{
-							prequel.length !== 0 && (
-								<MediaDetailRow title={<><FaFastForward/> Prequel</>}>
-									{prequel.map((anime)=>{
+							sequel.length !== 0 && (
+								<MediaDetailRow title={<><FaFastForward/> Sequel</>}>
+									{sequel.map((anime)=>{
 										return (
 											<Link href={'/anime/detail/'+anime.id} key={anime.id} className='show-link'>
 												{getTitle(anime.title)}
