@@ -91,9 +91,20 @@ export default function EpisodeList({episodes,currentEpisode,animeId,provider}: 
 		setEpisodeElement(sectionedEpisode);
 	};
 	
+	const  scrollToPlayingEpisodes = ()=>{
+		if(episodeContainerRef.current){
+			const child = episodeContainerRef.current.getElementsByClassName('played')[0] as HTMLAnchorElement;
+			console.log('smoothing scroll to ',child,child.scrollTop);
+			episodeContainerRef.current.scrollTo({top:child.offsetTop - child.offsetHeight,behavior:'smooth'});
+		}
+	};
+
 	useEffect(()=>{
 		if(episodes){
 			updateEpisodeList(episodes);
+			setTimeout(() => {
+				scrollToPlayingEpisodes();
+			}, 500);
 		}
 	},[episodes,detailedEpisode,provider]);
 	
