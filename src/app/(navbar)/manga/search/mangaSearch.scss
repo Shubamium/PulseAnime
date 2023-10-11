@@ -1,0 +1,19 @@
+#container_manga-search{
+	padding-top: 100px;
+	.confine{
+		max-width: min(1400px,95%);
+		margin: 0 auto;
+	}
+	.filter-bar{
+		background-color: rgba(128, 128, 128, 0.259);
+		padding: .5em 1em;
+		border-radius: .25em;
+	}
+
+	.container_search-results{
+		padding: 1em 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		gap: 1em;
+	}
+}

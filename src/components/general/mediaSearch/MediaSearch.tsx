@@ -12,11 +12,6 @@ type MediaSearchProps = {
 const MEDIA_TYPE = 'MEDIA_TYPE';
 export default function MediaSearch({useAltColor,reverseOrder}: MediaSearchProps) {
 
-	// Get the active media type from local storage
-	// let savedMediaType: string= '';
-	// if(typeof window !== 'undefined'){
-	// 	savedMediaType = localStorage.getItem(MEDIA_TYPE) ?? 'anime';
-	// }
 	const [mediaType,setMediaType] = useState('anime') ;
 
 
@@ -30,6 +25,7 @@ export default function MediaSearch({useAltColor,reverseOrder}: MediaSearchProps
 	} active={mediaType}/>;
 	
 	useEffect(() => {
+		// Get the active media type from local storage
 		let savedMediaType = localStorage.getItem(MEDIA_TYPE) ?? 'anime';
 		setMediaType(savedMediaType);
 	}, []);

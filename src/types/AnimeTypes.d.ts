@@ -1,4 +1,5 @@
 import { type } from "os";
+import { Date } from "./GeneralTypes";
 
 export type AnimeSearchResult = {
 	title:AnimeTitle
@@ -37,11 +38,6 @@ export type AnimeEpisodeSource = {
 	quality:string
 }
 
-type dateObj = {
-	day:number;
-	month:number;
-	year:number;
-}
 
 type AnimeRelation = {
 	id:number;
@@ -72,11 +68,11 @@ export type AnimeMeta = {
 	episodes:AnimeEpisode[];
 	recommendations:AnimeRecommendation[];
 	studios:string[];
-	startDate:dateObj;
+	startDate:Date;
 	duration:number;
 	rating:number;
 	popularity:number;
-	endDate:dateObj;
+	endDate:Date;
 	synonyms:string[];
 	relations:AnimeRelation[];
 };
