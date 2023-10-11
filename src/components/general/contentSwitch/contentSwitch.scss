@@ -12,7 +12,7 @@
 		border: none;
 		font-size: 1rem;
 		background:none;
-		transition: all 250ms ease, border 0ms;
+		transition: all 100ms linear, border 0ms;
 		padding:.2em 1.2em;
 		
 		&.active, &:hover{

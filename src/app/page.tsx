@@ -1,4 +1,4 @@
-import AnimeList from "@/components/animeList/AnimeList";
+import AnimeList from "@/components/anime/animeList/AnimeList";
 import HomeTitle from "@/components/home/homeTitle/HomeTitle";
 import { backendUrl } from "@/db/util";
 import { AnimeSearchResult } from "@/types/AnimeTypes";

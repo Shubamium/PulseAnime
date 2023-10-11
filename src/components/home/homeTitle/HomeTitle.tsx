@@ -19,6 +19,7 @@ export default function HomeTitle({}: Props) {
 				<p className={styling['description']}>Welcome to PulseAnime - Your Ultimate Destination for Anime, Manga, and Light Novels! Immerse yourself in a world of captivating stories, vibrant characters, and thrilling adventures. Discover a vast collection of the latest anime episodes, manga chapters, and light novels, all at your fingertips, and all for free! Whether you&apos;re a seasoned otaku or new to the world of Japanese entertainment, PulseAnime brings you the best content in high-quality streaming.</p>
 			</div>
 			<div className={styling["container_action"]}>
+				{/* <MediaSearch/> */}
 				<SearchBar/>	
 				<ContentSwitch/>
 			</div>
