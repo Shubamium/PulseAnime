@@ -91,25 +91,29 @@ export default function EpisodeList({episodes,currentEpisode,animeId,provider}: 
 		setEpisodeElement(sectionedEpisode);
 	};
 	
+	// Scroll the container to the active episodes whenver the episodes update
 	const  scrollToPlayingEpisodes = ()=>{
 		if(episodeContainerRef.current){
 			const child = episodeContainerRef.current.getElementsByClassName('played')[0] as HTMLAnchorElement;
-			console.log('smoothing scroll to ',child,child.scrollTop);
 			episodeContainerRef.current.scrollTo({top:child.offsetTop - child.offsetHeight,behavior:'smooth'});
 		}
 	};
 
 	useEffect(()=>{
+		
 		if(episodes){
 			updateEpisodeList(episodes);
 			setTimeout(() => {
 				scrollToPlayingEpisodes();
 			}, 500);
 		}
+
 	},[episodes,detailedEpisode,provider]);
 	
 	return (
 		<div className="container_episodes-list">
+
+			{/* Episode Header */}
 			<div className="episode-header">
 				<div className="title">
 					<h2>Episodes</h2>
@@ -121,12 +125,14 @@ export default function EpisodeList({episodes,currentEpisode,animeId,provider}: 
 				</div>
 			</div>
 
+			{/* Controls */}
 			{isLongAnime && (
 				<div className="episode-section-control">
 					<Dropdown options={getDropdownOptions(episodeElement)} onChange={(res) => setEpisodeSectionIndex(prev=>parseInt(res))}/> 
 				</div>
 			)}
 
+			{/* Episode List */}
 			<div className="episode-list" ref={episodeContainerRef}>
 				{episodeElement[episodeSectionIndex]?.length !== 0 ? episodeElement[episodeSectionIndex] : (
 					<p>No episodes found, Try another server!</p>

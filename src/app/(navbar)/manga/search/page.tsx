@@ -1,13 +1,17 @@
-import React from 'react';
+import { redirect } from 'next/navigation';
 
-type Props = {
-	searchQuery:{
+type MangaSearchProps = {
+	searchParams:{
 		query:string
 	}
 }
 
-export default function MangaSearch({searchQuery}: Props) {
+export default function MangaSearch({searchParams}: MangaSearchProps) {
+	if(!searchParams?.query){
+		redirect('/');
+
+	}
 	return (
-		<div>Searching for {searchQuery.query}</div>
+		<div>Searching for {searchParams.query}</div>
 	);
 }

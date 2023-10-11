@@ -1,13 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Button from '../button/Button';
 import './contentSwitch.scss';
 
-export default function ContentSwitch() {
+type ContentSwitchProps = {
+	onMediaSwitch?:(mediaType:string)=>void;
+	defaultValue?:string;
+}
+export default function ContentSwitch({onMediaSwitch,defaultValue}:ContentSwitchProps) {
 
-	const [active,setActive] = useState('anime');
+	const [active,setActive] = useState(defaultValue ?? 'anime');
 
+	useEffect(() => {
+		onMediaSwitch && onMediaSwitch(active);
+	}, [active]);
+	
 	return (
 		<div className="container_content-switch">
 			<Button className={"btn_content-type" + ` ${active === 'anime' ? ' active' : '' }`} onClick={()=>setActive('anime')}>

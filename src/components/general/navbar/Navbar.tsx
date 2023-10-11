@@ -7,6 +7,7 @@ import Link from "next/link";
 import ContentSwitch from "../contentSwitch/ContentSwitch";
 
 import {BsDice3} from 'react-icons/bs';
+import MediaSearch from "../mediaSearch/MediaSearch";
 type Props = {}
 
 export default function Navbar({ }: Props) {
@@ -35,8 +36,7 @@ export default function Navbar({ }: Props) {
 					</div>
 				</div>
 				<nav className="right">
-					<ContentSwitch/>
-					<SearchBar altSearchColor={true}/>
+					<MediaSearch reverseOrder={true} useAltColor={true}/>
 					<Button className="btn-random">
 						<BsDice3/> Random
 					</Button>

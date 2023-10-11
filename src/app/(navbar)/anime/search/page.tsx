@@ -1,10 +1,11 @@
-import AnimeList from "@/components/animeList/AnimeList";
+import AnimeList from "@/components/anime/animeList/AnimeList";
 import { getAnimeSearch } from "@/db/AnimeData";
 import Link from "next/link";
 import './animeSearch.scss';
 import ResultDisplayer from "./resultDisplayer/ResultDisplayer";
 import { AnimeSearchResult } from "@/types/AnimeTypes";
 import { getTitle } from "@/db/util";
+import { redirect } from "next/navigation";
 type AnimeSearchProps = {
   searchParams: {
 	query:string
@@ -13,8 +14,10 @@ type AnimeSearchProps = {
 
 export default async function AnimeSearch({searchParams}: AnimeSearchProps) {
 	const query = searchParams.query;
+	if(!query){
+		redirect('/');
+	}
 	const {results} = await getAnimeSearch(query);
-
 	return (
 		<div className="container_search-page">
 			<div className="search-results">
