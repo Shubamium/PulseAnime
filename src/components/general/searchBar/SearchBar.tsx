@@ -8,6 +8,7 @@ type searchBarProps = {
 	route?:string
 	placeholder?:string
 }
+
 export default function SearchBar({altSearchColor,route,placeholder}:searchBarProps) {
 	return (
 		<form className={"search-bar"} action={route} method="GET">

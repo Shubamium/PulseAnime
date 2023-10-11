@@ -23,6 +23,9 @@
 			border-radius: .25em;
 		}
 
+		&:active{
+			scale: 1;
+		}
 		&:hover.active{
 			// background:none;
 			scale:1

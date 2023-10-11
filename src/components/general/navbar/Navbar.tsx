@@ -10,7 +10,7 @@ import {BsDice3} from 'react-icons/bs';
 import MediaSearch from "../mediaSearch/MediaSearch";
 type Props = {}
 
-export default function Navbar({ }: Props) {
+export default function Navbar({}: Props) {
 	return (
 		<header className="container_header">
 			<div className="confine">

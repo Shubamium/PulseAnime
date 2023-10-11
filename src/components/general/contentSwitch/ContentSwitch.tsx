@@ -7,24 +7,25 @@ import './contentSwitch.scss';
 type ContentSwitchProps = {
 	onMediaSwitch?:(mediaType:string)=>void;
 	defaultValue?:string;
+	active:string;
 }
-export default function ContentSwitch({onMediaSwitch,defaultValue}:ContentSwitchProps) {
+export default function ContentSwitch({onMediaSwitch,defaultValue,active}:ContentSwitchProps) {
 
-	const [active,setActive] = useState(defaultValue ?? 'anime');
+	// const [active,setActive] = useState(defaultValue ?? 'anime');
 
-	useEffect(() => {
-		onMediaSwitch && onMediaSwitch(active);
-	}, [active]);
-	
+	// useEffect(() => {
+	// 	onMediaSwitch && onMediaSwitch(active);
+	// }, [active]);
+
 	return (
 		<div className="container_content-switch">
-			<Button className={"btn_content-type" + ` ${active === 'anime' ? ' active' : '' }`} onClick={()=>setActive('anime')}>
+			<Button className={"btn_content-type" + ` ${active === 'anime' ? ' active' : '' }`} onClick={()=>onMediaSwitch && onMediaSwitch('anime')}>
 				Anime
 			</Button>
-			<Button className={"btn_content-type" + ` ${active === 'manga' ? ' active' : '' }`} onClick={()=>setActive('manga')}>
+			<Button className={"btn_content-type" + ` ${active === 'manga' ? ' active' : '' }`} onClick={()=>onMediaSwitch && onMediaSwitch('manga')}>
 				Manga
 			</Button>
-			<Button className={"btn_content-type" + ` ${active === 'novel' ? ' active' : '' }`} onClick={()=>setActive('novel')}>
+			<Button className={"btn_content-type" + ` ${active === 'novel' ? ' active' : '' }`} onClick={()=>onMediaSwitch && onMediaSwitch('novel')}>
 				Novel
 			</Button>
 		</div>

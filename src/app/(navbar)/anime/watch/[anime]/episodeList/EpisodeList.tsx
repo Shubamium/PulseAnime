@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import Dropdown from "@/components/general/dropdown/Dropdown";
 import { AnimeProvider } from "@/types/AnimeEnums";
+import { IS_SERVER } from "../../../../../../../util/utility";
 
 type Props = {
 	episodes:AnimeEpisode[];
@@ -23,7 +24,7 @@ export default function EpisodeList({episodes,currentEpisode,animeId,provider}: 
 
 	// Get the user preferences for episode thumbnail iew
 	let savedDetailed = undefined;
-	if(typeof window === 'undefined'){
+	if(typeof window !== 'undefined'){
 		 savedDetailed = JSON.parse(localStorage.getItem(EPISODE_DETAIL_VIEW)|| 'true');
 	}
 	const [detailedEpisode,setDetailedEpisode] = useState(savedDetailed ?? true);
@@ -35,7 +36,9 @@ export default function EpisodeList({episodes,currentEpisode,animeId,provider}: 
 	
 	const changeDetailedView = ()=>{
 		setDetailedEpisode((prev:boolean) => {
-			localStorage.setItem(EPISODE_DETAIL_VIEW,JSON.stringify(!prev));
+			if(typeof window !== 'undefined'){
+				localStorage.setItem(EPISODE_DETAIL_VIEW,JSON.stringify(!prev));
+			}
 			return !prev;
 		});
 	};
