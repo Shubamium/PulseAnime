@@ -14,7 +14,7 @@ type MangaSearchResultProps = {
 	chapter?:number;
 }
 
-export default function MangaSearchResult({title,cover,to,type,tags,volume,chapter,description}: MangaSearchResultProps) {
+export default function MangaSearchResult({title,cover,to,type,tags,volume,chapter}: MangaSearchResultProps) {
 	return (
 		<Link href ={to || '/'} className="container_manga-list">
 			<div className="img-part">

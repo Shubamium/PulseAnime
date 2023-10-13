@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 import EpisodeDisplayer from './episodeDisplayer/EpisodeDisplayer';
 import MediaDetailRow from './mediaDetailRow/MediaDetailRow';
 import Link from 'next/link';
+import DetailBanner from '@/components/general/detail/detailBanner/DetailBanner';
 
 type Props = {
 	params:{
@@ -29,20 +30,15 @@ export default async function AnimeDetail({params}: Props) {
 	const prequel = animeDetail.relations.filter((relation)=> relation.relationType === 'PREQUEL');
 	return (
 		<div className='container_anime-detail'>
-			<div className="banner">
-				<Image src={ animeDetail.cover || '/images/placeholder/banner.png'}  alt='banner' width={1200} height={400} ></Image>
-				<div className="overlay"></div>
-			</div>
+			<DetailBanner src={animeDetail.cover} title={title} altTitle={animeDetail.title.native}/>
 			<div className="confine watch-section">
 				<section className={"detail-part"+ ` ${ title.length >= 35 ? 'longer-header':''}`}>
 					<div className='info-part'>
-						<div className="title-container">
-							<h2>{title} </h2>
-							<span className='jp'>{animeDetail.title.native || ''}</span>
-						</div>
-					
+					{/* <div className="title-container">
+				<h2>{title} </h2>
+				<span className='jp'>{animeDetail.title.native || ''}</span> */}
 						<div className="details-list">
-							<MediaDetail title='Studios' text={animeDetail.studios.join(', ')} />
+							{animeDetail.studios && <MediaDetail title='Studios' text={animeDetail.studios.join(', ')} />}
 							<MediaDetail title='Episodes' text={animeDetail.totalEpisodes?.toString() || 'TBA'} />
 							<MediaDetail title='Release Date' text={animeDetail.releaseDate || 'TBA'} />
 							<MediaDetail title='Status' text={animeDetail.status} />

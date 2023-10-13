@@ -37,40 +37,11 @@
 		.detail-part{
 			max-width: 700px;
 			position: relative;
-			top: -50px;
-			
-			&.longer-header{
-				top: -75px;
-				.info-part .title-container{
-					gap: 0;
-					padding-bottom: 1em;
-				}
-			}
-
 			z-index: 100;
 			position: relative;
 			.info-part{
 				width: 100%;
-				.title-container{
-					margin-bottom: 1em;
-					display: flex;
-					flex-wrap: wrap;
-					gap: .2em;
-					align-items: center;
-					padding-bottom: .5em;
-					h2{
-						color: white;
-						font-weight: 400;
-						font-size: 1.5rem;
-						white-space: nowrap;
-						text-shadow: -2px 2px 4px black;
-					}
-					span{
-						font-size: 1rem;
-						text-shadow: -2px 2px 4px black;
-						color: #F3215C;
-					}
-				}
+			
 				.description{
 					padding: 1em;
 					font-weight: 400;
