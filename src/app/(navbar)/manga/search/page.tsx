@@ -5,6 +5,7 @@ import {  searchManga } from '@/db/MangaData';
 import ResultDisplayer from '../../anime/search/resultDisplayer/ResultDisplayer';
 import { MangaMeta } from '@/types/MangaTypes';
 import { getTitle } from '@/db/util';
+import MangaSearchResult from '@/components/manga/search/mangaSearchResult/MangaSearchResult';
 
 type MangaSearchProps = {
 	searchParams:{
@@ -27,10 +28,18 @@ export default async function MangaSearch({searchParams}: MangaSearchProps) {
 				<div className="filter-bar"><FaFilter/> Filter by - Showing {mangaSearchResults?.results && mangaSearchResults.results.length + ' results'}</div>
 
 				<div className="container_search-results">
-					
 					{mangaSearchResults?.results.map((result:MangaMeta) => {
 						const title = getTitle(result.title);
-						return <ResultDisplayer key={'manga-search-result'+result.id} title={title} cover={result.image} to={`/manga/detail/${result.id}`} />;
+						return <MangaSearchResult 
+							key={'manga-search-result'+result.id} 
+							title={title} 
+							cover={result.image} 
+							to={`/manga/detail/${result.id}`} 
+							type={result.type} 
+							tags={result.genres} 
+							chapter={result.totalChapters}
+							volume={result.volumes}
+						/>;
 					})}
 				</div>
 			</div>
