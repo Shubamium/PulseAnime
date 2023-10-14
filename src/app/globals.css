@@ -15,5 +15,5 @@ body{
 	background-color: #F4F7FF;
 	padding: .25em;
 	border-radius: .25em;
-	filter: drop-shadow(-1px .1em .2em rgba(55, 93, 163, 0.338));
+	filter: drop-shadow(-1px 2px .2em rgba(73, 105, 164, 0.246));
 }

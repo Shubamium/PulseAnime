@@ -26,7 +26,6 @@ export default async function MangaSearch({searchParams}: MangaSearchProps) {
 					Searching for {searchParams.query}
 				</div>
 				<div className="filter-bar"><FaFilter/> Filter by - Showing {mangaSearchResults?.results && mangaSearchResults.results.length + ' results'}</div>
-
 				<div className="container_search-results">
 					{mangaSearchResults?.results.map((result:MangaMeta) => {
 						const title = getTitle(result.title);
@@ -42,6 +41,7 @@ export default async function MangaSearch({searchParams}: MangaSearchProps) {
 						/>;
 					})}
 				</div>
+
 			</div>
 		</div>
 	);

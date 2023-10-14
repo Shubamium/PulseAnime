@@ -20,9 +20,12 @@
 	}
 	.list{
 		display: grid;
-		grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-		gap: 2em .5em;
-		margin: 1em;
+		grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+		gap: 1.4em .5em;
+		min-height: 370px;
+		align-items: start;
+		align-content: start;
+		padding: 1em .5em;
 		.episode{
 			padding: 0;
 			border-radius: 1em 1em 0.2em 0.2em;

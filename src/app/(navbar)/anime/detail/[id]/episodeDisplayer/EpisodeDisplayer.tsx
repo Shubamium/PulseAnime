@@ -50,14 +50,7 @@ export default function EpisodeDisplayer({episodes,animeId}: EpisodeDisplayerPro
 						<Dropdown options={[{label:'9Anime',value:AnimeProvider.NINEANIME},{label:'Gogoanime',value:AnimeProvider.GOGOANIME}]} onChange={(val)=>setProvider(val as AnimeProvider)}/>
 					</div>
 				</div>
-				{episodesPerPage.length > 1 && (
-					<div className="pagination">
-						{episodesPerPage.length > pageSelectorSize &&  <Button className='btn-page edge' onClick={()=>{setPageSelector(Math.max(pageSelector-1,0));}}><FaArrowLeft/></Button>}
-						{pageButtons}
-						{pageButtons.length >= pageSelectorSize && pageSelector !== maxPageSelector && <Button className='btn-page' onClick={increasePageSelector}>...</Button>}
-						{episodesPerPage.length > pageSelectorSize && <Button className='btn-page edge' onClick={increasePageSelector}><FaArrowRight/></Button>}
-					</div>
-				)}
+			
 				<div className="list">
 					{episodesPerPage[page]?.map((episode)=>{
 						return (
@@ -73,7 +66,14 @@ export default function EpisodeDisplayer({episodes,animeId}: EpisodeDisplayerPro
 						);
 					})}
 				</div>
-			
+				{episodesPerPage.length > 1 && (
+					<div className="pagination">
+						{episodesPerPage.length > pageSelectorSize &&  <Button className='btn-page edge' onClick={()=>{setPageSelector(Math.max(pageSelector-1,0));}}><FaArrowLeft/></Button>}
+						{pageButtons}
+						{pageButtons.length >= pageSelectorSize && pageSelector !== maxPageSelector && <Button className='btn-page' onClick={increasePageSelector}>...</Button>}
+						{episodesPerPage.length > pageSelectorSize && <Button className='btn-page edge' onClick={increasePageSelector}><FaArrowRight/></Button>}
+					</div>
+				)}
 			</div>
 		);
 	}

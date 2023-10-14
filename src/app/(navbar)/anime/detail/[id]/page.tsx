@@ -10,15 +10,19 @@ import EpisodeDisplayer from './episodeDisplayer/EpisodeDisplayer';
 import MediaDetailRow from './mediaDetailRow/MediaDetailRow';
 import Link from 'next/link';
 import DetailBanner from '@/components/general/detail/detailBanner/DetailBanner';
+import DetailLayout from '@/components/general/detail/detailLayout/DetailLayout';
+import DetailSidebar from '@/components/general/detail/detailSidebar/DetailSidebar';
 
-type Props = {
+type AnimeDetailProps = {
 	params:{
 		id:string;
 	}
 }
 
 const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-export default async function AnimeDetail({params}: Props) {
+
+export default async function AnimeDetail({params}: AnimeDetailProps) {
+
 	const animeDetail = await getAnimeMeta(params.id);
 
 	if(!animeDetail.id){
@@ -28,23 +32,25 @@ export default async function AnimeDetail({params}: Props) {
 	const title = getTitle(animeDetail.title);
 	const sequel = animeDetail.relations.filter((relation)=> relation.relationType === 'SEQUEL');
 	const prequel = animeDetail.relations.filter((relation)=> relation.relationType === 'PREQUEL');
+
 	return (
 		<div className='container_anime-detail'>
 			<DetailBanner src={animeDetail.cover} title={title} altTitle={animeDetail.title.native}/>
-			<div className="confine watch-section">
-				<section className={"detail-part"+ ` ${ title.length >= 35 ? 'longer-header':''}`}>
+			<DetailLayout className="watch-section">
+
+				<section className={"detail-part"}>
 					<div className='info-part'>
-					{/* <div className="title-container">
-				<h2>{title} </h2>
-				<span className='jp'>{animeDetail.title.native || ''}</span> */}
 						<div className="details-list">
-							{animeDetail.studios && <MediaDetail title='Studios' text={animeDetail.studios.join(', ')} />}
+							{animeDetail.studios.length !== 0 && <MediaDetail title='Studios' text={animeDetail.studios.join(', ')} />}
 							<MediaDetail title='Episodes' text={animeDetail.totalEpisodes?.toString() || 'TBA'} />
 							<MediaDetail title='Release Date' text={animeDetail.releaseDate || 'TBA'} />
 							<MediaDetail title='Status' text={animeDetail.status} />
 						</div>
 						<div className="description panel">
-							<div dangerouslySetInnerHTML={{__html:animeDetail.description} }></div>
+							{
+								animeDetail.description !== '' && 
+								<div dangerouslySetInnerHTML={{__html:animeDetail.description ?? ''} }></div>
+							}
 						</div>
 						{animeDetail.trailer && animeDetail.trailer.site === 'youtube' && (
 							<div className="trailer">
@@ -55,16 +61,9 @@ export default async function AnimeDetail({params}: Props) {
 					</div>
 					<EpisodeDisplayer episodes={animeDetail.episodes} animeId={animeDetail.id}/>
 				</section>
-				<aside className="detail-sidebar">
-					<Image className='poster' src={animeDetail.image} alt='anime-poster' width={300} height={400}/>
-					<div className="sidebar-part">
-						
-						<div className="sidebar-header">
-							<h2><FaInfoCircle/> Info</h2>
-						</div>
-
-						<p className='media-title'>{title}</p>
-
+	
+				<DetailSidebar cover={animeDetail.image} title={title}>
+					<div className="anime-detail">
 						<div className="detail-grid">
 							<MediaDetailRow title='Format'>
 								<p>{animeDetail.type}</p>
@@ -99,12 +98,12 @@ export default async function AnimeDetail({params}: Props) {
 							</div>
 						</MediaDetailRow>
 					
-					    {/* Popularity */}
+						{/* Popularity */}
 						<MediaDetailRow title={<>Ratings & Popularity </>}>
 								<p>{(animeDetail.rating / 100 * 5).toFixed(2)} <FaStar/> - {animeDetail.popularity} </p> 
 						</MediaDetailRow>
 
-					    {/* Sequel */}
+						{/* Sequel */}
 						{
 							prequel.length !== 0 && (
 								<MediaDetailRow title={<><FaFastBackward/> Prequel  </>}>
@@ -132,7 +131,6 @@ export default async function AnimeDetail({params}: Props) {
 							</MediaDetailRow> 
 							)
 						}
-
 						{/* Other Names */}
 						{animeDetail.synonyms?.length !== 0 && (
 							<MediaDetailRow title='Other Names'>
@@ -146,8 +144,9 @@ export default async function AnimeDetail({params}: Props) {
 							</MediaDetailRow>
 						)}
 					</div>
-				</aside>		
-			</div>
+				</DetailSidebar>
+			
+			</DetailLayout>
 			
 		</div>
 	);

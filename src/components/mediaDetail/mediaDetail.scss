@@ -1,5 +1,7 @@
 .detail{
 	width: 100%;
+	display: flex;
+	flex-direction: column;
 	.detail-name{
 		background:#A52F7D;
 		color: white;
@@ -15,5 +17,9 @@
 		font-size: .8rem;
 		text-align: center;
 		text-transform: capitalize;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 }
