@@ -12,6 +12,7 @@ import Link from 'next/link';
 import DetailBanner from '@/components/general/detail/detailBanner/DetailBanner';
 import DetailLayout from '@/components/general/detail/detailLayout/DetailLayout';
 import DetailSidebar from '@/components/general/detail/detailSidebar/DetailSidebar';
+import DetailGeneralInfo from '@/components/general/detail/detailGeneralInfo/DetailGeneralInfo';
 
 type AnimeDetailProps = {
 	params:{
@@ -33,35 +34,40 @@ export default async function AnimeDetail({params}: AnimeDetailProps) {
 	const sequel = animeDetail.relations.filter((relation)=> relation.relationType === 'SEQUEL');
 	const prequel = animeDetail.relations.filter((relation)=> relation.relationType === 'PREQUEL');
 
+	const animeGeneralDetails = [
+		{
+			title: 'Studios',
+			text: animeDetail.studios.join(', ')
+		},{
+			title: 'Episodes',
+			text: animeDetail.totalEpisodes?.toString() || 'TBA'
+		},{
+			title: 'Release Date',
+			text: animeDetail.releaseDate || 'TBA'
+		},{
+			title: 'Status',
+			text: animeDetail.status
+		}
+	];
+
 	return (
 		<div className='container_anime-detail'>
+
 			<DetailBanner src={animeDetail.cover} title={title} altTitle={animeDetail.title.native}/>
+
 			<DetailLayout className="watch-section">
 
+				{/* Info */}
 				<section className={"detail-part"}>
-					<div className='info-part'>
-						<div className="details-list">
-							{animeDetail.studios.length !== 0 && <MediaDetail title='Studios' text={animeDetail.studios.join(', ')} />}
-							<MediaDetail title='Episodes' text={animeDetail.totalEpisodes?.toString() || 'TBA'} />
-							<MediaDetail title='Release Date' text={animeDetail.releaseDate || 'TBA'} />
-							<MediaDetail title='Status' text={animeDetail.status} />
-						</div>
-						<div className="description panel">
-							{
-								animeDetail.description !== '' && 
-								<div dangerouslySetInnerHTML={{__html:animeDetail.description ?? ''} }></div>
-							}
-						</div>
-						{animeDetail.trailer && animeDetail.trailer.site === 'youtube' && (
-							<div className="trailer">
-								<iframe width="650" height="350" src={`https://www.youtube.com/embed/${animeDetail.trailer.id}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
-							</div>
-						)}
-					
-					</div>
+					<DetailGeneralInfo
+						details={animeGeneralDetails}
+						description={animeDetail.description}
+						videoId={animeDetail.trailer && animeDetail.trailer.site === 'youtube' ? animeDetail.trailer.id :  null}
+					/>
 					<EpisodeDisplayer episodes={animeDetail.episodes} animeId={animeDetail.id}/>
 				</section>
-	
+
+				{/* Sidebar */}
 				<DetailSidebar cover={animeDetail.image} title={title}>
 					<div className="anime-detail">
 						<div className="detail-grid">

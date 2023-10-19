@@ -26,44 +26,6 @@
 		}
 	}
 	.watch-section{
-		.detail-part{
-			max-width: 700px;
-			position: relative;
-			z-index: 100;
-			position: relative;
-			.info-part{
-				width: 100%;
-			
-				.description{
-					padding: 1em;
-					font-weight: 400;
-					font-size: .8rem;
-				}
-				.trailer{
-					max-width: 100%;
-					iframe{
-						width: 100%;
-						border-radius: .55em;
-						border: 2px solid #62A1FF;
-						box-shadow: -2px 2px 4px 1px #050d1825;
-					}
-					margin: 1em 0;
-				}
-
-				margin-bottom: 2em;
-			}       
-			.details-list{
-				display: grid;
-				grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
-				gap: .5em;
-				margin: 1em 0;
-			
-			}   
-			
-			
-		
-		}
-
 		.anime-detail{
 			
 			.genre-list{
