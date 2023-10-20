@@ -13,6 +13,7 @@ import DetailBanner from '@/components/general/detail/detailBanner/DetailBanner'
 import DetailLayout from '@/components/general/detail/detailLayout/DetailLayout';
 import DetailSidebar from '@/components/general/detail/detailSidebar/DetailSidebar';
 import DetailGeneralInfo from '@/components/general/detail/detailGeneralInfo/DetailGeneralInfo';
+import { rating } from '../../../../../../util/utility';
 
 type AnimeDetailProps = {
 	params:{
@@ -106,7 +107,7 @@ export default async function AnimeDetail({params}: AnimeDetailProps) {
 					
 						{/* Popularity */}
 						<MediaDetailRow title={<>Ratings & Popularity </>}>
-								<p>{(animeDetail.rating / 100 * 5).toFixed(2)} <FaStar/> - {animeDetail.popularity} </p> 
+								<p>{rating(animeDetail.rating)} <FaStar/> - {animeDetail.popularity} </p> 
 						</MediaDetailRow>
 
 						{/* Sequel */}

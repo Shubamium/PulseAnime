@@ -1,11 +1,11 @@
 import MediaDetail from '@/components/mediaDetail/MediaDetail';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './detailGeneralInfo.scss';
 
 type detailGeneralInfoProps = {
 	details:{
 		title:string
-		text:string | null
+		text:string | ReactNode | null
 	}[]
 	description?:any
 	videoId?:string | null

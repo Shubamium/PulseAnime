@@ -1,4 +1,4 @@
-import { MangaSearchResult } from "@/types/MangaTypes";
+import { MangaMeta, MangaSearchResult } from "@/types/MangaTypes";
 import { backendUrl } from "./util";
 
 
@@ -14,9 +14,15 @@ export async function searchManga(query:string) {
 }
 export async function getMangaMeta(title:string) {
 	try{
-		const response = fetch(backendUrl+ '/meta/anilist-manga/info/' + encodeURIComponent(title));
+		const response =  await fetch(backendUrl+ '/meta/anilist-manga/info/' + encodeURIComponent(title));
+		const result = await response.json();
+		if(response.ok){
+			return result as MangaMeta;
+		}else{
+			return null;
+		}
 	}catch(err){
-
+		return null;
 	}
 }
 

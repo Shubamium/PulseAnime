@@ -6,6 +6,10 @@ export type MangaMeta = {
 		english: string;
 		native: string;
 	};
+	trailer:{
+		id:string,
+		site:string,
+	}
 	status: string;
 	image: string;
 	cover: string;
@@ -14,10 +18,11 @@ export type MangaMeta = {
 	rating: number;
 	genres: string[];
 	color: string;
-	totalChapters: number;
-	volumes: number;
+	totalChapters?: number;
+	volumes?: number;
+	chapters:any[]
 	type: string;
-	releaseDate: string;
+	releaseDate: number;
 }
 
 

@@ -6,38 +6,54 @@ import DetailLayout from '@/components/general/detail/detailLayout/DetailLayout'
 import DetailSidebar from '@/components/general/detail/detailSidebar/DetailSidebar';
 import { redirect } from 'next/navigation';
 import DetailGeneralInfo from '@/components/general/detail/detailGeneralInfo/DetailGeneralInfo';
+import { getMangaMeta } from '@/db/MangaData';
+import { getTitle } from '@/db/util';
+import { rating } from '../../../../../../util/utility';
+import { FaStar } from 'react-icons/fa';
 type MangaDetailProps = {
 	params:{
 		id:string;
 	}
 }
 
-export default function MangaDetail({ params }: MangaDetailProps) {
+export default async function MangaDetail({ params }: MangaDetailProps) {
+	
 	
 	if(!params.id){
 		redirect('/');
 	}
 	
+	// Get manga data with id from parameter 
+	const mangaData = await getMangaMeta(params.id);
+	console.log(mangaData?.totalChapters);
+	// If no manga data return to home
+	if(!mangaData || mangaData === null){
+		redirect('/');
+	}
+
 	const mangaDetails = [
 		{
-			title:'Manga Info 1',
-			text:'Manga Value',
+			title:'Status',
+			text:mangaData.status,
 		},
 		{
-			title:'Manga Info 1',
-			text:'Manga Value',
+			title:'Length',
+			text: (mangaData.chapters) && mangaData.chapters.length,
+		},{
+			title:'Release Date',
+			text: mangaData.releaseDate
 		},
 		{
-			title:'Manga Info 1',
-			text:'Manga Value',
-		},
+			title:'Rating',
+			text: <p>  {rating(mangaData.rating)} <FaStar/> - {mangaData.popularity && mangaData.popularity} </p>,
+		}
 		
 	];
-	
+	const mangaTitle = getTitle(mangaData.title);
 	return (
 		<div id='container_manga-detail'>
 			{/* Title */}
-			<DetailBanner title={params.id} />		
+			<DetailBanner title={mangaTitle} altTitle={mangaData.title?.native ?? ''}  src={mangaData.cover ?? null} />		
 			
 			{/* Layout */}
 			<DetailLayout className='manga-detail'>
@@ -46,12 +62,13 @@ export default function MangaDetail({ params }: MangaDetailProps) {
 				<section id='info-section'>
 					<DetailGeneralInfo
 						details={mangaDetails}
-						description={"Manga description"}
+						description={mangaData.description}
+						videoId={mangaData.trailer && mangaData.trailer.id ? mangaData.trailer.id : null }
 					/>
 				</section>
 
 				{/* Sidebar */}
-				<DetailSidebar cover='src/images/awd.png' title={params.id} >
+				<DetailSidebar cover={mangaData.image} title={mangaTitle} >
 
 				</DetailSidebar>
 

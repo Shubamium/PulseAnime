@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './mediaDetail.scss';
 
 type Props = {
 	title:string;
-	text:string;
+	text:string | ReactNode;
 }
 
 export default function MediaDetail({title,text}: Props) {
@@ -13,7 +13,7 @@ export default function MediaDetail({title,text}: Props) {
 			<p>{title}</p>
 		</div>
 		<div className="detail-text panel">
-			<p>{text}</p>
+			{typeof text === 'string' ? <p>{text}</p> : text}
 		</div>
 	</div>
   );
