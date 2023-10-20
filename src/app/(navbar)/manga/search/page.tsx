@@ -38,6 +38,7 @@ export default async function MangaSearch({searchParams}: MangaSearchProps) {
 							tags={result.genres} 
 							chapter={result.totalChapters}
 							volume={result.volumes}
+							score={result.rating}
 						/>;
 					})}
 				</div>
