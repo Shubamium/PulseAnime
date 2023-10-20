@@ -85,7 +85,7 @@ export default async function AnimeDetail({params}: AnimeDetailProps) {
 							<MediaDetailRow title='End'>
 								{animeDetail.endDate.day && month[animeDetail.endDate.month] ? <p>{month[animeDetail.endDate.month] + ' ' + animeDetail.endDate.day + ', ' + animeDetail.endDate.year}</p> : animeDetail.endDate.year ? <p>{animeDetail.endDate.year}</p> : <p>N/A</p>}
 							</MediaDetailRow>
-							<MediaDetailRow title='Episodes'>
+							<MediaDetailRow title='Total Episodes'>
 								<p>{animeDetail.currentEpisodes ? animeDetail.currentEpisodes + '/' : ''}{animeDetail.totalEpisodes}</p>
 							</MediaDetailRow>
 							{animeDetail.duration && (
