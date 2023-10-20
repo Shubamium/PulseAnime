@@ -20,9 +20,15 @@ export type MangaMeta = {
 	color: string;
 	totalChapters?: number;
 	volumes?: number;
-	chapters:any[]
+	chapters:MangaChapter[]
 	type: string;
 	releaseDate: number;
+}
+
+export type MangaChapter = {
+	id:string;
+	title:string;
+	releaseDate:string;
 }
 
 

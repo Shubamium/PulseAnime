@@ -13,7 +13,7 @@ import DetailBanner from '@/components/general/detail/detailBanner/DetailBanner'
 import DetailLayout from '@/components/general/detail/detailLayout/DetailLayout';
 import DetailSidebar from '@/components/general/detail/detailSidebar/DetailSidebar';
 import DetailGeneralInfo from '@/components/general/detail/detailGeneralInfo/DetailGeneralInfo';
-import { rating } from '../../../../../../util/utility';
+import { month, rating } from '../../../../../../util/utility';
 
 type AnimeDetailProps = {
 	params:{
@@ -21,7 +21,6 @@ type AnimeDetailProps = {
 	}
 }
 
-const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
 export default async function AnimeDetail({params}: AnimeDetailProps) {
 

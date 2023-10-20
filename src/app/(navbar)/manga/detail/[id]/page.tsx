@@ -10,6 +10,7 @@ import { getMangaMeta } from '@/db/MangaData';
 import { getTitle } from '@/db/util';
 import { rating } from '../../../../../../util/utility';
 import { FaStar } from 'react-icons/fa';
+import MangaChapterList from './mangaChapterList/MangaChapterList';
 type MangaDetailProps = {
 	params:{
 		id:string;
@@ -37,8 +38,8 @@ export default async function MangaDetail({ params }: MangaDetailProps) {
 			text:mangaData.status,
 		},
 		{
-			title:'Length',
-			text: (mangaData.chapters) && mangaData.chapters.length,
+			title:'Chapters',
+			text: mangaData.chapters ? mangaData.chapters.length : 'N/A',
 		},{
 			title:'Release Date',
 			text: mangaData.releaseDate
@@ -65,7 +66,9 @@ export default async function MangaDetail({ params }: MangaDetailProps) {
 						description={mangaData.description}
 						videoId={mangaData.trailer && mangaData.trailer.id ? mangaData.trailer.id : null }
 					/>
+					<MangaChapterList chapters={mangaData.chapters}/>
 				</section>
+
 
 				{/* Sidebar */}
 				<DetailSidebar cover={mangaData.image} title={mangaTitle} >
