@@ -40,7 +40,7 @@ export default function EpisodeControls({route,currentEpisode,episodesData,provi
 	},[provider,episodeId]);
 
 
-	if(episodesData.length <= 1 || episodeId === null || episodeId === -1) return null;
+	if(episodesData?.length <= 1 || episodeId === null || episodeId === -1) return null;
 	
 	// const url = new URL(window.location.href);
 	// url.searchParams.set('episode',episodesData[Math.max(currentEpisodeId - 1,0)]?.number.toString());

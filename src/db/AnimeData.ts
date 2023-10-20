@@ -59,7 +59,8 @@ export async function getAnimeMeta(id:string,provider?:AnimeProvider) {
 export async function getAnimeEpisode(episodeId:string) {
 	
 	const targetUrl = backendUrl +'/anime/gogoanime/watch/'+encodeURIComponent(episodeId);
-	const response = await fetch(corsUrl,{headers:{'my-url':targetUrl}});
+	const response = await fetch(targetUrl);
+	console.log('getting anime episode',targetUrl);
 	const result = await response.json();
 	
 	return result as AnimeEpisodeSource;
