@@ -66,7 +66,7 @@ export default async function MangaDetail({ params }: MangaDetailProps) {
 						description={mangaData.description}
 						videoId={mangaData.trailer && mangaData.trailer.id ? mangaData.trailer.id : null }
 					/>
-					<MangaChapterList chapters={mangaData.chapters}/>
+					<MangaChapterList chapters={mangaData.chapters} mangaId={mangaData.id}/>
 				</section>
 
 

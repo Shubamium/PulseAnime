@@ -73,7 +73,7 @@
 		display: flex;
 		align-items: center;
 		gap: 1em;
-		
+		padding: 0 1em;
 		.search-bar{
 			margin: 0;
 			gap: .5em;
@@ -92,5 +92,30 @@
 
 		}
 	}
-	
+	transition: all 1500ms ease,width 0ms ;
+	position: absolute;
+	z-index: 1000;
+	width: 100vw;
+	opacity: 1;
+	&.hidden{
+		transform: translateY(-140%);
+		opacity: 0;
+	}
+	&.reset{
+		position: relative;
+		width: 100%;
+		background: #F1215F;
+		opacity: 0;
+		.confine{
+			max-width: 100% !important;
+			padding: 0 !important;
+			flex-direction: row-reverse;
+		}
+		&.open{
+			opacity: 1;
+		}
+		.left{
+			flex-direction: row-reverse;
+		}
+	}
 }

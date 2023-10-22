@@ -8,9 +8,13 @@ type DetailBannerProps = {
 }
 
 export default function DetailBanner({src,title,altTitle}: DetailBannerProps) {
+	const bannerImg =  src || '/images/placeholder/banner.png';
   return (
 		<div className="detail-banner">
-			<Image src={ src || '/images/placeholder/banner.png'} alt='banner' width={1200} height={400} ></Image>
+			<div className="banner-container">
+				<Image src={bannerImg} alt='banner' width={1200} height={400}></Image>
+			</div>
+			{/* <div className="banner-img" style={{backgroundImage:`url(${src ?? '/images/placeholder/banner.png'});`}}></div> */}
 			<div className="overlay"></div>
 			 
 			<div className="title-container">

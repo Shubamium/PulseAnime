@@ -1,18 +1,25 @@
 .detail-banner{
-	height: 300px;
+	height: 350px;
 	position: relative;
 	border-bottom: .5em solid #F1215F;
 	overflow: hidden;
 	width: 100%;
-	img{
-		width: 100%;
+	.banner-container{
+		clip-path: inset(0);
+		background-color: transparent;
 		height: 100%;
+	}
+	img,.banner-img{
+		width: 100%;
 		object-fit: cover;
+		background-color: #F1215F;
 		filter: blur(2px) brightness(90%); 
 		scale: 1.1;
 		position: relative;
 		z-index: -10;
-		background-color: #F1215F;
+		top: 0%;
+		position: fixed;
+
 	}
 	
 	.overlay{

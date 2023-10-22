@@ -1,3 +1,5 @@
+'use client';
+import {useContext} from 'react';
 import Image from "next/image";
 import SearchBar from "../searchBar/SearchBar";
 import './navbar.scss';
@@ -8,17 +10,25 @@ import ContentSwitch from "../contentSwitch/ContentSwitch";
 
 import {BsDice3} from 'react-icons/bs';
 import MediaSearch from "../mediaSearch/MediaSearch";
-type Props = {}
+import { NavbarContext } from '@/components/context/navbarContext';
+type Props = {
+	resetPosition?:boolean
+	hidden?:boolean
+}
 
-export default function Navbar({}: Props) {
+export default function Navbar({resetPosition,hidden}: Props) {
+	const navbarContext = useContext(NavbarContext);
+
 	return (
-		<header className="container_header">
+		<header className={`container_header ${resetPosition ? 'reset' : ''} ${(hidden !== undefined && hidden === false) || navbarContext.navbarOpen   ? 'open' : 'hidden'}`}>
 			<div className="confine">
 				<div className="left">
 					<Link href={'/'} className="logo">
-						<div className="container_logo bleed">
-							<Image src={"/images/logo/logo.png"} alt="" width={320} height={120}/>
-						</div>
+						{navbarContext.isBleeding && (
+							<div className="container_logo bleed">
+								<Image src={"/images/logo/logo.png"} alt="" width={320} height={120}/>
+							</div>
+						)} 
 						<div className="container_logo">
 							<Image src={"/images/logo/logo.png"} alt="" width={320} height={120}/>
 						</div>
@@ -42,6 +52,6 @@ export default function Navbar({}: Props) {
 					</Button>
 				</nav>
 			</div>
-		</header>
+		</header>		
 	  );
 }

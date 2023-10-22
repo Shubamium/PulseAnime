@@ -1,3 +1,4 @@
+import NavbarContextProvider from '@/components/context/navbarContext';
 import Navbar from '@/components/general/navbar/Navbar';
 import React from 'react';
 
@@ -8,10 +9,12 @@ type Props = {
 export default function NavbarLayout({children}: Props) {
   return (
 	<div>
-		<Navbar/>
-		<main>
-			{children}
-		</main>
+		<NavbarContextProvider>
+			<Navbar/>
+			<main>
+				{children}
+			</main>
+		</NavbarContextProvider>
 	</div>
   );
 }
