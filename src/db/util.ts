@@ -1,4 +1,5 @@
 import { AnimeTitle } from "@/types/AnimeTypes";
+import { month } from "../../util/utility";
 
 export const backendUrl = process.env.NEXT_PUBLIC_DB_HOST ?? 'http://127.0.0.1:3173';
 // export const backendUrl = 'https://pulseanime-be.vercel.app';
@@ -39,5 +40,16 @@ export function getEnumKeyByValue(enumObj: any, value: string): string | undefin
 	  }
 	}
 	return undefined;
-  }
+}
   
+
+
+export function getChapterNumber(chapterId:string,fallback?:string){
+	if(chapterId === '') return fallback;
+	return chapterId.match(/\d+\.\d+|\d+/g);
+}
+
+export function getReleaseDate(timestring:string){
+	let releaseDate = new Date(timestring);
+	return releaseDate.getDate() + ' ' + month[releaseDate.getMonth()] + ', ' + releaseDate.getFullYear(); 
+}

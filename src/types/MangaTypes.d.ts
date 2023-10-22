@@ -31,6 +31,11 @@ export type MangaChapter = {
 	releaseDate:string;
 }
 
+export type MangaChapterPages = {
+	page:number;
+	img:string;
+}
+
 
 export type MangaSearchResult = {
 	results: MangaMeta[];

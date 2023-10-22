@@ -2,7 +2,6 @@
 import {useState, useEffect} from 'react';
 import SearchBar from '../searchBar/SearchBar';
 import ContentSwitch from '../contentSwitch/ContentSwitch';
-import { IS_SERVER } from '../../../../util/utility';
 
 type MediaSearchProps = {
 	useAltColor?:boolean
@@ -30,7 +29,7 @@ export default function MediaSearch({useAltColor,reverseOrder}: MediaSearchProps
 		setMediaType(savedMediaType);
 	}, []);
 	
-	const searchBar = <SearchBar placeholder="Search for the title here!" altSearchColor={useAltColor} route={`/${mediaType}/search`}/>;
+	const searchBar = <SearchBar rounded={reverseOrder} placeholder="Search for the title here!" altSearchColor={useAltColor} route={`/${mediaType}/search`}/>;
 
 	return (
 		<>

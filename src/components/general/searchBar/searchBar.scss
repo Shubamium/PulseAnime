@@ -2,7 +2,6 @@
 	display: flex;
 	gap: 1em;
 	margin: 0 .2em;
-
 	.input-search{
 		padding: 0em 1em;
 		border-radius: .25em;
@@ -11,6 +10,9 @@
 		min-width: 400px;
 		color: #5E3030;
 		background-color: #FFE3EA;
+		&::placeholder{
+			opacity: .3;
+		}
 	}
 	.btn-search{
 		font-family: var(--fontPoppins);
@@ -22,9 +24,15 @@
 		border: none;
 		border-radius: .25em;	
 		font-size: 1.4rem;		
-
+		
 		&.alt-color{
 			background-color: #7E0D58;
+		}
+	}
+	&.rounded{
+		.input-search{
+			border-radius: 2em;
+			padding: 0em 1.5em;
 		}
 	}
 }

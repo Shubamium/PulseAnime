@@ -1,11 +1,11 @@
 import NavbarSetter from '@/components/general/navbarSetter/NavbarSetter';
-import { getMangaMeta } from '@/db/MangaData';
+import { getMangaChapter, getMangaMeta } from '@/db/MangaData';
 import Link from 'next/link';
 import React from 'react';
 import './mangaRead.scss';
 import Button from '@/components/general/button/Button';
 import { FaArrowLeft, FaArrowRight, FaHome } from 'react-icons/fa';
-import { getTitle } from '@/db/util';
+import { getChapterNumber, getTitle } from '@/db/util';
 import { redirect } from 'next/navigation';
 import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
 import Navbar from '@/components/general/navbar/Navbar';
@@ -21,10 +21,11 @@ type MangaReadProps = {
 export default async function MangaRead({params,searchParams}: MangaReadProps) {
 	
 	const targetManga = params.id;
-	const activeChapter = searchParams.chapter;
+	const activeChapter = parseFloat(searchParams.chapter) || 1;
 
 	const mangaData = await getMangaMeta(targetManga);
-	if(!mangaData){
+	const mangaChapterData = await getMangaChapter(mangaData?.chapters[activeChapter-1].id || "");
+	if(!mangaData || !mangaChapterData){
 		redirect('/');
 	}
 
@@ -44,24 +45,26 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 						
 						{/* Site Navigation */}
 						<div className="manga-navigation">
-							<Link href={`/manga/detail/${targetManga}`}><Button><FaArrowLeft/></Button></Link>
-							<Link href={'/'}><Button><FaHome/></Button></Link>
+							<Link href={`/manga/detail/${targetManga}`} ><Button className='btn-readmanga'><FaArrowLeft/></Button></Link>
+							<Link href={'/'}><Button className='btn-readmanga'><FaHome/></Button></Link>
 						</div>
 
 						{/* Logo */}
 						<img src='/images/logo/logo.png' className='site-logo'></img>
-						
 
 						{/* Manga Navigation */}
 						<div className="read-navigation">
 							<p className='manga-title'>{title}</p>
-							<p className='active-chapter'>{activeChapter}</p>
+							{ mangaData.chapters && mangaData.chapters[activeChapter-1] ? (
+									<p className='active-chapter'>{'Chapter ' + getChapterNumber(mangaData.chapters[activeChapter - 1].id, activeChapter.toString())}</p>
+							) : <></>}
 							<div className="chapter-navigation">
-								<Button className='btn-readmanga'> <ImArrowLeft/> </Button>
-								<p className='chapter-total'></p>
-								<Button className='btn-readmanga'> <ImArrowRight/> </Button>
+								<Link href={`?chapter=${Math.max(activeChapter - 1,1)}`} scroll={false}><Button className='btn-readmanga'> <ImArrowLeft/> </Button></Link>
+								<p className='chapter-total'> {activeChapter} / {mangaData.chapters.length} </p>
+								<Link href={`?chapter=${Math.min(activeChapter + 1,mangaData.chapters.length)}`}><Button className='btn-readmanga'> <ImArrowRight/> </Button></Link>
 							</div>
 						</div>
+
 					</div>
 
 					{/* Bottom Sidebar */}
@@ -74,7 +77,15 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 				{/* Manga View */}
 				<section className='container_manga-view'>
 					<Navbar resetPosition={true} hidden={false}/>
-					<img src="https://i.ibb.co/y0hqsNG/p-1.png" className='manga-image' />
+					<div className='manga-horizontal-view'>
+						{
+							mangaChapterData.map((mangaChapter, index) => {
+								return <div className='manga-page' key={`manga-page-${index}`} >
+									<img src={mangaChapter.img}  className='manga-image' />
+								</div>;
+							})
+						}
+					</div>
 				</section>
 				
 			</div>

@@ -1,4 +1,4 @@
-import { MangaMeta, MangaSearchResult } from "@/types/MangaTypes";
+import { MangaChapter, MangaChapterPages, MangaMeta, MangaSearchResult } from "@/types/MangaTypes";
 import { backendUrl } from "./util";
 
 
@@ -28,3 +28,19 @@ export async function getMangaMeta(title:string) {
 	}
 }
 
+
+export async function getMangaChapter(chapterId:string) {
+	try{
+		const url = backendUrl+ `/meta/anilist-manga/read?chapterId=${encodeURIComponent(chapterId)}`;
+		console.log(url);
+		const response =  await fetch(url);
+		const result = await response.json();
+		if(response.ok){
+			return result as MangaChapterPages[];
+		}else{
+			return null;
+		}
+	}catch(err){
+		return null;
+	}
+}

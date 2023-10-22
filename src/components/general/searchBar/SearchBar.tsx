@@ -7,11 +7,12 @@ type searchBarProps = {
 	altSearchColor?:boolean
 	route?:string
 	placeholder?:string
+	rounded?:boolean
 }
 
-export default function SearchBar({altSearchColor,route,placeholder}:searchBarProps) {
+export default function SearchBar({altSearchColor,route,placeholder,rounded}:searchBarProps) {
 	return (
-		<form className={"search-bar"} action={route} method="GET">
+		<form className={`search-bar ${rounded ? 'rounded' : '' }`} action={route} method="GET">
 			<input type="search" className={"input-search"} name="query" placeholder={placeholder}  required/>
 				<Button type="submit" className={'btn-search' + (altSearchColor ? ' alt-color' : '')}><FaSearch/></Button>
 		</form>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { month } from '../../../../../../../util/utility';
 import { FaArrowRight, FaBookOpen } from 'react-icons/fa';
+import { getChapterNumber, getReleaseDate } from '@/db/util';
 
 type MangaChapterList = {
 	chapters?:MangaChapter[]
@@ -21,13 +22,13 @@ export default function MangaChapterList({chapters,mangaId}: MangaChapterList) {
 			</div>
 		<div className="chapters">
 			{chapters ? chapters.map((chapter, index) => {
-					const chapterNumber = chapter.id.match(/\d+\.\d+|\d+/g);
-					let releaseDate = new Date(chapter.releaseDate);
-					const releaseDateString = releaseDate.getDate() + ' ' + month[releaseDate.getMonth()] + ', ' + releaseDate.getFullYear(); 
-					return <Link className='manga-chapter-row' key={`chapter-${chapter.id}`} href={`/manga/read/${mangaId}?chapter=${index}`}>
+					const chapterNumber = getChapterNumber(chapter.id);
+					let releaseDate = getReleaseDate(chapter.releaseDate);
+
+					return <Link className='manga-chapter-row' key={`chapter-${chapter.id}`} href={`/manga/read/${mangaId}?chapter=${index+1}`}>
 								<span className='chapter'>Chapter { chapterNumber ? chapterNumber[0] : index} </span>
 								<div className="action">
-									<span className='date'>{releaseDateString} </span>
+									<span className='date'>{releaseDate} </span>
 									<span className='read'>Read Now <FaArrowRight/> </span>
 								</div>
 						 </Link>
