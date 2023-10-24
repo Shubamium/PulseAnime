@@ -31,7 +31,7 @@ export type MangaChapter = {
 	releaseDate:string;
 }
 
-export type MangaChapterPages = {
+export type MangaChapterPage = {
 	page:number;
 	img:string;
 }

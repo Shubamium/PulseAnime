@@ -1,4 +1,4 @@
-import { MangaChapter, MangaChapterPages, MangaMeta, MangaSearchResult } from "@/types/MangaTypes";
+import { MangaChapter, MangaChapterPage, MangaMeta, MangaSearchResult } from "@/types/MangaTypes";
 import { backendUrl } from "./util";
 
 
@@ -36,7 +36,7 @@ export async function getMangaChapter(chapterId:string) {
 		const response =  await fetch(url);
 		const result = await response.json();
 		if(response.ok){
-			return result as MangaChapterPages[];
+			return result as MangaChapterPage[];
 		}else{
 			return null;
 		}

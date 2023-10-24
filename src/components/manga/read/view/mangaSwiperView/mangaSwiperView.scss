@@ -1,0 +1,54 @@
+.manga-swiper-view{
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+	max-width: calc(100vw - 300px);
+	overflow: hidden;
+	position: relative;
+	
+	.manga-slide{
+		width: 100%;
+		height: 100%;
+
+		img{
+			width: 100%;
+			height: 100%;
+			max-height: 100%;
+			max-width: 100%;
+			object-fit: contain;
+		}
+	}
+	&.hidden{
+		display: none;
+	}
+}
+
+.manga-progress{
+	background-color: rgba(0, 0, 0, 0.212);
+	
+	z-index: 200;
+	position: absolute;
+	justify-content: space-evenly;
+	height: 5px;
+	gap: .5em;
+	display: flex;
+	padding-top: 5px;
+	width: 100%;
+	.progress-part{
+		background: #2474EB;
+		height: 100%;
+		width: 100%;
+		opacity: 0.5;
+		border-radius: 1em;
+		
+		transition: all 100ms ease;
+		box-shadow: 0px 2px 4px black;
+		&.filled{
+			opacity: 1;
+		}
+		&:hover{
+			height: 250%;
+			cursor: pointer;	
+		}
+	}
+}

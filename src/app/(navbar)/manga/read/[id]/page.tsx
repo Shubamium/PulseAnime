@@ -1,7 +1,7 @@
 import NavbarSetter from '@/components/general/navbarSetter/NavbarSetter';
 import { getMangaChapter, getMangaMeta } from '@/db/MangaData';
 import Link from 'next/link';
-import React from 'react';
+import React, { Suspense } from 'react';
 import './mangaRead.scss';
 import Button from '@/components/general/button/Button';
 import { FaArrowLeft, FaArrowRight, FaHome } from 'react-icons/fa';
@@ -9,6 +9,9 @@ import { getChapterNumber, getTitle } from '@/db/util';
 import { redirect } from 'next/navigation';
 import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
 import Navbar from '@/components/general/navbar/Navbar';
+import MangaSwiperView from '@/components/manga/read/view/mangaSwiperView/MangaSwiperView';
+import 'keen-slider/keen-slider.min.css';
+
 type MangaReadProps = {
 	params:{
 		id:string;
@@ -77,7 +80,7 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 				{/* Manga View */}
 				<section className='container_manga-view'>
 					<Navbar resetPosition={true} hidden={false}/>
-					<div className='manga-horizontal-view'>
+					<div className='manga-basic-view'>
 						{
 							mangaChapterData.map((mangaChapter, index) => {
 								return <div className='manga-page' key={`manga-page-${index}`} >
@@ -86,6 +89,9 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 							})
 						}
 					</div>
+					<Suspense fallback={<div>Loading...</div>}>
+						{/* <MangaSwiperView direction='right' doublePage={false} vertical={true} pages={mangaChapterData}/> */}
+					</Suspense>
 				</section>
 				
 			</div>
