@@ -6,7 +6,7 @@ import './mangaSwiperView.scss';
 type MangaSwiperView = {
 	pages: MangaChapterPage[]
 	doublePage?: boolean;
-	direction:'left'|'right';
+	direction:'rtl'|'ltr';
 	vertical?:boolean;
 }
 
@@ -31,7 +31,7 @@ export default function MangaSwiperView({pages,direction,doublePage,vertical}: M
 		slides:{
 			perView:doublePage ? 2 : 1,
 		},
-		rtl:direction === 'left',
+		rtl:!vertical && direction === 'rtl',
 		vertical:vertical,
 
 	});	
@@ -69,7 +69,7 @@ export default function MangaSwiperView({pages,direction,doublePage,vertical}: M
 		<>
 			<div className="manga-swiper-view keen-slider hidden" ref={sliderRef}   >
 					<div className='manga-progress' style={{gridTemplateColumns:`repeat(${pageCount + 2},1fr)`}}>
-						{new Array(pageCount).fill('progres').map((_,index)=>{
+						{new Array(doublePage ? Math.floor(pages.length / 2) : pages.length ).fill('progres').map((_,index)=>{
 							return <div onClick={()=>setPage(index)} className={`progress-part ${index+1 <= currentPage ? 'filled' : ''}`} key={'progress-view-'+index}></div>;
 						})}
 					</div>

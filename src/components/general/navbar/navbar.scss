@@ -22,9 +22,9 @@
 				transform: translateY(4px);
 			}
 			&:hover{
-				transform: translateY(0px);
+				transform: translateY(-15px);
 				.container_logo:not(.bleed){
-					scale: 1.2;
+					scale: 1.01;
 				}
 			}
 			&:active{
