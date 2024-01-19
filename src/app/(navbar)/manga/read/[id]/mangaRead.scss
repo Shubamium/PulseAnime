@@ -1,6 +1,7 @@
 .container_manga-read{
 	background-color: #22212B;
 	height: 100vh;
+	margin-top:-50px;
 	.manga-read-layout{
 		height: 100%;
 		display: grid;
@@ -180,3 +181,6 @@
 	}
 }
 
+main.empty{
+	padding-top: 0px;
+}

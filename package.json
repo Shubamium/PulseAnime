@@ -15,6 +15,7 @@
     "artplayer": "^5.0.9",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "framer-motion": "^10.18.0",
     "hls.js": "^1.4.10",
     "keen-slider": "^6.8.6",
     "next": "13.4.12",

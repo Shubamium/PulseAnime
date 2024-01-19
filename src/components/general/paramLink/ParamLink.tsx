@@ -16,7 +16,7 @@ export default function ParamLink({children,param,value}: ParamLinkProps) {
 		newUrl.searchParams.set(param,value);
 		console.log(newUrl.searchParams.toString());
 		const newParam = '?' + newUrl.searchParams.toString();
-		router.replace(newParam);
+		router.push(newParam);
 	};
 	return (
 		<div onClick={()=>navigate(param,value)} className='param-link'>

@@ -71,8 +71,8 @@ export default async function MangaDetail({ params }: MangaDetailProps) {
 
 
 				{/* Sidebar */}
-				<DetailSidebar cover={mangaData.image} title={mangaTitle} >
-
+				<DetailSidebar cover={mangaData.image} title={mangaTitle}>
+				<></>
 				</DetailSidebar>
 
 			</DetailLayout>

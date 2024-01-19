@@ -15,7 +15,7 @@ export default async function Home() {
 	const serverData = await getTopAiringAnime();
 	const topAiring = serverData.results as AnimeSearchResult[]; 
 	return (
-		<main className={styling['container_home-page']}>
+		<main className={styling['container_home-page'] + ' empty'}>
 			<HomeTitle/>
 			<AnimeList animes={topAiring}/>
 		</main>
