@@ -44,7 +44,7 @@ export default function VideoPlayer({videoInfo}: videoPlayerProps) {
 				};
 			});
 			// videoInfo.find((episodeSource)=>)
-			if(artPlayer.current){
+			if(artPlayer.current && sourceList.length > 1){
 				const type = videoInfo[0].isM3U8 ? 'm3u8' : 'default';
 				art = new Artplayer(
 					{
