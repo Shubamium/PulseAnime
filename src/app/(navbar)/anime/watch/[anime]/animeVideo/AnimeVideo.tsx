@@ -5,6 +5,7 @@ import { AnimeEpisode, AnimeEpisodeSource } from '@/types/AnimeTypes';
 import { AnimeProvider } from '@/types/AnimeEnums';
 import { getAnimeEpisodeUrl } from '@/db/AnimeData';
 import VideoPlayer from '@/components/videoPlayer/VideoPlayer';
+import { FaSpinner } from 'react-icons/fa';
 
 type AnimeVideoProps = {
 	episode:number;
@@ -65,7 +66,10 @@ export default function AnimeVideo({episode,provider,episodeList}: AnimeVideoPro
 	},[episode]);
 	return (
 		
-		<div className="video">
+		<div className={`video ${videoInfo ? 'loaded' : ''}`}>
+				<div className="spinner">
+					<FaSpinner/>
+				</div>
 				{videoInfo ? (
 					<VideoPlayer videoInfo={videoInfo}/>
 				) : 		

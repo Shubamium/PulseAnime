@@ -1,14 +1,3 @@
-import React from 'react';
-import { FaSpinner, FaTruckLoading } from 'react-icons/fa';
-type Props = {
-	children:React.ReactNode
-}
+import RootLoading from "@/components/general/loading";
 
-export default function loading({children}: Props) {
-	return (
-		<div className='container-all'>
-			<div className="loader"><FaSpinner/></div>
-			{children}
-		</div>
-	);
-}
+export default RootLoading;

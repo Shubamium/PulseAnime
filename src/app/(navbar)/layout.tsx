@@ -11,7 +11,7 @@ export default function NavbarLayout({children}: Props) {
 	<div>
 		<NavbarContextProvider>
 			<Navbar/>
-			<main>
+			<main className='empty'>
 				{children}
 			</main>
 		</NavbarContextProvider>
