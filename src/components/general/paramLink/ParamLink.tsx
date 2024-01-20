@@ -17,9 +17,18 @@ export default function ParamLink({children,param,value}: ParamLinkProps) {
 		console.log(newUrl.searchParams.toString());
 		const newParam = '?' + newUrl.searchParams.toString();
 		router.push(newParam);
+		router.refresh();
 	};
+
+	const getLink = () => {
+		const newUrl =  new URL(window.location.href);
+		newUrl.searchParams.set(param,value);
+		const newParam = '?' + newUrl.searchParams.toString();
+		return newParam;
+	};
+	// onClick={()=>navigate(param,value)} 
 	return (
-		<div onClick={()=>navigate(param,value)} className='param-link'>
+		<div  onClick={()=>navigate(param,value)}  className='param-link'>
 			{children}
 		</div>
 	);

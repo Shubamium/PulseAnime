@@ -67,7 +67,7 @@ export default function MangaSwiperView({pages,direction,doublePage,vertical}: M
 	},[pages]);
 	return (
 		<>
-			<div className="manga-swiper-view keen-slider hidden" ref={sliderRef}   >
+			<div className="manga-swiper-view keen-slider hidden manga-view" ref={sliderRef}   >
 					<div className='manga-progress' style={{gridTemplateColumns:`repeat(${pageCount + 2},1fr)`}}>
 						{new Array(doublePage ? Math.floor(pages.length / 2) : pages.length ).fill('progres').map((_,index)=>{
 							return <div onClick={()=>setPage(index)} className={`progress-part ${index+1 <= currentPage ? 'filled' : ''}`} key={'progress-view-'+index}></div>;
