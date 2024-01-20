@@ -6,10 +6,11 @@ import { MangaMeta } from '@/types/MangaTypes';
 import Link from 'next/link';
 import React, { ReactNode, useState } from 'react';
 import { FaArrowLeft, FaArrowRight, FaArrowsAltV, FaBars, FaGripLines, FaHamburger, FaHammer, FaHome } from 'react-icons/fa';
-import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
+import { ImArrowLeft, ImArrowRight, ImZoomIn, ImZoomOut } from 'react-icons/im';
 import {IoSwapVertical, IoSwapHorizontal, IoHammer, IoHammerOutline, IoHammerSharp} from 'react-icons/io5';
-import { BsBook, BsBookFill, BsBookHalf } from 'react-icons/bs';
+import { BsBook, BsBookFill, BsBookHalf, BsFullscreen } from 'react-icons/bs';
 import { MangaChapterPage } from '@/types/MangaTypes';
+import MangaChapterBar from '@/components/manga/read/view/mangaChapterBar/MangaChapterBar';
 type Props = {
 	children:React.ReactNode;
 	title:string;
@@ -38,12 +39,17 @@ function MangaOptions({param,options,activeOption}:{param:string,options:{name:s
 }
 export default function MangaReadLayout({mangaData,title,targetManga,activeChapter,children, readOptions}: Props) {
 	const [isCollapsed,setIsCollapsed] = useState(false);
+	const [isChapterBarOpen,setIsChapterBarOpen] = useState(false);
 	
 	function collapse(){
 		setIsCollapsed(true);
+		setIsChapterBarOpen(false);
 	}
 	function show(){
 		setIsCollapsed(false);
+	}
+	function openChapterBar(){
+		setIsChapterBarOpen(open => !open);
 	}
 	
 	return (
@@ -52,6 +58,7 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 		{/* Sidebar / Action Navigation */}
 		<section className='container_manga-action-detail'>
 
+			<MangaChapterBar isOpen={isChapterBarOpen}/>
 			{/* Show Button */}
 			<div className="show-bar">
 				<Button onClick={show}><FaBars/></Button>
@@ -74,7 +81,7 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 					<p className='manga-title'>{title}</p>
 
 					{ mangaData.chapters && mangaData.chapters[activeChapter-1] ? (
-							<p className='active-chapter btn-readmanga-inactive'>{'Chapter ' + getChapterNumber(mangaData.chapters[activeChapter - 1].id, activeChapter.toString())}</p>
+							<p onClick={openChapterBar} className='active-chapter btn-readmanga-inactive'>{'Chapter ' + getChapterNumber(mangaData.chapters[activeChapter - 1].id, activeChapter.toString())}</p>
 					) : <></>}
 
 					<div className="chapter-navigation">
@@ -154,7 +161,7 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 								param='Zoom'
 								options={[
 									{
-										icon:<FaGripLines/>,
+										icon:<ImZoomOut/>,
 										name:'50%',
 										value:'small'
 									},
@@ -163,11 +170,11 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 										name:'100%',
 										value:'normal'
 									},{
-										icon:<FaArrowsAltV/>,
+										icon:<ImZoomIn/>,
 										name:'125%',
 										value: 'large'
 									},{
-										icon:<FaArrowsAltV/>,
+										icon:<BsFullscreen/>,
 										name:'150%',
 										value: 'extra'
 									}
