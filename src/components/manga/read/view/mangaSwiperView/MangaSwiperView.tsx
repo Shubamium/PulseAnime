@@ -1,5 +1,5 @@
-import { MangaChapterPage } from '@/types/MangaTypes';
 'use client';
+import { MangaChapterPage } from '@/types/MangaTypes';
 import React, { useEffect,useState } from 'react';
 import {useKeenSlider} from 'keen-slider/react';
 import './mangaSwiperView.scss';
@@ -33,7 +33,7 @@ export default function MangaSwiperView({pages,direction,doublePage,vertical}: M
 		},
 		rtl:!vertical && direction === 'rtl',
 		vertical:vertical,
-
+		
 	});	
 	
 	const moveNext = ()=>{

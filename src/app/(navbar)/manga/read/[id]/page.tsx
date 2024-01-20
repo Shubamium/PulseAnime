@@ -11,10 +11,7 @@ import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
 import Navbar from '@/components/general/navbar/Navbar';
 import MangaSwiperView from '@/components/manga/read/view/mangaSwiperView/MangaSwiperView';
 import 'keen-slider/keen-slider.min.css';
-import {IoSwapVertical, IoSwapHorizontal, IoHammer, IoHammerOutline} from 'react-icons/io5';
-import ParamLink from '@/components/general/paramLink/ParamLink';
-import { BsBook, BsBookFill, BsBookHalf } from 'react-icons/bs';
-import { MangaChapterPage } from '@/types/MangaTypes';
+
 import RootLoading from '../loading';
 import MangaReadLayout from './mangaReadLayout';
 type MangaReadProps = {
@@ -27,6 +24,8 @@ type MangaReadProps = {
 		direction: 'hr' | 'vr';
 		read : 'rtl' |'ltr';
 		pc: '1' | '2';
+		gap:'' | 'gap' | 'gapless';
+		zoom: 'small' | 'normal' | 'large' | 'extra'
 	}
 }
 
@@ -35,6 +34,8 @@ type MangaReadOptions = {
 	direction:'hr' | 'vr'
 	readingDirection : 'rtl' |'ltr'
 	pageCount: '1' | '2'
+	gap: '' | 'gap' |'gapless'
+	zoom: 'small' | 'normal' | 'large' | 'extra'
 }
 
 
@@ -49,7 +50,7 @@ async function MangaView({chapterId,readOptions}:{chapterId:string,readOptions:M
 					<Navbar resetPosition={true} hidden={false}/>
 					{	
 						readOptions.mode === 'simple' && 
-						<div className='manga-basic-view manga-view'>
+						<div className={`manga-basic-view manga-view ${readOptions.gap === 'gap' ? 'gap' : ''} ${readOptions.zoom}`}>
 							{
 								mangaChapterData.map((mangaChapter, index) => {
 									return <div className='manga-page' key={`manga-page-${index}`} >
@@ -80,7 +81,9 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 		mode: searchParams.mode ?? 'advanced',
 		direction: searchParams.direction ?? 'vr',
 		readingDirection : searchParams.read ??'ltr',
-		pageCount : searchParams.pc ?? '1'
+		pageCount : searchParams.pc ?? '1',
+		gap: searchParams.gap ?? 'gapless',
+		zoom: searchParams.zoom ?? 'normal',
 	};
 
 	const title = getTitle(mangaData.title);

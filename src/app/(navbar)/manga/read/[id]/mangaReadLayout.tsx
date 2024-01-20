@@ -4,10 +4,10 @@ import ParamLink from '@/components/general/paramLink/ParamLink';
 import { getChapterNumber } from '@/db/util';
 import { MangaMeta } from '@/types/MangaTypes';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { FaArrowLeft, FaArrowRight, FaHome } from 'react-icons/fa';
+import React, { ReactNode, useState } from 'react';
+import { FaArrowLeft, FaArrowRight, FaArrowsAltV, FaBars, FaGripLines, FaHamburger, FaHammer, FaHome } from 'react-icons/fa';
 import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
-import {IoSwapVertical, IoSwapHorizontal, IoHammer, IoHammerOutline} from 'react-icons/io5';
+import {IoSwapVertical, IoSwapHorizontal, IoHammer, IoHammerOutline, IoHammerSharp} from 'react-icons/io5';
 import { BsBook, BsBookFill, BsBookHalf } from 'react-icons/bs';
 import { MangaChapterPage } from '@/types/MangaTypes';
 type Props = {
@@ -19,6 +19,23 @@ type Props = {
 	readOptions:any;
 }
 
+
+function MangaOptions({param,options,activeOption}:{param:string,options:{name:string,value:string,icon:React.ReactNode}[],activeOption:string}){
+	return (
+		<div className="reading-option">
+		<h3 className='reading-option-title'>{param}</h3>
+		<div className="reading-option-buttons">
+			{options.map((val,index)=>{
+				return (
+					<ParamLink param={param.toLowerCase()} value={val.value} key={val.value+index}>
+						<Button className={`btn-readmanga ${activeOption === val.value ? 'active' : 'inactive'}`}> {val.icon}{val.name} </Button>
+					</ParamLink>
+				);
+			})}
+		</div>
+	</div>
+	);
+}
 export default function MangaReadLayout({mangaData,title,targetManga,activeChapter,children, readOptions}: Props) {
 	const [isCollapsed,setIsCollapsed] = useState(false);
 	
@@ -37,7 +54,7 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 
 			{/* Show Button */}
 			<div className="show-bar">
-				<Button onClick={show}><FaArrowRight/></Button>
+				<Button onClick={show}><FaBars/></Button>
 			</div>
 			{/* Top Sidebar */}
 			<div className="top">
@@ -76,17 +93,17 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 				<div className="reading-options">
 
 					{/* Reading Mode */}
-					<div className="reading-option">
-						<h3 className='reading-option-title'>Mode</h3>
-						<div className="reading-option-buttons">
-							<ParamLink param='mode' value='simple'>
-								<Button className={`btn-readmanga ${readOptions.mode === 'simple' ? 'active' : 'inactive'}`}> <IoHammerOutline/> Simple </Button>
-							</ParamLink>
-							<ParamLink param='mode' value='advanced'>
-								<Button className={`btn-readmanga ${readOptions.mode === 'advanced' ? 'active' : 'inactive'}`}> <IoHammer/> Advanced </Button>
-							</ParamLink>
-						</div>
-					</div>
+						<MangaOptions options={[
+							{
+								icon:<IoHammerOutline/>,
+								name:'Simple',
+								value:'simple'
+							},{
+								icon:<IoHammer/>,
+								name:'Advanced',
+								value:'advanced'
+							}
+						]} param={'Mode'} activeOption={readOptions.mode}/>
 						{readOptions.mode === 'advanced' ? (
 							<>
 										{/* Direction */}
@@ -129,7 +146,50 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 										
 										</>: <></>}
 							</>
-						): <></>}
+						): <>
+
+							{/* Zoom */}
+							<MangaOptions 
+								activeOption={readOptions.zoom}
+								param='Zoom'
+								options={[
+									{
+										icon:<FaGripLines/>,
+										name:'50%',
+										value:'small'
+									},
+									{
+										icon:<FaArrowsAltV/>,
+										name:'100%',
+										value:'normal'
+									},{
+										icon:<FaArrowsAltV/>,
+										name:'125%',
+										value: 'large'
+									},{
+										icon:<FaArrowsAltV/>,
+										name:'150%',
+										value: 'extra'
+									}
+								]} ></MangaOptions>
+							{/* Gap */}
+							<MangaOptions 
+								activeOption={readOptions.gap}
+								param='Gap'
+								options={[
+									{
+										icon:<FaGripLines/>,
+										name:'No Gap',
+										value:'gapless'
+									},
+									{
+										icon:<FaArrowsAltV/>,
+										name:'Visible',
+										value:'gap'
+									}
+								]} ></MangaOptions>
+						</>}
+						{}
 				</div>
 
 				{/* Sidebar Collapse */}
