@@ -5,12 +5,13 @@ import { getChapterNumber } from '@/db/util';
 import { MangaMeta } from '@/types/MangaTypes';
 import Link from 'next/link';
 import React, { ReactNode, useState } from 'react';
-import { FaArrowLeft, FaArrowRight, FaArrowsAltV, FaBars, FaGripLines, FaHamburger, FaHammer, FaHome } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight, FaArrowsAltV, FaBars, FaGripLines, FaHamburger, FaHammer, FaHome, FaListUl } from 'react-icons/fa';
 import { ImArrowLeft, ImArrowRight, ImZoomIn, ImZoomOut } from 'react-icons/im';
 import {IoSwapVertical, IoSwapHorizontal, IoHammer, IoHammerOutline, IoHammerSharp} from 'react-icons/io5';
 import { BsBook, BsBookFill, BsBookHalf, BsFullscreen } from 'react-icons/bs';
 import { MangaChapterPage } from '@/types/MangaTypes';
 import MangaChapterBar from '@/components/manga/read/view/mangaChapterBar/MangaChapterBar';
+import { TbLayoutSidebarLeftCollapse } from 'react-icons/tb';
 type Props = {
 	children:React.ReactNode;
 	title:string;
@@ -51,6 +52,9 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 	function openChapterBar(){
 		setIsChapterBarOpen(open => !open);
 	}
+	function closeChapterBar(){
+		setIsChapterBarOpen(open => false);
+	}
 	
 	return (
 		<div className={`manga-read-layout ${isCollapsed ? 'collapsed' :''}`} >
@@ -58,7 +62,7 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 		{/* Sidebar / Action Navigation */}
 		<section className='container_manga-action-detail'>
 
-			<MangaChapterBar isOpen={isChapterBarOpen}/>
+			<MangaChapterBar onClose={closeChapterBar} activeChapter={mangaData.chapters[activeChapter].id} isOpen={isChapterBarOpen} chapterlist={mangaData.chapters}/>
 			{/* Show Button */}
 			<div className="show-bar">
 				<Button onClick={show}><FaBars/></Button>
@@ -70,6 +74,7 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 				<div className="manga-navigation">
 					<Link href={`/manga/detail/${targetManga}`} ><Button className='btn-readmanga active'><FaArrowLeft/></Button></Link>
 					<Link href={'/'}><Button className='btn-readmanga active'><FaHome/></Button></Link>
+					<Button className='btn-readmanga active' onClick={openChapterBar}><FaListUl/></Button>
 				</div>
 
 				{/* Logo */}
@@ -80,14 +85,14 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 					
 					<p className='manga-title'>{title}</p>
 
-					{ mangaData.chapters && mangaData.chapters[activeChapter-1] ? (
-							<p onClick={openChapterBar} className='active-chapter btn-readmanga-inactive'>{'Chapter ' + getChapterNumber(mangaData.chapters[activeChapter - 1].id, activeChapter.toString())}</p>
+					{ mangaData.chapters && mangaData.chapters[activeChapter] ? (
+							<p onClick={openChapterBar} className='active-chapter btn-readmanga-inactive'>{'Chapter ' + getChapterNumber(mangaData.chapters[activeChapter ].id, activeChapter.toString())}</p>
 					) : <></>}
 
 					<div className="chapter-navigation">
-						<ParamLink param='chapter' value={Math.max(activeChapter - 1,1).toString()} ><Button className='btn-readmanga '> <ImArrowLeft/> </Button></ParamLink>
-						<p className='chapter-total'> {activeChapter} / {mangaData.chapters.length} </p>
-						<ParamLink param='chapter' value={Math.min(activeChapter + 1,mangaData.chapters.length).toString()}><Button className='btn-readmanga'> <ImArrowRight/> </Button></ParamLink>
+						<ParamLink param='chapter' value={Math.max(activeChapter ,1).toString()} ><Button className='btn-readmanga '> <ImArrowLeft/> </Button></ParamLink>
+						<p className='chapter-total'> {activeChapter + 1} / {mangaData.chapters.length} </p>
+						<ParamLink param='chapter' value={Math.min(activeChapter + 2 ,mangaData.chapters.length).toString()}><Button className='btn-readmanga'> <ImArrowRight/> </Button></ParamLink>
 					</div>
 				</div>
 
@@ -200,7 +205,7 @@ export default function MangaReadLayout({mangaData,title,targetManga,activeChapt
 				</div>
 
 				{/* Sidebar Collapse */}
-				<Button className='btn-collapse' onClick={collapse}> <FaArrowLeft/> Collapse</Button>
+				<Button className='btn-collapse' onClick={collapse}> <TbLayoutSidebarLeftCollapse/> Collapse</Button>
 			</div>
 			
 		</section>

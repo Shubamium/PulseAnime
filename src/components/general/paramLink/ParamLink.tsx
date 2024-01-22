@@ -4,12 +4,13 @@ import React, { ReactNode } from 'react';
 import './paramLink.scss';
 import { useRouter } from 'next/navigation';
 type ParamLinkProps = {
-	children?:ReactNode
+	children?:ReactNode,
+	className?:string,
 	param:string,
 	value:string,
 }
 
-export default function ParamLink({children,param,value}: ParamLinkProps) {
+export default function ParamLink({className,children,param,value}: ParamLinkProps) {
 	const router = useRouter();
 	const navigate = (param:string,value:string) =>{
 		const newUrl =  new URL(window.location.href);
@@ -28,7 +29,7 @@ export default function ParamLink({children,param,value}: ParamLinkProps) {
 	};
 	// onClick={()=>navigate(param,value)} 
 	return (
-		<div  onClick={()=>navigate(param,value)}  className='param-link'>
+		<div onClick={()=>navigate(param,value)}  className={`param-link ${className}`}>
 			{children}
 		</div>
 	);

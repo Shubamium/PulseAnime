@@ -27,7 +27,7 @@ export default async function MangaSearch({searchParams}: MangaSearchProps) {
 				</div>
 				<div className="filter-bar"><FaFilter/> Filter by - Showing {mangaSearchResults?.results && mangaSearchResults.results.length + ' results'}</div>
 				<div className="container_search-results">
-					{mangaSearchResults?.results.map((result:MangaMeta) => {
+					{mangaSearchResults?.results.filter((result)=>{return result.type !== 'NOVEL';}).map((result:MangaMeta) => {
 						const title = getTitle(result.title);
 						return <MangaSearchResult 
 							key={'manga-search-result'+result.id} 

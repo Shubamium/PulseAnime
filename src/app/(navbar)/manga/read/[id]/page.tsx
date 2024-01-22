@@ -78,7 +78,7 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 	}
 
 	const readOptions:MangaReadOptions = {
-		mode: searchParams.mode ?? 'advanced',
+		mode: searchParams.mode ?? 'simple',
 		direction: searchParams.direction ?? 'vr',
 		readingDirection : searchParams.read ??'ltr',
 		pageCount : searchParams.pc ?? '1',
@@ -92,7 +92,7 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 		
 		<div className='container_manga-read'>
 			<NavbarSetter/>
-			<MangaReadLayout activeChapter={activeChapter} mangaData={mangaData} targetManga={targetManga} title={title} readOptions={readOptions}>
+			<MangaReadLayout activeChapter={activeChapter-1} mangaData={mangaData} targetManga={targetManga} title={title} readOptions={readOptions}>
 				<Suspense fallback={<RootLoading/>}>
 					<MangaView chapterId={mangaData?.chapters[activeChapter-1].id} readOptions={readOptions}/>
 				</Suspense>
