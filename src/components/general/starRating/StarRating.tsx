@@ -10,7 +10,7 @@ export default function StarRating({rating}: starRatingProps) {
   return (
 	<div className='stars'>
 		{new Array(5).fill('').map((_,index)=>{
-			return index + 1 < rating  ? <FaStar/> : index < Math.ceil(rating) ? <FaStarHalfAlt/> : <ImStarEmpty/>;
+			return index + 1 <= rating  ? <FaStar/> : index < Math.ceil(rating) ? <FaStarHalfAlt/> : <ImStarEmpty/>;
 		})}
 	</div>
   );

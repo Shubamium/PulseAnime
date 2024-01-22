@@ -9,3 +9,13 @@ export async function searchNovel(query:string) {
 		return null;
 	}
 }
+
+export async function getNovelMeta(id:string) {
+	try{
+		const response = await fetch(backendUrl + '/light-novels/readlightnovels/info?id=' + encodeURIComponent(id));
+		const result = await response.json();
+		return result as NovelMeta;
+	}catch(err){
+		return null;
+	}
+}

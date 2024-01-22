@@ -40,7 +40,7 @@ type NovelSearchResultDisplayerProps = {
  id:string;
 }
 function NovelSearchResultDisplayer({image,title,id} : NovelSearchResultDisplayerProps){
-	return 	<Link type='div' href={`/novel/details/${id}`} className="novel">
+	return 	<Link type='div' href={`/novel/detail/${id}`} className="novel">
 		<img src={image} alt="" />
 		<div className="details">
 			<h2 className='title'>{title ?? 'No title'}</h2>
