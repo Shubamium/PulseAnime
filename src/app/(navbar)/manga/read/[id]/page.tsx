@@ -92,10 +92,17 @@ export default async function MangaRead({params,searchParams}: MangaReadProps) {
 		
 		<div className='container_manga-read'>
 			<NavbarSetter/>
-			<MangaReadLayout activeChapter={activeChapter-1} mangaData={mangaData} targetManga={targetManga} title={title} readOptions={readOptions}>
+			<MangaReadLayout 
+				activeChapter={activeChapter-1} 
+				mangaData={mangaData} 
+				targetManga={targetManga} 
+				title={title} 
+				readOptions={readOptions}>
+
 				<Suspense fallback={<RootLoading/>}>
 					<MangaView chapterId={mangaData?.chapters[activeChapter-1].id} readOptions={readOptions}/>
 				</Suspense>
+				
 			</MangaReadLayout>
 				
 		</div>

@@ -7,10 +7,12 @@ import DetailSidebar from '@/components/general/detail/detailSidebar/DetailSideb
 import { redirect } from 'next/navigation';
 import DetailGeneralInfo from '@/components/general/detail/detailGeneralInfo/DetailGeneralInfo';
 import { getMangaMeta } from '@/db/MangaData';
-import { getTitle } from '@/db/util';
+import { getChapterNumber, getReleaseDate, getTitle } from '@/db/util';
 import { rating } from '../../../../../../util/utility';
 import { FaStar } from 'react-icons/fa';
-import MangaChapterList from './mangaChapterList/MangaChapterList';
+import ChapterList from '@/components/general/readLayout/chapterList/ChapterList';
+import ChapterListItem from '@/components/general/readLayout/chapterList/chapterListItem/ChapterListItem';
+
 type MangaDetailProps = {
 	params:{
 		id:string;
@@ -66,7 +68,21 @@ export default async function MangaDetail({ params }: MangaDetailProps) {
 						description={mangaData.description}
 						videoId={mangaData.trailer && mangaData.trailer.id ? mangaData.trailer.id : null }
 					/>
-					<MangaChapterList chapters={mangaData.chapters} mangaId={mangaData.id}/>
+					<ChapterList length={mangaData.chapters.length}>
+						{
+							mangaData.chapters.map((chapter, index) => {
+								const chapterNumber = getChapterNumber(chapter.id);
+								let releaseDate = getReleaseDate(chapter.releaseDate);
+								return <ChapterListItem
+													key={`chapter-${chapter.id}`}
+													href={`/manga/read/${mangaData.id}?chapter=${index+1}`}
+													chapterTitle={'Chapter ' +  (chapterNumber ? chapterNumber[0] : index)}  
+													releaseDate={releaseDate}
+												/>
+								;
+						})
+						}
+					</ChapterList>
 				</section>
 
 

@@ -9,6 +9,8 @@ import React from 'react';
 import './novelDetail.scss';
 import StarRating from '@/components/general/starRating/StarRating';
 import { FaEye } from 'react-icons/fa';
+import ChapterList from '@/components/general/readLayout/chapterList/ChapterList';
+import ChapterListItem from '@/components/general/readLayout/chapterList/chapterListItem/ChapterListItem';
 type NovelDetailProps = {
 	params:{
 		id:string;
@@ -63,18 +65,23 @@ export default async function NovelDetail({params}: NovelDetailProps) {
 			<DetailLayout  >
 				<div className='novel-detail'>
 					<DetailGeneralInfo description={novelData.description}  details={novelDetails}/>
+					<ChapterList length={novelData.chapters.length}>
+						{novelData.chapters && novelData.chapters.length > 0 && novelData.chapters.map((c,index)=>{
+							return <ChapterListItem chapterTitle={c.title} key={c.id} href={`/novel/read/${encodeURIComponent(c.id)}?chapter=${index+1}`}/>;
+						})}
+					</ChapterList>
 				</div>
 				<DetailSidebar cover={novelData.image} title={novelData.title}>
-				<div className="group">
-						<MediaDetailRow title="Rating">
-								<div className="data">
-										<p><StarRating rating={novelData.rating / 2}/> {novelData.rating /2} / 5 </p> 
-								</div>
-							</MediaDetailRow>
-							<MediaDetailRow title={<><FaEye/> Views</>}>
-									<p>{novelData.views}</p>
-							</MediaDetailRow>
-					</div>
+					<div className="group">
+							<MediaDetailRow title="Rating">
+									<div className="data">
+											<p><StarRating rating={novelData.rating / 2}/> {novelData.rating /2} / 5 </p> 
+									</div>
+								</MediaDetailRow>
+								<MediaDetailRow title={<><FaEye/> Views</>}>
+										<p>{novelData.views}</p>
+								</MediaDetailRow>
+						</div>
 					<MediaDetailRow title='Author'>
 						 <p>{formattedAuthor}</p>
 					</MediaDetailRow>
