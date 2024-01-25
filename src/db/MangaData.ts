@@ -14,7 +14,7 @@ export async function searchManga(query:string) {
 }
 export async function getMangaMeta(title:string) {
 	try{
-		const url = backendUrl+ '/meta/anilist-manga/info/' + encodeURIComponent(title);
+		const url = backendUrl+ '/meta/anilist-manga/info?id=' + encodeURIComponent(title);
 		console.log(url);
 		const response =  await fetch(url);
 		const result = await response.json();
