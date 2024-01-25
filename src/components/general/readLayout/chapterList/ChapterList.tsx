@@ -3,7 +3,7 @@ import './chapterList.scss';
 import React from 'react';
 
 type ChapterListProps = {
-	length:number;
+	length?:number;
 	children: React.ReactNode;
 }
 
@@ -14,7 +14,7 @@ export default function ChapterList({length,children}: ChapterListProps) {
 			<h2> <FaBookOpen/> Chapters</h2>
 		</div>
 			<div className="chapter-info">
-				<p className='chapter-amount'>{length}  Chapters</p>
+				<p className='chapter-amount'>{length ?? 'No'}  Chapters</p>
 			</div>
 		<div className="chapters">
 			{children ?? (

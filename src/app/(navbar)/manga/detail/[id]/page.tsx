@@ -68,9 +68,9 @@ export default async function MangaDetail({ params }: MangaDetailProps) {
 						description={mangaData.description}
 						videoId={mangaData.trailer && mangaData.trailer.id ? mangaData.trailer.id : null }
 					/>
-					<ChapterList length={mangaData.chapters.length}>
+					<ChapterList length={mangaData.chapters && mangaData.chapters.length}>
 						{
-							mangaData.chapters.map((chapter, index) => {
+							mangaData.chapters && mangaData.chapters.length > 0 && mangaData.chapters.map((chapter, index) => {
 								const chapterNumber = getChapterNumber(chapter.id);
 								let releaseDate = getReleaseDate(chapter.releaseDate);
 								return <ChapterListItem
